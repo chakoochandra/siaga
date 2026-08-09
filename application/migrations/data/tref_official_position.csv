@@ -1,0 +1,30 @@
+id,nama_jabatan,urutan,struktur_organisasi_id,is_struktural,has_staff,is_honorer,group
+1,Ketua,1,1,1,,,
+2,Wakil Ketua,2,2,1,,,
+3,Hakim ,4,3,0,,,
+4,Panitera,3,4,1,,,0
+5,Sekretaris,3,5,1,,,0
+6,Panitera Muda Gugatan,5,6,1,1,,2
+7,Panitera Muda Hukum,5,7,1,1,,2
+8,Panitera Muda Permohonan,5,8,1,1,,2
+9,"Kepala Sub Bagian Kepegawaian, Organisasi, Dan Tata Laksana",6,9,1,1,,3
+10,"Kepala Sub Bagian Perencanaan Teknologi Informasi, Dan Pelaporan",6,10,1,1,,3
+11,Kepala Sub Bagian Umum Dan Keuangan,6,11,1,1,,3
+12,Panitera Pengganti,7,12,0,,,5
+13,Pranata Komputer Ahli Pertama,8,10,0,,,4
+14,Juru Sita,8,13,0,,,6
+15,Juru Sita Pengganti,9,13,0,,,6
+16,Penyusun Laporan Keuangan,9,,0,,,7
+17,PPNPN,12,,0,,1,8
+18,Outsourcing,13,,0,,0,10
+19,Klerek - Analis Perkara Peradilan,9,,0,,,7
+20,Klerek - Pengelola Penanganan Perkara,10,,0,,,7
+21,Analis Pengelolaan Keuangan APBN Ahli Pertama,8,11,0,,,4
+22,Analis Sumber Daya Manusia Aparatur Ahli Pertama,8,9,0,,,4
+23,Klerek - Pengolah Data dan Informasi,10,,0,,,7
+24,Klerek - Pengolah Data dan Informasi & Bendahara Pengeluaran,10,,0,,,7
+25,Pranata Komputer Ahli Muda,7,5,0,,,4
+26,P3K,11,,0,,,9
+27,Operator - Penata Layanan Operasional,10,,0,,,7
+28,Dokumentalis Hukum,10,,0,,,7
+29,	Operator Layanan Operasional,10,,0,,,7

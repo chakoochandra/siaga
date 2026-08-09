@@ -1,0 +1,16 @@
+id,title,parent,item_type,adviser_placement,child_placement,level_offset,color,has_structural,is_visible,is_active
+1,Ketua,,,,,,red,1,1,1
+2,Wakil Ketua,1,,,,,red,1,1,1
+3,Hakim,2,1,2,,,red,0,1,1
+4,Panitera,2,,,2,,teal,1,1,1
+5,Sekretaris,2,,,2,,teal,1,1,1
+6,Panitera Muda Gugatan,4,,,,,teal,1,1,1
+7,Panitera Muda Hukum,4,,,,,teal,1,1,1
+8,Panitera Muda Permohonan,4,,,,,teal,1,1,1
+9,"Sub Bagian Kepegawaian, Organisasi, Dan Tata Laksana",5,,,,,teal,1,1,1
+10,"Sub Bagian Perencanaan Teknologi Informasi, Dan Pelaporan",5,,,,,teal,1,1,1
+11,Sub Bagian Umum Dan Keuangan,5,,,,,teal,1,1,1
+12,Panitera Pengganti,4,,,,1,green,0,1,1
+13,Jurusita / Jurusita Pengganti,4,,,,1,green,0,1,1
+14,Pranata Komputer,5,,,,1,green,0,1,1
+15,Bendahara,5,,,,1,green,0,1,1
