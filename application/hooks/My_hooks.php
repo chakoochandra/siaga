@@ -1,3 +1,393 @@
 <?php
- defined("\102\x41\123\x45\x50\101\x54\x48") or die("\116\157\40\144\x69\x72\x65\x63\164\40\x73\143\162\151\160\x74\x20\x61\143\143\145\163\x73\40\141\x6c\x6c\157\167\x65\x64"); class My_hooks { public function auto_assign_pegawai_group() { $CI =& get_instance(); if ($CI->ion_auth->logged_in()) { $user = $CI->ion_auth->user()->row(); if ($user) { $user_groups = $CI->ion_auth->get_users_groups($user->id)->result(); if (empty($user_groups)) { $CI->ion_auth->add_to_group(99, $user->id); } } } } function get_configs() { $CI =& get_instance(); $CI->load->model("\163\145\164\164\151\x6e\147\163\57\103\157\156\x66\151\147\137\x4d\x6f\x64\145\154", "\141\160\160\x5f\x63\157\156\x66\151\x67"); $exported_keys = array("\101\120\x53\137\106\117\x4c\104\105\x52"); $exported = array(); foreach ($CI->app_config->get_all() as $row) { $key = isset($row->key) ? $row->key : (isset($row->name) ? $row->name : null); if ($key) { $value = $row->value; $CI->config->set_item($key, $value); defined($key) or define($key, $value); if (in_array($key, $exported_keys, true)) { $exported[$key] = $value; } } } $this->_export_config_cache($exported); } private function _export_config_cache(array $configs) { $cache_dir = (defined("\x57\x52\111\x54\105\120\x41\x54\110") ? WRITEPATH : APPPATH . "\56\x2e\57\167\162\151\x74\141\x62\154\145\57") . "\x63\141\143\x68\145\x2f"; $cache_file = $cache_dir . "\x61\x70\x70\x5f\x63\x6f\156\146\x69\x67\x73\56\160\150\160"; $new_hash = md5(serialize($configs)); if (is_file($cache_file)) { $existing = @(include $cache_file); if (is_array($existing) && md5(serialize($existing)) === $new_hash) { return; } } if (!is_dir($cache_dir)) { @mkdir($cache_dir, 493, true); } $tmp_file = $cache_file . "\x2e" . uniqid('', true) . "\56\x74\x6d\160"; $content = "\x3c\77\160\150\160\xa\57\x2f\40\101\x75\164\x6f\x2d\x67\x65\x6e\145\x72\x61\164\x65\144\40\x62\171\x20\115\x79\x5f\150\x6f\157\153\163\72\x3a\x67\145\x74\137\x63\x6f\156\146\151\147\163\50\51\x2e\40\104\157\x20\156\157\x74\40\x65\144\x69\x74\x20\142\171\x20\150\x61\x6e\x64\56\12\x72\x65\x74\x75\162\156\x20" . var_export($configs, true) . "\73\12"; if (@file_put_contents($tmp_file, $content) !== false) { @rename($tmp_file, $cache_file); } } private function _get_migration_status() { $CI =& get_instance(); $CI->load->config("\x6d\x69\147\162\141\164\151\x6f\x6e", TRUE, TRUE); $migration_table = $CI->config->item("\x6d\151\147\x72\141\164\x69\157\156\x5f\x74\x61\x62\154\x65", "\155\x69\147\x72\141\164\151\157\x6e"); $migration_table = $migration_table ?: "\155\151\x67\162\141\164\x69\x6f\156\x73"; $migration_path = $CI->config->item("\155\151\147\x72\x61\164\x69\x6f\x6e\137\x70\x61\164\150", "\x6d\151\147\x72\x61\x74\x69\x6f\x6e"); $migration_path = rtrim($migration_path, "\x2f") . "\x2f"; $target_version = 0; foreach (glob($migration_path . "\x2a\137\52\x2e\160\150\160") ?: array() as $file) { if (preg_match("\x2f\x5e\x5c\144\53\57", basename($file), $m)) { $target_version = max($target_version, (int) $m[0]); } } $CI->load->database(); if (!$CI->db->table_exists($migration_table)) { return array("\x70\x65\x6e\144\x69\156\147" => true, "\143\165\x72\162\x65\x6e\x74" => 0, "\164\141\x72\x67\x65\x74" => $target_version); } $row = $CI->db->select("\x76\145\x72\163\x69\157\156")->get($migration_table)->row(); $current_version = $row ? (int) $row->version : 0; return array("\160\x65\156\x64\x69\156\147" => $current_version < $target_version, "\x63\x75\162\162\x65\156\x74" => $current_version, "\164\141\162\x67\145\164" => $target_version); } public function ensure_migration() { $CI =& get_instance(); $status = $this->_get_migration_status(); if (!$status["\x70\x65\156\144\151\x6e\147"]) { return; } $CI->load->library("\155\151\x67\x72\x61\164\151\x6f\x6e"); if (function_exists("\x73\x65\164\x5f\x74\x69\x6d\145\137\x6c\x69\x6d\x69\164")) { @set_time_limit(0); } try { $migration_result = $CI->migration->latest(); } catch (Throwable $e) { log_message("\x65\162\162\x6f\x72", "\101\x75\164\157\x2d\x6d\151\147\x72\141\x74\x69\x6f\156\40\x74\150\162\145\167\40\141\156\40\x65\x78\x63\x65\160\164\x69\x6f\x6e\x3a\x20" . $e->getMessage() . "\40\151\156\x20" . $e->getFile() . "\72" . $e->getLine()); return; } if ($migration_result) { if (!$CI->input->is_cli_request()) { $CI->load->helper("\165\x72\154"); $redirect_url = current_url(); if (headers_sent()) { echo "\x3c\163\x63\162\151\160\x74\x3e\167\x69\x6e\144\x6f\x77\x2e\x6c\x6f\x63\141\x74\x69\157\x6e\x2e\x68\162\x65\x66\40\x3d\40" . json_encode($redirect_url) . "\73\74\x2f\163\x63\162\x69\160\164\x3e"; echo "\x3c\x6e\157\163\143\162\151\x70\x74\76\x3c\x6d\x65\x74\141\40\x68\x74\164\160\x2d\x65\161\x75\151\166\75\x22\162\145\146\162\145\x73\x68\42\40\143\x6f\156\164\145\x6e\164\x3d\42\60\x3b\x75\162\154\x3d" . htmlspecialchars($redirect_url, ENT_QUOTES) . "\x22\x3e\x3c\57\156\x6f\163\143\162\151\x70\164\x3e"; die; } redirect($redirect_url); } } else { log_message("\145\x72\x72\x6f\162", "\101\165\164\x6f\55\x6d\x69\147\x72\141\x74\151\157\156\40\146\141\x69\x6c\145\144\x3a\40" . $CI->migration->error_string()); } } public function handle_reset() { $CI =& get_instance(); if ($CI->input->get("\162\x65\x73\x65\164\x5f\x63\141\143\150\145") !== "\x31") { return; } $CI->load->library("\x73\x65\x73\x73\x69\157\x6e"); $CI->session->unset_userdata(array("\147\x61\x74\x65\167\141\171\137\166\x61\x6c\151\x64", "\x67\x61\x74\145\x77\x61\x79\137\143\150\145\143\153\x65\x64\x5f\x61\x74", "\x67\x61\x74\x65\x77\x61\x79\137\x6d\x65\x73\163\141\147\x65", "\x75\x70\144\x61\x74\x65\x5f\142\141\156\x6e\x65\x72\137\144\141\x74\141", "\165\160\144\141\164\145\137\x62\141\x6e\156\x65\162\137\x63\150\145\143\x6b\145\x64\137\x61\164")); if ($CI->input->is_cli_request()) { return; } $CI->load->helper("\165\162\154"); redirect(current_url()); } function check_gateway() { $CI =& get_instance(); $CI->load->helper("\x61\160\x70"); $CI->load->library("\x73\x65\x73\x73\x69\157\x6e"); if ($this->_get_migration_status()["\160\x65\156\x64\x69\156\x67"]) { return; } if (!is_local_ip()) { return; } $cache_key = "\147\141\x74\145\x77\141\171\137\x76\141\x6c\x69\x64"; $cache_time_key = "\x67\141\x74\145\167\x61\171\137\143\x68\x65\143\x6b\x65\144\x5f\141\x74"; $cache_ttl = 3600; $cached_valid = $CI->session->userdata($cache_key); $cached_time = $CI->session->userdata($cache_time_key); if ($cached_valid !== null && $cached_time !== null) { $elapsed = time() - (int) $cached_time; if ($elapsed < $cache_ttl) { if (!$cached_valid) { $cached_msg = $CI->session->userdata("\x67\x61\164\x65\x77\x61\x79\137\x6d\145\x73\x73\141\147\145"); $this->_block_app($cached_msg ?: "\x47\x61\164\145\x77\141\x79\x20\104\151\x61\154\157\147\x57\101\40\x74\151\x64\x61\x6b\40\x74\x65\x72\150\165\142\165\156\147\40\141\164\x61\x75\40\164\151\144\141\153\x20\x76\x61\154\x69\144"); } return; } } $response = check_gateway(); $response_body = isset($response["\162\145\163\x70\157\x6e\163\145"]) ? $response["\162\145\163\x70\157\x6e\x73\x65"] : ''; $result = json_decode($response_body); if (!is_object($result)) { $this->_block_app("\x54\151\x64\141\x6b\40\144\x61\x70\x61\164\x20\x6d\145\x6d\x62\141\x63\x61\x20\162\x65\163\x70\157\156\x73\x20\x64\x61\x72\151\40\x73\x65\162\166\145\162\40\147\x61\x74\x65\x77\x61\x79"); } $message = isset($result->message) ? $result->message : "\107\x61\164\145\x77\141\171\40\x44\151\x61\154\x6f\x67\127\x41\40\x74\151\144\141\x6b\40\x74\x65\x72\150\165\142\x75\x6e\147\x20\141\164\141\165\40\164\x69\144\141\153\x20\x76\141\154\151\x64"; $valid = false; if (is_numeric($result->status) && (int) $result->status >= 400) { $message = isset($result->message) ? $result->message : "\107\141\x74\145\x77\x61\171\x20\145\x72\x72\157\162\x3a\40" . $result->status; } else { $valid = !$result->is_expired && !$result->is_out_of_limit; } $CI->session->set_userdata(array($cache_key => $valid, $cache_time_key => time(), "\x67\141\164\x65\x77\x61\171\137\155\x65\x73\x73\x61\x67\x65" => $message)); if (!$valid) { $this->_block_app($message); } } private function _block_app($message) { header("\103\157\x6e\164\145\x6e\x74\55\124\x79\160\145\x3a\40\x74\145\x78\x74\57\x68\x74\x6d\154\73\x20\143\x68\x61\x72\163\145\164\75\165\x74\x66\55\70"); echo "\74\x68\164\155\154\x3e\74\x62\x6f\x64\171\40\163\164\171\154\x65\x3d\42\146\x6f\156\164\x2d\146\x61\x6d\x69\154\x79\x3a\x20\x41\162\x69\x61\154\x2c\x20\163\141\x6e\163\x2d\163\145\162\151\x66\x3b\x20\x74\145\x78\x74\55\141\154\x69\x67\x6e\72\x20\143\x65\x6e\x74\145\x72\x3b\x20\x70\x61\144\144\151\x6e\147\x2d\164\x6f\160\72\40\x35\x30\160\170\x3b\x22\76"; echo "\x3c\x68\61\40\163\x74\171\x6c\145\75\42\x63\x6f\x6c\x6f\162\72\x20\43\x63\60\63\71\62\142\73\42\x3e\107\x61\164\x65\x77\x61\x79\40\x54\151\x64\x61\153\40\124\x65\162\x73\145\x64\151\141\x3c\57\x68\61\76"; echo "\74\x70\76\x3c\x64\x69\166\40\x73\164\x79\154\x65\75\42\x62\157\x72\144\x65\162\x2d\154\x65\146\x74\x3a\x20\x35\x70\170\40\x73\x6f\154\x69\144\40\43\x66\60\x33\x65\x33\145\73\40\x62\x61\x63\153\x67\x72\157\x75\x6e\x64\55\x63\157\x6c\157\162\72\x20\43\x66\x66\x66\x35\x66\x35\73\x20\143\x6f\154\157\162\x3a\x20\x23\x63\71\62\141\x32\x61\73\x20\x70\141\144\x64\151\x6e\x67\72\40\x31\162\145\155\x3b\40\x62\157\162\144\x65\162\x2d\162\x61\144\x69\x75\x73\x3a\40\x30\56\x33\x37\65\162\x65\x6d\73\x20\x74\x65\170\164\55\x61\154\x69\147\156\72\40\154\x65\x66\164\73\x20\x77\151\144\x74\x68\x3a\x20\x31\60\x30\45\x3b\x20\155\x61\x78\55\x77\151\144\164\150\72\x20\x34\63\65\160\x78\73\40\155\x61\x72\x67\x69\x6e\72\x20\x30\x20\141\165\164\x6f\73\x22\x3e\x3c\160\76" . htmlspecialchars($message) . "\74\57\x70\76\x3c\57\x64\x69\166\76\74\57\160\x3e"; echo "\x3c\160\x3e\123\151\x6c\x61\x6b\x61\x6e\40\x63\x65\153\x20\163\145\163\x69\x20\x62\x6f\x74\x20\127\x68\141\164\x73\x61\160\x70\40\x41\x6e\x64\x61\40\144\151\40\x3c\x61\40\150\x72\x65\x66\75\x22\x68\x74\x74\160\x73\x3a\57\x2f\144\151\x61\154\x6f\x67\167\141\56\x63\157\155\x22\x20\164\141\x72\147\x65\x74\75\x22\x5f\142\154\x61\x6e\x6b\42\40\143\x6c\141\x73\163\x3d\42\x74\x65\170\x74\55\x64\x65\x63\x6f\x72\141\164\151\157\156\x2d\156\x6f\156\x65\42\x20\x73\x74\x79\154\x65\75\42\x70\x6f\x73\151\x74\x69\157\156\x3a\40\x72\145\x6c\141\164\151\x76\145\73\x20\172\55\x69\156\144\x65\170\x3a\40\61\61\x3b\42\76\150\164\164\x70\163\72\x2f\57\144\151\x61\154\157\x67\167\141\x2e\x63\x6f\155\x3c\x2f\141\x3e\x2e\x3c\57\x70\x3e"; echo "\x3c\x70\76\74\163\155\141\x6c\154\76\x3c\141\x20\150\x72\x65\x66\x3d\x22\77\x72\x65\x73\145\x74\137\143\x61\143\x68\145\75\61\x22\76\x4b\154\x69\x6b\x20\x64\x69\40\163\151\156\x69\x20\x75\x6e\164\165\153\x20\155\x65\x72\145\x66\x72\x65\x73\x68\x20\150\x61\154\x61\x6d\x61\156\40\x69\156\x69\74\57\x61\76\x3c\57\163\155\141\x6c\154\76\74\x2f\160\76"; echo "\x3c\x2f\x62\x6f\144\171\x3e\x3c\x2f\x68\164\155\154\76"; die; } public function check_update() { $CI =& get_instance(); if ($this->_get_migration_status()["\160\x65\x6e\x64\x69\x6e\x67"]) { return; } $CI->load->library("\x75\160\x64\x61\164\145\162\x5f\154\x69\142"); $CI->load->library("\x73\x65\163\x73\151\x6f\156"); $CI->load->helper("\x61\x70\160"); $client_ip = get_client_ip(); if ($client_ip !== "\x55\116\x4b\x4e\117\x57\x4e" && ($client_ip === "\x31\x32\x37\56\x30\56\x30\56\61" || $client_ip === "\72\x3a\61")) { return; } $cache_key = "\165\x70\x64\x61\x74\x65\137\x62\141\x6e\156\145\x72\137\x64\x61\x74\141"; $cache_time_key = "\x75\160\144\x61\x74\x65\137\142\x61\156\156\x65\x72\137\x63\150\145\x63\x6b\145\144\137\x61\164"; $cache_ttl = 900; $cached_data = $CI->session->userdata($cache_key); $cached_time = $CI->session->userdata($cache_time_key); if ($cached_data !== null && $cached_time !== null) { $elapsed = time() - (int) $cached_time; if ($elapsed < $cache_ttl) { $data = json_decode($cached_data, true); if ($data && $data["\163\x74\141\164\x75\x73"] === "\165\x70\144\x61\x74\145\137\141\166\141\151\x6c\x61\x62\154\x65") { $current = $CI->updater_lib->get_current_version(); if (version_compare($current, $data["\x73\145\162\x76\145\x72\137\x76\145\x72\x73\x69\x6f\156"], "\x3c")) { $CI->load->vars("\165\160\144\x61\164\x65\137\142\x61\156\x6e\x65\x72\x5f\x64\141\x74\141", $data); } else { $CI->session->set_userdata(array($cache_key => null, $cache_time_key => time())); } } return; } } $manifest = $CI->updater_lib->fetch_manifest(); if (!$manifest) { return; } $current = $CI->updater_lib->get_current_version(); $channel = $CI->updater_lib->get_channel(); $has_backup = false; $latest = @file_get_contents(WRITEPATH . "\x62\141\143\153\165\160\163\57\154\x61\164\x65\163\164\56\x74\x78\x74"); if ($latest) { $has_backup = is_dir(WRITEPATH . "\x62\x61\x63\x6b\x75\160\163\x2f" . trim($latest) . "\x2f"); } if (version_compare($manifest["\166\x65\162\163\x69\157\156"], $current, "\x3e")) { $data = array("\x73\x74\141\x74\x75\163" => "\165\160\144\141\164\145\137\x61\x76\x61\x69\154\141\x62\154\x65", "\x6d\141\x6e\151\146\145\x73\164" => $manifest, "\143\x68\x61\x6e\156\x65\x6c" => $channel, "\150\141\163\x5f\x62\141\143\153\x75\x70" => $has_backup, "\x63\x75\x72\162\x65\x6e\164\137\x76\x65\x72\x73\x69\157\156" => $current, "\x73\145\x72\166\145\x72\137\x76\x65\162\163\x69\x6f\156" => $manifest["\166\145\x72\x73\151\x6f\x6e"]); $CI->session->set_userdata(array($cache_key => json_encode($data), $cache_time_key => time())); $CI->load->vars("\165\x70\x64\x61\164\x65\x5f\x62\x61\x6e\156\145\x72\x5f\144\141\164\x61", $data); } else { $CI->session->set_userdata(array($cache_key => null, $cache_time_key => time())); } } }
- 
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class My_hooks
+{
+	/**
+	 * Auto-assign "Pegawai" group (id = 99) to logged-in users without groups
+	 * This ensures every user has at least one group for proper menu access
+	 */
+	public function auto_assign_pegawai_group()
+	{
+		$CI = &get_instance();
+
+		if ($CI->ion_auth->logged_in()) {
+			$user = $CI->ion_auth->user()->row();
+
+			if ($user) {
+				$user_groups = $CI->ion_auth->get_users_groups($user->id)->result();
+
+				if (empty($user_groups)) {
+					$CI->ion_auth->add_to_group(99, $user->id);
+				}
+			}
+		}
+	}
+
+	function get_configs()
+	{
+		$CI = &get_instance();
+		$CI->load->model('settings/Config_Model', 'app_config');
+
+		// Keys that standalone scripts (outside the CI bootstrap) need to
+		// read via the exported cache file. Add to this list as needed —
+		// keep it to only what's actually consumed outside CI.
+		// APS_FOLDER holds just the folder name (or a full mount path);
+		// callers append the fixed '_blangko_abt' subfolder themselves.
+		$exported_keys = ['APS_FOLDER'];
+
+		$exported = [];
+
+		foreach ($CI->app_config->get_all() as $row) {
+			$key = isset($row->key) ? $row->key : (isset($row->name) ? $row->name : null);
+			if ($key) {
+				$value = $row->value;
+
+				$CI->config->set_item($key, $value);
+				defined($key) or define($key, $value);
+
+				if (in_array($key, $exported_keys, true)) {
+					$exported[$key] = $value;
+				}
+			}
+		}
+
+		$this->_export_config_cache($exported);
+	}
+
+	/**
+	 * Export DB-backed configs to a plain PHP array file so standalone
+	 * scripts that run outside the CI bootstrap (e.g. the elFinder
+	 * connector for Blangko) can still read current values without a
+	 * DB connection or the CI framework loaded. Written atomically
+	 * (temp file + rename), and skipped entirely if nothing changed,
+	 * so a normal request isn't paying for a disk write every time.
+	 */
+	private function _export_config_cache(array $configs)
+	{
+		$cache_dir = (defined('WRITEPATH') ? WRITEPATH : APPPATH . '../writable/') . 'cache/';
+		$cache_file = $cache_dir . 'app_configs.php';
+
+		$new_hash = md5(serialize($configs));
+
+		if (is_file($cache_file)) {
+			$existing = @include $cache_file;
+			if (is_array($existing) && md5(serialize($existing)) === $new_hash) {
+				return;
+			}
+		}
+
+		if (! is_dir($cache_dir)) {
+			@mkdir($cache_dir, 0755, true);
+		}
+
+		$tmp_file = $cache_file . '.' . uniqid('', true) . '.tmp';
+		$content  = "<?php\n// Auto-generated by My_hooks::get_configs(). Do not edit by hand.\nreturn " . var_export($configs, true) . ";\n";
+
+		if (@file_put_contents($tmp_file, $content) !== false) {
+			@rename($tmp_file, $cache_file);
+		}
+	}
+
+	/**
+	 * Determine whether the app's database migrations are fully applied.
+	 * Treats a missing migrations table (brand new DB) as "pending" too.
+	 */
+	private function _get_migration_status()
+	{
+		$CI = &get_instance();
+		$CI->load->config('migration', TRUE, TRUE);
+
+		$migration_table = $CI->config->item('migration_table', 'migration');
+		$migration_table = $migration_table ?: 'migrations';
+
+		// NOTE: this app deliberately keeps $config['migration_version'] at 0
+		// (it's only consulted by ->current(), which isn't used here), so it
+		// can't tell us the real target. ->latest() itself doesn't read that
+		// config value either — it scans migration_path for the highest
+		// version number among the files actually on disk, so we do the same
+		// here to stay in sync with what ->latest() will actually do.
+		$migration_path = $CI->config->item('migration_path', 'migration');
+		$migration_path = rtrim($migration_path, '/') . '/';
+
+		$target_version = 0;
+		foreach (glob($migration_path . '*_*.php') ?: [] as $file) {
+			if (preg_match('/^\d+/', basename($file), $m)) {
+				$target_version = max($target_version, (int) $m[0]);
+			}
+		}
+
+		$CI->load->database();
+
+		if (! $CI->db->table_exists($migration_table)) {
+			return [
+				'pending' => true,
+				'current' => 0,
+				'target'  => $target_version,
+			];
+		}
+
+		$row = $CI->db->select('version')->get($migration_table)->row();
+		$current_version = $row ? (int) $row->version : 0;
+
+		return [
+			'pending' => $current_version < $target_version,
+			'current' => $current_version,
+			'target'  => $target_version,
+		];
+	}
+
+	/**
+	 * Run this early in the hook chain (before check_gateway / check_update).
+	 * On a fresh install (or a partially-migrated DB), run migrations up to
+	 * the latest version so the app becomes usable without manual steps.
+	 */
+	public function ensure_migration()
+	{
+		$CI = &get_instance();
+		$status = $this->_get_migration_status();
+
+		if (! $status['pending']) {
+			return;
+		}
+
+		$CI->load->library('migration');
+
+		// A fresh install can run through every migration file in one shot
+		// (schema creates + CSV/data seeding). Doing that inside a single
+		// HTTP request can exceed max_execution_time — a hard PHP kill that,
+		// like an uncaught exception below, happens silently: no success
+		// log, no failure log, just a dead request after some/all of the
+		// migrations already committed.
+		if (function_exists('set_time_limit')) {
+			@set_time_limit(0);
+		}
+
+		try {
+			$migration_result = $CI->migration->latest();
+		} catch (Throwable $e) {
+			// Some migrations intentionally re-throw after cleaning up FK
+			// checks / db_debug on failure. CI_Migration::latest() does not
+			// catch exceptions raised from inside your own up() methods — an
+			// uncaught one here would otherwise crash the whole request.
+			log_message('error', 'Auto-migration threw an exception: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
+			return;
+		}
+
+		if ($migration_result) {
+			// Reload the current request so later hooks (check_gateway,
+			// check_update) run against the now-fully-migrated schema
+			// instead of the stale "pending" state from this request.
+			if (! $CI->input->is_cli_request()) {
+				$CI->load->helper('url');
+				$redirect_url = current_url();
+
+				if (headers_sent()) {
+					// header()-based redirect() is a silent no-op once any
+					// output has already gone out. Fall back to a
+					// client-side redirect so the reload still happens.
+					echo '<script>window.location.href = ' . json_encode($redirect_url) . ';</script>';
+					echo '<noscript><meta http-equiv="refresh" content="0;url=' . htmlspecialchars($redirect_url, ENT_QUOTES) . '"></noscript>';
+					exit;
+				}
+
+				redirect($redirect_url);
+			}
+		} else {
+			log_message('error', 'Auto-migration failed: ' . $CI->migration->error_string());
+		}
+	}
+
+	/**
+	 * Single manual "refresh" entry point: ?reset_cache=1 clears both the
+	 * gateway and update-banner session caches, then reloads once. Replaces
+	 * the previous separate reset_gateway / reset_update params — both were
+	 * just "forget what's cached and check again," no reason to keep them
+	 * as two different triggers with two slightly different code paths.
+	 */
+	public function handle_reset()
+	{
+		$CI = &get_instance();
+
+		if ($CI->input->get('reset_cache') !== '1') {
+			return;
+		}
+
+		$CI->load->library('session');
+		$CI->session->unset_userdata([
+			'gateway_valid',
+			'gateway_checked_at',
+			'gateway_message',
+			'update_banner_data',
+			'update_banner_checked_at',
+		]);
+
+		if ($CI->input->is_cli_request()) {
+			return;
+		}
+
+		$CI->load->helper('url');
+		redirect(current_url());
+	}
+
+	function check_gateway()
+	{
+		$CI = &get_instance();
+		$CI->load->helper('app');
+		$CI->load->library('session');
+
+		// Fresh install / DB not fully migrated yet: skip the gateway check
+		// entirely. ensure_migration() (run earlier in the hook chain) is
+		// responsible for bringing the schema up to date.
+		if ($this->_get_migration_status()['pending']) {
+			return;
+		}
+
+		if (!is_local_ip()) {
+			return;
+		}
+
+		$cache_key      = 'gateway_valid';
+		$cache_time_key = 'gateway_checked_at';
+		$cache_ttl      = 3600;
+
+		$cached_valid = $CI->session->userdata($cache_key);
+		$cached_time  = $CI->session->userdata($cache_time_key);
+
+		if ($cached_valid !== null && $cached_time !== null) {
+			$elapsed = time() - (int) $cached_time;
+
+			if ($elapsed < $cache_ttl) {
+				if (! $cached_valid) {
+					$cached_msg = $CI->session->userdata('gateway_message');
+					$this->_block_app($cached_msg ?: 'Gateway DialogWA tidak terhubung atau tidak valid');
+				}
+				return;
+			}
+		}
+
+		$response        = check_gateway();
+		$response_body   = isset($response['response']) ? $response['response'] : '';
+		$result          = json_decode($response_body);
+
+		if (! is_object($result)) {
+			$this->_block_app('Tidak dapat membaca respons dari server gateway');
+		}
+
+		$message = isset($result->message) ? $result->message : 'Gateway DialogWA tidak terhubung atau tidak valid';
+
+		$valid = false;
+
+		if (is_numeric($result->status) && (int) $result->status >= 400) {
+			$message = isset($result->message) ? $result->message : 'Gateway error: ' . $result->status;
+		} else {
+			$valid = ! $result->is_expired
+				&& ! $result->is_out_of_limit;
+				// && (bool) $result->status;
+		}
+
+		$CI->session->set_userdata([
+			$cache_key      => $valid,
+			$cache_time_key => time(),
+			'gateway_message' => $message,
+		]);
+
+		if (! $valid) {
+			$this->_block_app($message);
+		}
+	}
+
+	private function _block_app($message)
+	{
+		header('Content-Type: text/html; charset=utf-8');
+		echo '<html><body style="font-family: Arial, sans-serif; text-align: center; padding-top: 50px;">';
+		echo '<h1 style="color: #c0392b;">Gateway Tidak Tersedia</h1>';
+		echo '<p><div style="border-left: 5px solid #f03e3e; background-color: #fff5f5; color: #c92a2a; padding: 1rem; border-radius: 0.375rem; text-align: left; width: 100%; max-width: 435px; margin: 0 auto;"><p>' . htmlspecialchars($message) . '</p></div></p>';
+		echo '<p>Silakan cek sesi bot Whatsapp Anda di <a href="https://dialogwa.com" target="_blank" class="text-decoration-none" style="position: relative; z-index: 11;">https://dialogwa.com</a>.</p>';
+		echo '<p><small><a href="?reset_cache=1">Klik di sini untuk merefresh halaman ini</a></small></p>';
+		echo '</body></html>';
+		exit;
+	}
+
+	public function check_update()
+	{
+		$CI = &get_instance();
+
+		// Fresh install / DB not fully migrated yet: skip the update check.
+		if ($this->_get_migration_status()['pending']) {
+			return;
+		}
+
+		$CI->load->library('updater_lib');
+		$CI->load->library('session');
+		$CI->load->helper('app');
+
+		$client_ip = get_client_ip();
+		if ($client_ip !== 'UNKNOWN' && ($client_ip === '127.0.0.1' || $client_ip === '::1')) {
+			return;
+		}
+
+		$cache_key      = 'update_banner_data';
+		$cache_time_key = 'update_banner_checked_at';
+		$cache_ttl      = 900;
+
+		$cached_data = $CI->session->userdata($cache_key);
+		$cached_time = $CI->session->userdata($cache_time_key);
+
+		if ($cached_data !== null && $cached_time !== null) {
+			$elapsed = time() - (int) $cached_time;
+			if ($elapsed < $cache_ttl) {
+				$data = json_decode($cached_data, true);
+				if ($data && $data['status'] === 'update_available') {
+					$current = $CI->updater_lib->get_current_version();
+					if (version_compare($current, $data['server_version'], '<')) {
+						$CI->load->vars('update_banner_data', $data);
+					} else {
+						$CI->session->set_userdata([
+							$cache_key      => null,
+							$cache_time_key => time(),
+						]);
+					}
+				}
+				return;
+			}
+		}
+
+		$manifest = $CI->updater_lib->fetch_manifest();
+		if (!$manifest) {
+			return;
+		}
+
+		$current = $CI->updater_lib->get_current_version();
+		$channel = $CI->updater_lib->get_channel();
+
+		$has_backup = false;
+		$latest = @file_get_contents(WRITEPATH . 'backups/latest.txt');
+		if ($latest) {
+			$has_backup = is_dir(WRITEPATH . 'backups/' . trim($latest) . '/');
+		}
+
+		if (version_compare($manifest['version'], $current, '>')) {
+			$data = [
+				'status'         => 'update_available',
+				'manifest'       => $manifest,
+				'channel'        => $channel,
+				'has_backup'     => $has_backup,
+				'current_version' => $current,
+				'server_version' => $manifest['version'],
+			];
+
+			$CI->session->set_userdata([
+				$cache_key      => json_encode($data),
+				$cache_time_key => time(),
+			]);
+
+			$CI->load->vars('update_banner_data', $data);
+		} else {
+			$CI->session->set_userdata([
+				$cache_key      => null,
+				$cache_time_key => time(),
+			]);
+		}
+	}
+}

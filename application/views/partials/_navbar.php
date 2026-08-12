@@ -74,9 +74,7 @@
 					<ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end" data-bs-popper="static"> <!--begin::User Image-->
 						<li class="user-header user-panel d-flex justify-content-center align-items-center text-wrap flex-column">
 							<img src="<?php echo $this->user->photoUrl ?>" class="img-circle elevation-4 m-2" alt="<?php echo $this->user->nama_lengkap ?>" style="object-fit: cover;">
-							<a href="<?php echo base_url('kepegawaian/pegawai/profile') ?>" class="d-block fw-bold btn-modal" style="line-height: 15px;">
-								<?php echo strtoupper($this->user->nama_lengkap) ?>
-							</a>
+							<?php echo strtoupper($this->user->nama_lengkap) ?>
 
 							<span class="my-2 lh-1"><?php echo $this->user->jabatan ?></span>
 

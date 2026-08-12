@@ -11,39 +11,6 @@ class Download extends Core_Controller
 		$this->upload_base_path = rtrim(dirname(APPPATH), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR;
 	}
 
-	public function debug()
-	{
-		if (ENVIRONMENT !== 'development') {
-			show_error('Not Found', 404);
-			return;
-		}
-
-		echo '<pre>';
-		echo 'ENVIRONMENT: '        . ENVIRONMENT . "\n";
-		echo 'APPPATH: '            . APPPATH . "\n";
-		echo 'FCPATH: '             . FCPATH . "\n";
-		echo 'Upload base path: '   . $this->upload_base_path . "\n";
-		echo 'Uploads dir exists: ' . (is_dir($this->upload_base_path) ? 'YES' : 'NO') . "\n\n";
-
-		if (is_dir($this->upload_base_path)) {
-			$dirs = scandir($this->upload_base_path);
-			foreach ($dirs as $dir) {
-				if ($dir === '.' || $dir === '..') continue;
-				$full = $this->upload_base_path . $dir;
-				if (is_dir($full)) {
-					echo "[$dir/]\n";
-					$files = scandir($full);
-					foreach ($files as $f) {
-						if ($f === '.' || $f === '..') continue;
-						echo "    $f (" . filesize($full . DIRECTORY_SEPARATOR . $f) . " bytes)\n";
-					}
-				}
-			}
-		}
-		echo '</pre>';
-		exit;
-	}
-
 	public function index($type = '', $subpath = '', $filename = '')
 	{
 		if (empty($type) || empty($subpath)) {
