@@ -1,12 +1,12 @@
 [
     {
-        "version": "3.0",
-        "released_at": "2026-08-10 05:55:55",
+        "version": "3.1",
+        "released_at": "2026-08-12 19:23:36",
         "min_supported_version": "2.0",
-        "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.0.zip",
-        "checksum_sha256": "c940b80adc9b2aee45f292fe8cdc111d8a043fa9ad03a401ae30007006b47e0a",
+        "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.1.zip",
+        "checksum_sha256": "c0abca9d6aeb6aa1fdeb4bc7900ae5697909f7a827b98cd799518b774125206d",
         "mandatory": true,
-        "changelog": "many new modules",
+        "changelog": "minor update",
         "excluded_from_overwrite": [
             "updates/",
             "uploads/",
