@@ -448,7 +448,7 @@
 				</svg>
 			</span>
 			<input type="text" id="textfield-search" class="form-control form-input" placeholder="Cari aplikasi" aria-label="Cari aplikasi" aria-describedby="button-addon2" style="background: rgba(var(--bs-body-bg),.1); padding-left: 2.75rem;">
-			<button class="btn btn-xs btn-clear icon-end inner-btn text-red m-0 collapse" onClick="$('#textfield-search').val('').trigger('input');"><i class="fa fa-times"></i></button>
+			<button class="btn btn-xs btn-clear icon-end inner-btn text-red m-0 collapse" onClick="$('#textfield-search').val('').trigger('input');"><i class="fa-solid fa-xmark"></i></button>
 		</div>
 
 		<?php if (is_local_ip()): ?>
@@ -478,7 +478,7 @@
 
 			function loadRatio() {
 				hideLoader = true;
-				$('.badge-number').html('<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>');
+				$('.badge-number').html('<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>');
 				loadPartial('<?php echo base_url('site/get_ratio') ?>', '.container-ratio');
 			}
 
@@ -610,7 +610,7 @@
 				);
 			});
 		} else {
-			$(target).find('#' + elId).find('.my-apps').append('<span class="text-muted m-0"><i class="fa fa-search text-danger" aria-hidden="true"></i> Web tidak ditemukan</span>');
+			$(target).find('#' + elId).find('.my-apps').append('<span class="text-muted m-0"><i class="fa-solid fa-magnifying-glass text-danger" aria-hidden="true"></i> Web tidak ditemukan</span>');
 		}
 
 		$(target).show();

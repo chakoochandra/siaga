@@ -1,154 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title><?php echo isset($title) ? $title : ($this->config->item('APP_SHORT_NAME') ?: 'JOSS') ?></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="title" content="<?php echo isset($title) ? $title : ($this->config->item('APP_SHORT_NAME') ?: 'JOSS') ?>">
-	<meta name="author" content="Chako">
-	<meta name="description" content="<?php echo isset($title) ? $title : ($this->config->item('APP_SHORT_NAME') ?: 'JOSS') ?>">
-	<meta name="keywords" content="<?php echo isset($title) ? $title : ($this->config->item('APP_SHORT_NAME') ?: 'JOSS') ?>">
-
-	<link rel="shortcut icon" href="<?php echo asset_url('assets/images/joss.png') ?>" type="image/png">
-
-	<?php
-	$hasAssets      = isset($assets) && is_array($assets);
-	$legacyFallback = !$hasAssets && empty($lightAssets);
-	$useICheck      = ($hasAssets && !empty($assets['icheck']))     || $legacyFallback;
-	$useJqueryUI    = ($hasAssets && !empty($assets['jquery_ui']))  || $legacyFallback;
-	$useBusyLoad    = ($hasAssets && !empty($assets['busy_load']))  || $legacyFallback;
-	$useMoment      = ($hasAssets && !empty($assets['moment']))     || $legacyFallback;
-
-	// Get theme CSS files for preloading
-	$themeCssFiles = [];
-	foreach (get_available_themes() as $theme) {
-		if (isset($theme['cssFile'])) {
-			$themeCssFiles[] = $theme['cssFile'];
-		}
-	}
-	?>
-	<link rel="stylesheet" href="<?php echo asset_url('assets/plugins/adminlte4/dist/css/adminlte.css') ?>">
-	<?php foreach ($themeCssFiles as $cssFile): ?>
-		<link rel="stylesheet" href="<?php echo asset_url('assets/plugins/bootstrap/custom/' . $cssFile) ?>" id="theme-css-<?php echo str_replace('.css', '', $cssFile); ?>" disabled style="display: none;">
-	<?php endforeach; ?>
-
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-	<link rel="stylesheet" href="<?php echo asset_url('assets/plugins/font-awesome/css/font-awesome.min.css') ?>">
-	<?php if ($useJqueryUI): ?>
-		<link rel="stylesheet" href="<?php echo asset_url('assets/plugins/jquery-ui/jquery-ui.min.css') ?>">
-	<?php endif; ?>
-	<link rel="stylesheet" href="<?php echo asset_url('assets/css/glow.css') ?>">
-	<link rel="stylesheet" href="<?php echo asset_url('assets/css/app.css') ?>">
-	<link rel="stylesheet" href="<?php echo asset_url('assets/css/custom-themes.css') ?>">
-
-	<script src="<?php echo asset_url('assets/plugins/jquery/jquery.min.js') ?>"></script>
-	<script type="text/javascript">
-		var $ = jQuery.noConflict();
-	</script>
-
-	<!-- Minimal moment shim: prevents ReferenceError if moment is gated off or loads late -->
-	<script>
-		(function() {
-			if (typeof window.moment === 'undefined') {
-				window.moment = function(input) {
-					var d = (input instanceof Date) ? new Date(input) : new Date(input || Date.now());
-					return {
-						startOf: function(unit) {
-							if (unit === 'day') {
-								d.setHours(0, 0, 0, 0);
-							}
-							return this;
-						},
-						day: function() {
-							return d.getDay();
-						},
-						add: function(n, unit) {
-							if (unit === 'day' || unit === 'days') {
-								d = new Date(d.getTime() + n * 86400000);
-							}
-							return this;
-						},
-						subtract: function(n, unit) {
-							return this.add(-n, unit);
-						},
-						isSameOrBefore: function(other) {
-							var e = (other && typeof other.toDate === 'function') ? other.toDate() : new Date(other);
-							return d.getTime() <= e.getTime();
-						},
-						format: function() {
-							try {
-								return d.toLocaleString('id-ID', {
-									weekday: 'long',
-									day: '2-digit',
-									month: 'long',
-									year: 'numeric',
-									hour: '2-digit',
-									minute: '2-digit'
-								});
-							} catch (e) {
-								return d.toISOString();
-							}
-						},
-						diff: function(other, unit) {
-							var o = (other && typeof other.toDate === 'function') ? other.toDate() : new Date(other);
-							var ms = d - o;
-							if (unit === 'days') return Math.round(ms / 86400000);
-							return ms;
-						},
-						toDate: function() {
-							return d;
-						}
-					};
-				};
-			}
-		})();
-	</script>
-
-	<?php if ($useJqueryUI): ?>
-		<script src="<?php echo asset_url('assets/plugins/jquery-ui/jquery-ui.min.js') ?>" defer></script>
-	<?php endif; ?>
-	<?php if ($useBusyLoad): ?>
-		<!-- busy-load -->
-		<link rel="stylesheet" href="<?php echo asset_url('assets/plugins/busy-load/busy-load.min.css') ?>">
-		<script src="<?php echo asset_url('assets/plugins/busy-load/busy-load.min.js') ?>"></script>
-	<?php endif; ?>
-	<?php //if ($useMoment): 
-	?>
-	<!-- moment -->
-	<script src="<?php echo asset_url('assets/plugins/moment/moment.js') ?>"></script>
-	<script src="<?php echo asset_url('assets/plugins/moment/locale/id.js') ?>"></script>
-</head>
-
-<body class="<?php echo get_layout_classes('mode-layout-plain') ?>">
-	<?php $this->benchmark->mark('code_start') ?>
-
-	<?php $this->load->view('partials/_navbar', array('hasSidebar' => false)); ?>
-
-	<?php if (!empty($update_banner_data) && $update_banner_data['status'] === 'update_available'): ?>
-		<?php $this->load->view('partials/_update_banner'); ?>
-		<?php exit ?>
-	<?php endif; ?>
-
-	<!-- <div class="card container-main d-flex justify-content-center" style="background: transparent;"> -->
-	<div class="container-main d-flex justify-content-center mt-2">
-		<?php $showLogo = isset($showLogo) ? $showLogo : false ?>
-		<?php if ($showLogo) : ?>
-			<img src="<?php echo asset_url('assets/images/icon.png') ?>" height="100px" alt="Logo <?php echo (SATKER_NAME ?: 'JOSS') ?>" class="brand-image mt-3">
-		<?php endif ?>
-		<?php if (isset($showTitle) && $showTitle) : ?>
-			<span class="h4">
-				<?php echo strtoupper($title) ?>
-			</span>
-		<?php endif ?>
-
-		<?php $this->load->view($main_body) ?>
-	</div>
-
-	<?php $this->benchmark->mark('code_end') ?>
-
-	<?php $this->load->view('partials/_footer', ['isPrivate' => !isset($isPrivate) || $isPrivate]) ?>
-
-</body>
-
-</html>
+<?php
+ goto d_SiP; GrHUe: ?>
+<title><?php  goto DH6da; qpg77: $this->load->view("\160\141\x72\164\151\x61\154\x73\57\x5f\146\x6f\x6f\164\x65\x72", array("\151\163\120\x72\x69\166\141\x74\145" => !isset($isPrivate) || $isPrivate)); goto U7AM5; RRWJ9: echo $pageTitle; goto aYFzu; PiVSd: echo asset_url("\x61\163\x73\x65\x74\163\57\x69\155\x61\x67\x65\x73\57\152\x6f\x73\163\x2e\x70\156\x67"); goto nzVx1; kIWv5: echo asset_url("\141\x73\x73\145\x74\x73\57\143\163\163\x2f\x63\x75\163\164\157\155\55\x74\x68\x65\x6d\x65\163\56\x63\x73\163"); goto P2VmE; nzVx1: ?>
+"rel="shortcut icon"type="image/png"><?php  goto Pm5Av; VEf64: ?>
+"name="description"><meta content="<?php  goto ND053; XmrIX: $useBusyLoad = $hasAssets && !empty($assets["\142\165\163\171\x5f\x6c\x6f\141\x64"]) || $legacyFallback; goto xiX8Y; Zda2w: ?>
+"></script></head><body class="<?php  goto VXB7m; P2VmE: ?>
+"rel="stylesheet"><script src="<?php  goto xI5pd; HViTp: ?>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"rel="stylesheet"><?php  goto ESsxz; d_SiP: ?>
+<!doctypehtml><html lang="en"><head><meta content="text/html; charset=utf-8"http-equiv="Content-Type"><?php  goto s8LX8; aYFzu: ?>
+"name="title"><meta content="Chako"name="author"><meta content="<?php  goto S2Bi_; s8LX8: $pageTitle = isset($title) ? $title : ($this->config->item("\x41\x50\120\x5f\x53\x48\x4f\122\124\x5f\116\101\x4d\x45") ?: "\112\x4f\x53\123"); goto HTWuc; VXB7m: echo get_layout_classes("\155\157\x64\145\x2d\x6c\x61\171\x6f\165\164\x2d\x70\154\141\x69\156"); goto UfV5P; CMRr8: if ($useJqueryUI) { ?>
+<link href="<?php  echo asset_url("\x61\x73\x73\145\164\163\x2f\x70\x6c\165\x67\151\156\163\57\x6a\x71\165\x65\162\171\55\x75\151\x2f\x6a\161\x75\x65\162\171\55\x75\151\56\155\151\156\56\143\x73\163"); ?>
+"rel="stylesheet"><?php  } goto t63bw; scJam: ?>
+<script src="<?php  goto Kjx2J; q9LoT: ?>
+"rel="stylesheet"><link href="<?php  goto T2En7; JsHM6: if ($updateAvailable) { $this->load->view("\x70\141\162\164\151\x61\154\x73\x2f\x5f\165\160\144\141\x74\x65\137\x62\x61\x6e\x6e\145\162"); } else { ?>
+<div class="container-main d-flex justify-content-center mt-2"><?php  $showLogo = isset($showLogo) ? $showLogo : false; if ($showLogo) { ?>
+<img alt="Logo<?php  echo SATKER_NAME ?: "\x4a\x4f\x53\123"; ?>
+"class="brand-image mt-3"height="100px"src="<?php  echo asset_url("\141\163\x73\145\x74\163\57\151\155\x61\147\145\x73\57\x69\143\x6f\x6e\x2e\160\156\147"); ?>
+"><?php  } if (isset($showTitle) && $showTitle) { ?>
+<span class="h4"><?php  echo strtoupper($pageTitle); ?>
+</span><?php  } $uriSegments = $this->uri->segment_array(); $lastTwo = array_map("\163\164\162\x74\x6f\x6c\157\167\x65\162", array_slice($uriSegments, -2)); $isSettingsConfigPage = $lastTwo === array("\x73\x65\164\164\151\x6e\147\x73", "\143\x6f\x6e\x66\x69\147"); if (!$isSettingsConfigPage && (!defined("\x49\104\137\127\111\x4c\x41\131\101\x48") || ID_WILAYAH === '' || ID_WILAYAH === null)) { ?>
+<div class="callout callout-warning my-2"><p>Silakan set <code>ID_WILAYAH</code> di <a href="<?php  echo base_url("\163\x65\x74\164\x69\156\x67\x73\x2f\143\x6f\156\x66\151\x67"); ?>
+">Settings > Config</a>.</p></div><?php  } elseif (!$isSettingsConfigPage && (!defined("\x44\x49\x41\114\117\x47\x57\x41\137\x41\120\x49\137\x55\122\x4c") || DIALOGWA_API_URL === '' || DIALOGWA_API_URL === null || !defined("\104\x49\101\x4c\x4f\x47\127\x41\137\124\117\113\105\x4e") || DIALOGWA_TOKEN === '' || DIALOGWA_TOKEN === null || !defined("\x44\x49\x41\114\117\x47\x57\x41\137\x53\105\123\x53\x49\x4f\x4e") || DIALOGWA_SESSION === '' || DIALOGWA_SESSION === null)) { ?>
+<div class="callout callout-warning my-2"><p>Silakan set <code>DIALOGWA_API_URL</code>, <code>DIALOGWA_TOKEN</code>, dan <code>DIALOGWA_SESSION</code> di <a href="<?php  echo base_url("\163\145\164\x74\x69\x6e\x67\x73\57\x63\x6f\156\146\151\x67"); ?>
+">Settings > Config</a>.</p></div><?php  } else { $this->load->view($main_body); } ?>
+</div><?php  } goto WHOOJ; n7yR9: if ($useJqueryUI) { ?>
+<script src="<?php  echo asset_url("\x61\163\x73\145\164\163\57\160\154\x75\147\151\x6e\x73\x2f\152\x71\x75\145\162\171\x2d\x75\x69\x2f\x6a\161\165\145\162\x79\x2d\165\151\56\x6d\x69\156\56\152\x73"); ?>
+"defer></script><?php  } goto wJ4fq; zT3W6: $useJqueryUI = $hasAssets && !empty($assets["\x6a\161\165\145\x72\x79\x5f\x75\x69"]) || $legacyFallback; goto XmrIX; xI5pd: echo asset_url("\141\x73\163\x65\x74\x73\57\x70\154\165\x67\x69\156\163\x2f\152\161\x75\145\162\x79\57\152\x71\x75\x65\162\171\x2e\155\151\x6e\x2e\x6a\163"); goto IsPmH; oIiSq: $this->load->view("\160\x61\x72\x74\x69\141\x6c\x73\57\x5f\156\x61\166\142\x61\x72", array("\150\141\x73\x53\151\x64\145\142\x61\162" => false)); goto WPSOT; IxZkW: $this->benchmark->mark("\x63\157\144\145\137\163\164\x61\162\x74"); goto oIiSq; UfV5P: ?>
+"><?php  goto IxZkW; xiX8Y: $useMoment = $hasAssets && !empty($assets["\155\157\x6d\145\x6e\164"]) || $legacyFallback; goto KkbZh; Kjx2J: echo asset_url("\141\x73\163\145\164\x73\x2f\x70\x6c\165\147\x69\156\163\57\x6d\x6f\x6d\145\x6e\164\57\x6d\x6f\155\145\156\x74\x2e\152\163"); goto W8GG5; D45Pc: ?>
+</title><meta content="width=device-width,initial-scale=1"name="viewport"><meta content="<?php  goto RRWJ9; KkbZh: $themeCssFiles = array(); goto CBMly; wJ4fq: if ($useBusyLoad) { ?>
+<link href="<?php  echo asset_url("\141\x73\x73\x65\164\163\x2f\x70\x6c\165\147\x69\156\163\57\142\x75\163\x79\55\x6c\157\141\144\x2f\x62\165\163\x79\55\154\157\141\144\x2e\x6d\x69\x6e\x2e\143\x73\163"); ?>
+"rel="stylesheet"><script src="<?php  echo asset_url("\x61\163\163\145\164\163\x2f\160\x6c\x75\x67\x69\x6e\163\57\x62\x75\163\171\55\x6c\x6f\141\144\x2f\142\165\x73\x79\x2d\x6c\157\141\144\x2e\155\x69\x6e\56\x6a\163"); ?>
+"></script><?php  } goto scJam; lvFEN: foreach ($themeCssFiles as $cssFile) { ?>
+<link href="<?php  echo asset_url("\x61\x73\x73\145\x74\163\57\x70\x6c\x75\x67\151\x6e\x73\57\x62\157\157\x74\163\164\x72\x61\x70\x2f\143\x75\x73\164\157\x6d\57" . $cssFile); ?>
+"rel="stylesheet"disabled id="theme-css-<?php  echo str_replace("\56\x63\x73\x73", '', $cssFile); ?>
+"style="display:none"><?php  } goto HViTp; S2Bi_: echo $pageTitle; goto VEf64; Pm5Av: $hasAssets = isset($assets) && is_array($assets); goto tBn3T; WUUPq: ?>
+"rel="stylesheet"><?php  goto lvFEN; HTWuc: $pageTitle = htmlspecialchars($pageTitle, ENT_QUOTES, "\125\x54\106\x2d\x38"); goto GrHUe; ND053: echo $pageTitle; goto S4IUS; ESsxz: if ($useICheck) { ?>
+<link href="<?php  echo asset_url("\141\x73\x73\x65\x74\x73\x2f\x70\154\x75\147\x69\156\163\x2f\151\x63\150\145\x63\153\x2d\x62\157\x6f\164\163\x74\x72\x61\x70\57\151\x63\x68\x65\x63\153\x2d\142\x6f\x6f\164\x73\164\162\141\x70\x2e\155\151\x6e\56\143\x73\163"); ?>
+"rel="stylesheet"><?php  } goto CMRr8; WPSOT: $updateAvailable = !empty($update_banner_data) && $update_banner_data["\x73\x74\141\164\x75\163"] === "\165\x70\144\x61\x74\145\x5f\x61\x76\141\151\154\141\x62\154\x65"; goto JsHM6; O6992: ?>
+<link href="<?php  goto kroPL; t63bw: ?>
+<link href="<?php  goto hMeAM; nC2S0: $useICheck = $hasAssets && !empty($assets["\151\143\150\145\143\153"]) || $legacyFallback; goto zT3W6; HGnHZ: ?>
+"rel="stylesheet"><link href="<?php  goto kIWv5; WHOOJ: $this->benchmark->mark("\143\x6f\x64\x65\x5f\x65\156\x64"); goto qpg77; S4IUS: ?>
+"name="keywords"><link href="<?php  goto PiVSd; gJd7K: echo asset_url("\x61\163\163\x65\x74\163\x2f\160\154\x75\147\x69\x6e\163\x2f\x6d\x6f\155\145\x6e\164\57\x6c\x6f\x63\x61\x6c\x65\57\151\144\x2e\152\x73"); goto Zda2w; kroPL: echo asset_url("\x61\x73\163\x65\164\163\x2f\160\154\165\147\151\156\x73\x2f\x61\x64\155\151\156\154\x74\145\x34\x2f\x64\151\163\164\x2f\143\163\x73\x2f\141\144\155\151\x6e\154\164\145\56\x63\x73\x73"); goto WUUPq; CBMly: foreach (get_available_themes() as $theme) { if (isset($theme["\143\163\163\106\151\x6c\145"])) { $themeCssFiles[] = $theme["\x63\x73\163\x46\151\154\x65"]; } } goto O6992; W8GG5: ?>
+"></script><script src="<?php  goto gJd7K; IsPmH: ?>
+"></script><script type="text/javascript">var $=jQuery.noConflict()</script><script>void 0===window.moment&&(window.moment=function(t){var r=t instanceof Date?new Date(t):new Date(t||Date.now());return{startOf:function(t){return"day"===t&&r.setHours(0,0,0,0),this},day:function(){return r.getDay()},add:function(t,n){return"day"!==n&&"days"!==n||(r=new Date(r.getTime()+864e5*t)),this},subtract:function(t,n){return this.add(-t,n)},isSameOrBefore:function(t){var n=t&&"function"==typeof t.toDate?t.toDate():new Date(t);return r.getTime()<=n.getTime()},format:function(){try{return r.toLocaleString("id-ID",{weekday:"long",day:"2-digit",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"})}catch(t){return r.toISOString()}},diff:function(t,n){var e=t&&"function"==typeof t.toDate?t.toDate():new Date(t),o=r-e;return"days"===n?Math.round(o/864e5):o},toDate:function(){return r}}})</script><?php  goto n7yR9; T2En7: echo asset_url("\x61\x73\163\x65\x74\x73\57\143\x73\163\57\x61\160\160\x2e\x63\x73\x73"); goto HGnHZ; DH6da: echo $pageTitle; goto D45Pc; hMeAM: echo asset_url("\x61\x73\163\x65\x74\163\x2f\143\x73\163\57\x67\154\x6f\x77\56\143\163\x73"); goto q9LoT; tBn3T: $legacyFallback = !$hasAssets && empty($lightAssets); goto nC2S0; U7AM5: ?>
+</body></html>

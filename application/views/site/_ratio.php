@@ -40,7 +40,7 @@
 								<?php $maxTunggakan = max($ratio->tunggakan_total, $ratio->tunggakan_tahun_lalu + $ratio->masuk_tahun_ini) ?>
 								<input id="knob-tunggakan-perkara" type="text" class="knob" data-min="0" data-max="<?php echo $maxTunggakan ?>" value="<?php echo $ratio->tunggakan_total ?>" data-skin="tron" data-thickness="0.2" data-width="200" data-height="200" data-fgColor="<?php echo get_percentage_color($persentaseTunggakan) ?>" data-angleOffset="<?php echo 360 * (1 - $persentaseTunggakan / 100) ?>" data-angleArc="360">
 							<?php else: ?>
-								<i class="fa fa-circle-o-notch fa-spin text-danger" aria-hidden="true"></i>
+								<i class="fa-solid fa-circle-notch fa-spin text-danger" aria-hidden="true"></i>
 							<?php endif ?>
 						</font>
 					</h5>
@@ -59,7 +59,7 @@
 							<?php if (isset($ratio)): ?>
 								<input type="text" class="knob" data-min="0" data-max="100" value="<?php echo $ratio->persentase_perkara ?>" data-skin="tron" data-thickness="0.2" data-width="200" data-height="200" data-fgColor="<?php echo get_percentage_color($ratio->persentase_perkara) ?>" data-perkara-count="<?php echo htmlspecialchars(number_format_indo($ratio->minutasi_tahun_ini)) ?> / <?php echo htmlspecialchars(number_format_indo($ratio->masuk_tahun_ini + $ratio->tunggakan_tahun_lalu)) ?>">
 							<?php else: ?>
-								<i class="fa fa-circle-o-notch fa-spin text-danger" aria-hidden="true"></i>
+								<i class="fa-solid fa-circle-notch fa-spin text-danger" aria-hidden="true"></i>
 							<?php endif ?>
 						</font>
 					</h5>
@@ -77,7 +77,7 @@
 							<?php if (isset($ratio)): ?>
 								<input type="text" class="knob" data-min="0" data-max="100" value="<?php echo $ratio->persentase_ecourt ?>" data-skin="tron" data-thickness="0.2" data-width="200" data-height="200" data-fgColor="<?php echo get_percentage_color($ratio->persentase_ecourt) ?>" data-ecourt-count="<?php echo htmlspecialchars(number_format_indo($ratio->ecourt)) ?> / <?php echo htmlspecialchars(number_format_indo($ratio->masuk_tahun_ini)) ?>">
 							<?php else: ?>
-								<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
+								<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>
 							<?php endif ?>
 						</font>
 					</h5>
@@ -99,7 +99,7 @@
 							<?php if (isset($kinerja_minutasi)): ?>
 								<input type="text" class="knob" data-min="0" data-max="100" value="<?php echo $kinerja_minutasi->percentage_minutasi ?>" data-skin="tron" data-thickness="0.2" data-width="200" data-height="200" data-fgColor="<?php echo get_percentage_color($kinerja_minutasi->percentage_minutasi) ?>" data-minutasi-count="<?php echo htmlspecialchars(number_format_indo($kinerja_minutasi->setor_putus_tahun_ini)) ?> / <?php echo htmlspecialchars(number_format_indo($kinerja_minutasi->jumlah_putus_tahun_ini)) ?>">
 							<?php else: ?>
-								<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
+								<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>
 							<?php endif ?>
 						</font>
 					</h5>
@@ -117,7 +117,7 @@
 							<?php if (isset($kinerja_bas)): ?>
 								<input type="text" class="knob" data-min="0" data-max="100" value="<?php echo $kinerja_bas->percentage_bas ?>" data-skin="tron" data-thickness="0.2" data-width="200" data-height="200" data-fgColor="<?php echo get_percentage_color($kinerja_bas->percentage_bas) ?>" data-bas-count="<?php echo htmlspecialchars(number_format_indo($kinerja_bas->uploaded_bas)) ?> / <?php echo htmlspecialchars(number_format_indo($kinerja_bas->jumlah_sidang)) ?>">
 							<?php else: ?>
-								<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
+								<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>
 							<?php endif ?>
 						</font>
 					</h5>
@@ -135,7 +135,7 @@
 							<?php if (isset($ratio)): ?>
 								<input type="text" class="knob" data-min="0" data-max="100" value="<?php echo $ratio->persentase_edoc ?>" data-skin="tron" data-thickness="0.2" data-width="200" data-height="200" data-fgColor="<?php echo get_percentage_color($ratio->persentase_edoc) ?>" data-edoc-count="<?php echo htmlspecialchars(number_format_indo($ratio->sudah_ada_edoc_tahun_ini)) ?> / <?php echo htmlspecialchars(number_format_indo($ratio->putus_tahun_ini)) ?>">
 							<?php else: ?>
-								<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
+								<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>
 							<?php endif ?>
 						</font>
 					</h5>
@@ -148,22 +148,22 @@
 			<div class="statistic-global-item col">
 				<div class="info-box d-flex align-items-stretch">
 					<span class="info-box-icon me-1 text-bg-primary shadow-sm d-flex align-items-center justify-content-center" style="width: 15%; min-width: 50px;">
-						<i class="fa fa-sign-in mx-2"></i>
+						<i class="fa-solid fa-right-to-door mx-2"></i>
 					</span>
 					<div class="info-box-content px-0 d-flex flex-column">
 						<span class="fw-bold ms-2">Masuk</span>
 						<div class="d-flex justify-content-center flex-grow-1 w-100 gap-2">
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Tahun Ini</span>
-								<span class="badge-number badge-number-medium badge badge-primary"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->masuk_tahun_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'terima') ?></span>
+								<span class="badge-number badge-number-medium badge badge-primary"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->masuk_tahun_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'terima') ?></span>
 							</div>
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Bulan Ini</span>
-								<span class="badge-number badge-number-medium badge badge-primary"><?= createUrlRekapitulasi(date('Y'), date('m'), isset($ratio) ? number_format_indo($ratio->masuk_bulan_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'terima') ?></span>
+								<span class="badge-number badge-number-medium badge badge-primary"><?= createUrlRekapitulasi(date('Y'), date('m'), isset($ratio) ? number_format_indo($ratio->masuk_bulan_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'terima') ?></span>
 							</div>
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Hari Ini</span>
-								<span class="badge-number badge-number-medium badge badge-primary"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->masuk_hari_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'masuk_hari_ini') ?></span>
+								<span class="badge-number badge-number-medium badge badge-primary"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->masuk_hari_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'masuk_hari_ini') ?></span>
 							</div>
 						</div>
 					</div>
@@ -172,22 +172,22 @@
 			<div class="statistic-global-item col">
 				<div class="info-box d-flex align-items-stretch">
 					<span class="info-box-icon me-1 text-bg-info shadow-sm d-flex align-items-center justify-content-center" style="width: 15%; min-width: 50px;">
-						<i class="fa fa-star-o mx-2"></i>
+						<i class="fa-regular fa-star mx-2"></i>
 					</span>
 					<div class="info-box-content px-0 d-flex flex-column">
 						<span class="fw-bold ms-2">e-Court</span>
 						<div class="d-flex justify-content-center flex-grow-1 w-100 gap-2">
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Tahun Ini</span>
-								<span class="badge-number badge-number-medium badge badge-info"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->ecourt) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'terima', 1) ?></span>
+								<span class="badge-number badge-number-medium badge badge-info"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->ecourt) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'terima', 1) ?></span>
 							</div>
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Bulan Ini</span>
-								<span class="badge-number badge-number-medium badge badge-info"><?= createUrlRekapitulasi(date('Y'), date('m'), isset($ratio) ? number_format_indo($ratio->ecourt_bulan_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'terima', 1) ?></span>
+								<span class="badge-number badge-number-medium badge badge-info"><?= createUrlRekapitulasi(date('Y'), date('m'), isset($ratio) ? number_format_indo($ratio->ecourt_bulan_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'terima', 1) ?></span>
 							</div>
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Hari Ini</span>
-								<span class="badge-number badge-number-medium badge badge-info"><?= createUrlRekapitulasi(date('Y'), date('m'), isset($ratio) ? number_format_indo($ratio->ecourt_hari_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'masuk_hari_ini', 1) ?></span>
+								<span class="badge-number badge-number-medium badge badge-info"><?= createUrlRekapitulasi(date('Y'), date('m'), isset($ratio) ? number_format_indo($ratio->ecourt_hari_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'masuk_hari_ini', 1) ?></span>
 							</div>
 						</div>
 					</div>
@@ -196,22 +196,22 @@
 			<div class="statistic-global-item col">
 				<div class="info-box d-flex align-items-stretch">
 					<span class="info-box-icon me-1 text-bg-success shadow-sm d-flex align-items-center justify-content-center" style="width: 15%; min-width: 50px;">
-						<i class="fa fa-gavel mx-2"></i>
+						<i class="fa-solid fa-gavel mx-2"></i>
 					</span>
 					<div class="info-box-content px-0 d-flex flex-column">
 						<span class="fw-bold ms-2">Putus</span>
 						<div class="d-flex justify-content-center flex-grow-1 w-100 gap-2">
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Tahun Ini</span>
-								<span class="badge-number badge-number-medium badge badge-success"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->putus_tahun_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'jumlah_putus') ?></span>
+								<span class="badge-number badge-number-medium badge badge-success"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->putus_tahun_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'jumlah_putus') ?></span>
 							</div>
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Bulan Ini</span>
-								<span class="badge-number badge-number-medium badge badge-success"><?= createUrlRekapitulasi(date('Y'), date('m'), isset($ratio) ? number_format_indo($ratio->putus_bulan_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'jumlah_putus') ?></span>
+								<span class="badge-number badge-number-medium badge badge-success"><?= createUrlRekapitulasi(date('Y'), date('m'), isset($ratio) ? number_format_indo($ratio->putus_bulan_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'jumlah_putus') ?></span>
 							</div>
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Hari Ini</span>
-								<span class="badge-number badge-number-medium badge badge-success"><?= createUrlRekapitulasi(date('Y'), date('m'), isset($ratio) ? number_format_indo($ratio->putus_hari_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'putus_hari_ini') ?></span>
+								<span class="badge-number badge-number-medium badge badge-success"><?= createUrlRekapitulasi(date('Y'), date('m'), isset($ratio) ? number_format_indo($ratio->putus_hari_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'putus_hari_ini') ?></span>
 							</div>
 						</div>
 					</div>
@@ -224,22 +224,22 @@
 			<div class="statistic-global-item col col-md-4">
 				<div class="info-box d-flex align-items-stretch">
 					<span class="info-box-icon me-1 text-bg-warning shadow-sm d-flex align-items-center justify-content-center" style="width: 15%; min-width: 50px;">
-						<i class="fa fa-balance-scale mx-2"></i>
+						<i class="fa-solid fa-balance-scale mx-2"></i>
 					</span>
 					<div class="info-box-content px-0 d-flex flex-column">
 						<span class="fw-bold ms-2">Minutasi</span>
 						<div class="d-flex justify-content-center flex-grow-1 w-100 gap-2">
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Tahun Ini</span>
-								<span class="badge-number badge-number-medium badge badge-warning"><?php echo createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->minutasi_tahun_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'minutasi') ?></span>
+								<span class="badge-number badge-number-medium badge badge-warning"><?php echo createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->minutasi_tahun_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'minutasi') ?></span>
 							</div>
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Bulan Ini</span>
-								<span class="badge-number badge-number-medium badge badge-warning"><?php echo createUrlRekapitulasi(date('Y'), date('m'), isset($ratio) ? number_format_indo($ratio->minutasi_bulan_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'minutasi') ?></span>
+								<span class="badge-number badge-number-medium badge badge-warning"><?php echo createUrlRekapitulasi(date('Y'), date('m'), isset($ratio) ? number_format_indo($ratio->minutasi_bulan_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'minutasi') ?></span>
 							</div>
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Hari Ini</span>
-								<span class="badge-number badge-number-medium badge badge-warning"><?php echo createUrlRekapitulasi(date('Y'), date('m'), isset($ratio) ? number_format_indo($ratio->minutasi_hari_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'minutasi_hari_ini') ?></span>
+								<span class="badge-number badge-number-medium badge badge-warning"><?php echo createUrlRekapitulasi(date('Y'), date('m'), isset($ratio) ? number_format_indo($ratio->minutasi_hari_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'minutasi_hari_ini') ?></span>
 							</div>
 						</div>
 					</div>
@@ -248,22 +248,22 @@
 			<div class="statistic-global-item col col-md-4">
 				<div class="info-box d-flex align-items-stretch">
 					<span class="info-box-icon me-1 text-bg-danger shadow-sm d-flex align-items-center justify-content-center" style="width: 15%; min-width: 50px;">
-						<i class="fa fa-upload mx-2"></i>
+						<i class="fa-solid fa-upload mx-2"></i>
 					</span>
 					<div class="info-box-content px-0 d-flex flex-column">
 						<span class="fw-bold ms-2">Setor Panmud</span>
 						<div class="d-flex justify-content-center flex-grow-1 w-100 gap-2">
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Putus</span>
-								<span class="badge-number badge-number-medium badge badge-danger w-100 d-flex justify-content-center"><?php echo createUrlMinutasi(isset($kinerja_minutasi) ? number_format_indo($kinerja_minutasi->jumlah_putus_tahun_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'putus', 3) ?></span>
+								<span class="badge-number badge-number-medium badge badge-danger w-100 d-flex justify-content-center"><?php echo createUrlMinutasi(isset($kinerja_minutasi) ? number_format_indo($kinerja_minutasi->jumlah_putus_tahun_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'putus', 3) ?></span>
 							</div>
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Sudah Setor</span>
-								<span class="badge-number badge-number-medium badge badge-danger w-100 d-flex justify-content-center"><?php echo createUrlMinutasi(isset($kinerja_minutasi) ? number_format_indo($kinerja_minutasi->setor_putus_tahun_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'setor', 3) ?></span>
+								<span class="badge-number badge-number-medium badge badge-danger w-100 d-flex justify-content-center"><?php echo createUrlMinutasi(isset($kinerja_minutasi) ? number_format_indo($kinerja_minutasi->setor_putus_tahun_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'setor', 3) ?></span>
 							</div>
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Belum Setor</span>
-								<span class="badge-number badge-number-medium badge badge-danger w-100 d-flex justify-content-center"><?php echo createUrlMinutasi(isset($kinerja_minutasi) ? number_format_indo($kinerja_minutasi->jumlah_putus_tahun_ini - $kinerja_minutasi->setor_putus_tahun_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'pending', 3) ?></span>
+								<span class="badge-number badge-number-medium badge badge-danger w-100 d-flex justify-content-center"><?php echo createUrlMinutasi(isset($kinerja_minutasi) ? number_format_indo($kinerja_minutasi->jumlah_putus_tahun_ini - $kinerja_minutasi->setor_putus_tahun_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'pending', 3) ?></span>
 							</div>
 						</div>
 					</div>
@@ -272,22 +272,22 @@
 			<div class="statistic-global-item col col-md-4">
 				<div class="info-box d-flex align-items-stretch">
 					<span class="info-box-icon me-1 text-bg-secondary shadow-sm d-flex align-items-center justify-content-center" style="width: 15%; min-width: 50px;">
-						<i class="fa fa-clipboard-list mx-2"></i>
+						<i class="fa-solid fa-clipboard-list mx-2"></i>
 					</span>
 					<div class="info-box-content px-0 d-flex flex-column">
 						<span class="fw-bold ms-2">Bas Triwulan <?php echo ceil(date('n') / 3) ?></span>
 						<div class="d-flex justify-content-center flex-grow-1 w-100 gap-2">
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Sidang</span>
-								<span class="badge-number badge-number-medium badge badge-secondary"><?php echo createUrlBas(isset($kinerja_bas) ? number_format_indo($kinerja_bas->jumlah_sidang) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'sidang', 3) ?></span>
+								<span class="badge-number badge-number-medium badge badge-secondary"><?php echo createUrlBas(isset($kinerja_bas) ? number_format_indo($kinerja_bas->jumlah_sidang) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'sidang', 3) ?></span>
 							</div>
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Sudah Unggah</span>
-								<span class="badge-number badge-number-medium badge badge-secondary"><?php echo createUrlBas(isset($kinerja_bas) ? number_format_indo($kinerja_bas->uploaded_bas) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'uploaded', 3) ?></span>
+								<span class="badge-number badge-number-medium badge badge-secondary"><?php echo createUrlBas(isset($kinerja_bas) ? number_format_indo($kinerja_bas->uploaded_bas) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'uploaded', 3) ?></span>
 							</div>
 							<div class="d-flex flex-column justify-content-center flex-fill">
 								<span class="text-nowrap">Belum Unggah</span>
-								<span class="badge-number badge-number-medium badge badge-secondary"><?php echo createUrlBas(isset($kinerja_bas) ? number_format_indo($kinerja_bas->jumlah_sidang - $kinerja_bas->uploaded_bas) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'pending', 3) ?></span>
+								<span class="badge-number badge-number-medium badge badge-secondary"><?php echo createUrlBas(isset($kinerja_bas) ? number_format_indo($kinerja_bas->jumlah_sidang - $kinerja_bas->uploaded_bas) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'pending', 3) ?></span>
 							</div>
 						</div>
 					</div>
@@ -300,91 +300,91 @@
 				<ul class="col nav flex-column m-2 flex-shrink-0">
 					<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 						<span class="text-truncate flex-grow-1" style="max-width: 85%;">Belum Unggah Gugatan</span>
-						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->belum_ada_gugatan) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'belum_ada_gugatan') ?></span>
+						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->belum_ada_gugatan) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'belum_ada_gugatan') ?></span>
 					</li>
 					<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 						<span class="text-truncate flex-grow-1" style="max-width: 85%;">Belum Input PMH</span>
-						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->belum_ada_pmh) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'belum_ada_pmh') ?></span>
+						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->belum_ada_pmh) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'belum_ada_pmh') ?></span>
 					</li>
 					<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 						<span class="text-truncate flex-grow-1" style="max-width: 85%;">Belum Input PHS</span>
-						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, (isset($count_summary) && isset($count_summary['belum_ada_phs']['jumlah'])) ? number_format_indo($count_summary['belum_ada_phs']['jumlah']) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'belum_ada_phs') ?></span>
+						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, (isset($count_summary) && isset($count_summary['belum_ada_phs']['jumlah'])) ? number_format_indo($count_summary['belum_ada_phs']['jumlah']) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'belum_ada_phs') ?></span>
 					</li>
 					<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 						<span class="text-truncate flex-grow-1" style="max-width: 85%;">Belum Input Relaas</span>
-						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><a href="<?php echo base_url('kinerja/relaas') ?>" target="_blank" class="btn-external mx-auto my-2"><?= (isset($count_summary) && isset($count_summary['relaas_belum_input']['jumlah'])) ? number_format_indo($count_summary['relaas_belum_input']['jumlah']) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>' ?></a></span>
+						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><a href="<?php echo base_url('kinerja/relaas') ?>" target="_blank" class="btn-external mx-auto my-2"><?= (isset($count_summary) && isset($count_summary['relaas_belum_input']['jumlah'])) ? number_format_indo($count_summary['relaas_belum_input']['jumlah']) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>' ?></a></span>
 					</li>
 				</ul>
 				<ul class="col nav flex-column m-2 flex-shrink-0">
 					<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 						<span class="text-truncate flex-grow-1" style="max-width: 85%;">Redaksi Hari Ini</span>
-						<span class="badge-number badge-number-medium ms-2 badge badge-primary flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($count_redaksi) ? number_format_indo($count_redaksi->redaksi_hari_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'redaksi_hari_ini') ?></span>
+						<span class="badge-number badge-number-medium ms-2 badge badge-primary flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($count_redaksi) ? number_format_indo($count_redaksi->redaksi_hari_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'redaksi_hari_ini') ?></span>
 					</li>
 					<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 						<span class="text-truncate flex-grow-1" style="max-width: 85%;">Belum Input Redaksi</span>
-						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($count_redaksi) ? number_format_indo($count_redaksi->putus_belum_redaksi) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'putus_belum_redaksi') ?></span>
+						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($count_redaksi) ? number_format_indo($count_redaksi->putus_belum_redaksi) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'putus_belum_redaksi') ?></span>
 					</li>
 					<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 						<span class="text-truncate flex-grow-1" style="max-width: 85%;">Redaksi & Putus Beda</span>
-						<span class="badge-number badge-number-medium ms-2 badge badge-danger flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($count_summary) ? number_format_indo($count_summary['selisih_redaksi_putus']['jumlah']) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'selisih_redaksi_putus') ?></span>
+						<span class="badge-number badge-number-medium ms-2 badge badge-danger flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($count_summary) ? number_format_indo($count_summary['selisih_redaksi_putus']['jumlah']) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'selisih_redaksi_putus') ?></span>
 					</li>
 					<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 						<span class="text-truncate flex-grow-1" style="max-width: 85%;">Belum Anonimisasi</span>
-						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->belum_anonimasi_tahun_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'belum_anonimasi') ?></span>
+						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->belum_anonimasi_tahun_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'belum_anonimasi') ?></span>
 					</li>
 				</ul>
 				<ul class="col nav flex-column m-2 flex-shrink-0">
 					<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 						<span class="text-truncate flex-grow-1" style="max-width: 85%;">Belum Input Putus</span>
-						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($count_redaksi) ? number_format_indo($count_redaksi->belum_input_putus) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'belum_input_putus') ?></span>
+						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($count_redaksi) ? number_format_indo($count_redaksi->belum_input_putus) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'belum_input_putus') ?></span>
 					</li>
 					<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 						<span class="text-truncate flex-grow-1" style="max-width: 85%;">Belum Input Pertimbangan Hukum</span>
-						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->belum_pertimbangan_hukum_tahun_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'belum_pertimbangan_hukum') ?></span>
+						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->belum_pertimbangan_hukum_tahun_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'belum_pertimbangan_hukum') ?></span>
 					</li>
 					<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 						<span class="text-truncate flex-grow-1" style="max-width: 85%;">Putus Belum BAS</span>
-						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlBas(isset($kinerja_bas) ? number_format_indo($kinerja_bas->pending_bas_putus) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'pending', 4) ?></span>
+						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlBas(isset($kinerja_bas) ? number_format_indo($kinerja_bas->pending_bas_putus) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'pending', 4) ?></span>
 					</li>
 					<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 						<span class="text-truncate flex-grow-1" style="max-width: 85%;">Belum Minutasi</span>
-						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(0, 0, isset($ratio) ? number_format_indo($ratio->belum_minutasi) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'belum_minutasi') ?></span>
+						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(0, 0, isset($ratio) ? number_format_indo($ratio->belum_minutasi) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'belum_minutasi') ?></span>
 					</li>
 				</ul>
 				<ul class="col nav flex-column m-2 flex-shrink-0">
 					<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 						<span class="text-truncate flex-grow-1" style="max-width: 85%;">BHT Belum Arsip</span>
-						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= isset($ratio) ? number_format_indo($ratio->bht_belum_arsip_tahun_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>' ?></span>
+						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= isset($ratio) ? number_format_indo($ratio->bht_belum_arsip_tahun_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>' ?></span>
 					</li>
 					<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 						<span class="text-truncate flex-grow-1" style="max-width: 85%;">Belum Unggah Putusan</span>
-						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->belum_ada_edoc_tahun_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'belum_ada_edoc') ?></span>
+						<span class="badge-number badge-number-medium ms-2 badge badge-warning flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($ratio) ? number_format_indo($ratio->belum_ada_edoc_tahun_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'belum_ada_edoc') ?></span>
 					</li>
 					<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 						<span class="text-truncate flex-grow-1" style="max-width: 85%;">Antrian Dirput</span>
-						<span class="badge-number badge-number-medium ms-2 badge badge-primary flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($count_dirput_antrian) ? number_format_indo($count_dirput_antrian->dirput_antrian) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'dirput_antrian') ?></span>
+						<span class="badge-number badge-number-medium ms-2 badge badge-primary flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($count_dirput_antrian) ? number_format_indo($count_dirput_antrian->dirput_antrian) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'dirput_antrian') ?></span>
 					</li>
 					<!-- <li class="nav-item p-2">
-					<span class="float-start text-truncate" style="max-width: 80%;">Semua Perkara Putus</span> <span class="badge-number badge-number-medium ms-2 badge badge-info"><= createUrlRekapitulasi(0, 0, isset($ratio) ? number_format_indo($ratio->putus) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'jumlah_putus') ?></span>
+					<span class="float-start text-truncate" style="max-width: 80%;">Semua Perkara Putus</span> <span class="badge-number badge-number-medium ms-2 badge badge-info"><= createUrlRekapitulasi(0, 0, isset($ratio) ? number_format_indo($ratio->putus) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'jumlah_putus') ?></span>
 				</li> -->
 				</ul>
 				<?php if ($canSee): ?>
 					<ul class="col nav flex-column m-2 flex-shrink-0">
 						<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 							<span class="text-truncate flex-grow-1" style="max-width: 85%;">e-Doc Putusan</span>
-							<span class="badge-number badge-number-medium ms-2 badge badge-info flex-shrink-0"><?= createUrlRekapitulasi(0, 0, isset($ratio) ? number_format_indo($ratio->sudah_ada_edoc_tahun_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'sudah_ada_edoc') ?></span>
+							<span class="badge-number badge-number-medium ms-2 badge badge-info flex-shrink-0"><?= createUrlRekapitulasi(0, 0, isset($ratio) ? number_format_indo($ratio->sudah_ada_edoc_tahun_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'sudah_ada_edoc') ?></span>
 						</li>
 						<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 							<span class="text-truncate flex-grow-1" style="max-width: 85%;">Putusan Terpublish</span>
-							<span class="badge-number badge-number-medium ms-2 badge badge-info flex-shrink-0"><?= createUrlRekapitulasi(0, 0, isset($count_dirput_perkara) ? number_format_indo($count_dirput_perkara->published_tahun_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'published') ?></span>
+							<span class="badge-number badge-number-medium ms-2 badge badge-info flex-shrink-0"><?= createUrlRekapitulasi(0, 0, isset($count_dirput_perkara) ? number_format_indo($count_dirput_perkara->published_tahun_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'published') ?></span>
 						</li>
 						<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 							<span class="text-truncate flex-grow-1" style="max-width: 85%;">Tidak Terpublish</span>
-							<span class="badge-number badge-number-medium ms-2 badge badge-danger flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($count_dirput_perkara) ? number_format_indo($count_dirput_perkara->not_published_tahun_ini) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'not_published') ?></span>
+							<span class="badge-number badge-number-medium ms-2 badge badge-danger flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($count_dirput_perkara) ? number_format_indo($count_dirput_perkara->not_published_tahun_ini) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'not_published') ?></span>
 						</li>
 						<li class="nav-item p-2 d-flex flex-nowrap align-items-center justify-content-between">
 							<span class="text-truncate flex-grow-1" style="max-width: 85%;">Antrian Dirput Error</span>
-							<span class="badge-number badge-number-medium ms-2 badge badge-danger flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($count_dirput_antrian) ? number_format_indo($count_dirput_antrian->dirput_error) : '<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>', 'dirput_error') ?></span>
+							<span class="badge-number badge-number-medium ms-2 badge badge-danger flex-shrink-0"><?= createUrlRekapitulasi(date('Y'), 0, isset($count_dirput_antrian) ? number_format_indo($count_dirput_antrian->dirput_error) : '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>', 'dirput_error') ?></span>
 						</li>
 					</ul>
 				<?php endif ?>

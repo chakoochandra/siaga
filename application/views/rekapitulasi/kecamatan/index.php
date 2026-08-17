@@ -1,8 +1,3 @@
-<?php if (!defined('ID_WILAYAH') || ID_WILAYAH === '' || ID_WILAYAH === null): ?>
-	<div class="callout callout-warning my-2">
-		<p>Kabupaten belum diset. Silakan set di di <a href="<?php echo base_url('settings/config') ?>">Settings > Config</a>.</p>
-	</div>
-<?php else: ?>
 <div class="card leaves">
 	<div class="card-header leaves align-items-center">
 		<h5 class="m-0"><?php echo $title ?></h5>
@@ -286,4 +281,3 @@
 		}
 	});
 </script>
-<?php endif; ?>
