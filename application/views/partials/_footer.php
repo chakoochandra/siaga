@@ -464,8 +464,8 @@ $settingsFabItems = [
 	[
 		'url' => base_url('ck/pegawai'),
 		'icon' => 'fas fa-user-tag',
-		'label' => 'Pegawai',
-		'title' => 'Pegawai',
+		'label' => 'Pengeloaan Pegawai',
+		'title' => 'Pengeloaan Pegawai',
 		'admin_only' => true,
 	],
 	[

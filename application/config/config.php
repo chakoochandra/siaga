@@ -485,7 +485,7 @@ $config['csrf_exclude_uris'] = [
 	'generate/bas_belum_unggah_detail_excel_and_send',
 	'generate/relaas_belum_input_unggah_detail_excel_and_send',
 	'generate/rencana_bht_detail_excel_and_send',
-	'generate/dokumen_penetapan_detail_excel_and_send',
+	'generate/edoc_putus_today_excel_and_send',
 	'generate/sidang_today_excel_and_send',
 	'generate/send_attachment',
 	'updater/check',
@@ -509,7 +509,7 @@ $config['slow_query_exclude_methods'] = [
 	'generate/bas_belum_unggah_detail_excel_and_send',
 	'generate/relaas_belum_input_unggah_detail_excel_and_send',
 	'generate/rencana_bht_detail_excel_and_send',
-	'generate/dokumen_penetapan_detail_excel_and_send',
+	'generate/edoc_putus_today_excel_and_send',
 	'generate/sidang_today_excel_and_send',
 	'generate/send_attachment',
 ];

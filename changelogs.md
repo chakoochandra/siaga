@@ -1,5 +1,9 @@
 ### Update logs:
 
+#### Version 3.17 (17/08/2026)
+- UPDATE menu rekapitulasi mediasi
+- UPDATE notification templates
+
 #### Version 3.0 (09/08/2026)
 - ADDED Menu Keadaan Perkara
 - ADDED Menu Rekapitulasi Ecourt

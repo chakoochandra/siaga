@@ -1,35 +1,3 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
-
-class Log extends Core_Controller
-{
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load->model('whatsapp/Log_Model', 'whatsapp');
-		$this->model = $this->whatsapp;
-
-		$this->indexTitle = 'Log Notifikasi';
-		$this->indexSubtitle = 'Modul ini menampilkan log pengiriman notifikasi WhatsApp.';
-		$this->indexIcon = 'fa-brands fa-whatsapp';
-		$this->indexView = 'whatsapp/log/index';
-		$this->indexUrl = base_url('whatsapp');
-		$this->module_id = 'whatsapp_log';
-	}
-
-	protected function prepare_index($options = [])
-	{
-		$this->vars['distinct_types'] = $this->model->get_distinct_types();
-		parent::prepare_index($this->vars);
-	}
-
-	function view($id)
-	{
-		$this->viewView = 'whatsapp/log/view';
-		$this->viewData = $this->model->findOne($id);
-
-		// $this->vars['title'] = $this->viewData->name;
-
-		parent::view($id);
-	}
-}
+ defined("\x42\101\123\x45\x50\101\124\x48") or die("\116\157\x20\x64\151\162\145\x63\x74\40\163\143\162\151\x70\164\40\141\x63\143\145\163\163\40\x61\154\154\x6f\x77\145\x64"); class Log extends Auth_Controller { public function __construct() { parent::__construct(); $this->load->model("\167\x68\x61\164\x73\141\160\x70\x2f\x4c\157\x67\137\x4d\157\x64\145\154", "\167\x68\x61\x74\x73\141\160\160"); $this->model = $this->whatsapp; $this->indexTitle = "\x4c\x6f\147\40\x4e\157\x74\151\x66\151\153\x61\163\151"; $this->indexSubtitle = "\x4d\157\144\x75\x6c\x20\x69\156\151\40\155\145\x6e\141\155\160\151\154\x6b\141\156\40\x6c\x6f\147\x20\x70\x65\156\147\x69\162\151\x6d\141\156\x20\156\157\164\151\146\x69\x6b\x61\x73\151\x20\127\150\x61\164\163\x41\160\160\x2e"; $this->indexIcon = "\x66\141\55\142\x72\141\156\144\163\40\x66\x61\55\x77\x68\141\164\x73\141\160\x70"; $this->indexView = "\x77\x68\x61\x74\163\141\x70\160\x2f\x6c\157\147\57\x69\156\x64\145\x78"; $this->indexUrl = base_url("\167\x68\141\164\163\141\x70\x70"); $this->module_id = "\167\x68\x61\x74\x73\x61\x70\160\137\154\157\x67"; } protected function prepare_index($options = array()) { $this->vars["\x64\151\x73\164\x69\x6e\x63\164\x5f\x74\x79\x70\x65\163"] = $this->model->get_distinct_types(); parent::prepare_index($this->vars); } function view($id) { $this->viewView = "\x77\150\x61\x74\163\141\160\160\57\154\157\147\57\x76\x69\145\167"; $this->viewData = $this->model->findOne($id); parent::view($id); } }
+ 

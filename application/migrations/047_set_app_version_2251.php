@@ -5,7 +5,7 @@ class Migration_Set_app_version_2251 extends CI_Migration
 {
 	public function up()
 	{
-		$this->db->where('key', 'APP_VERSION')->update('tmst_configs', array('value' => '3.0'));
+		$this->db->where('key', 'APP_VERSION')->update('tmst_configs', array('value' => '3.2'));
 	}
 
 	public function down()
