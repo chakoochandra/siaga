@@ -1,10 +1,10 @@
 [
     {
         "version": "3.17",
-        "released_at": "2026-08-18 05:56:13",
+        "released_at": "2026-08-18 06:13:07",
         "min_supported_version": "2.0",
         "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.17.zip",
-        "checksum_sha256": "668c51812dfc645c642f6b1d0efbe6881a8a34b5a0455e9122c33ac9f4fb9f37",
+        "checksum_sha256": "e45ce9363027e159d3605e0603ec4e329ca609509c3ded90e145f02bdcb6ab03",
         "mandatory": true,
         "changelog": "update menu mediasi and notification templates",
         "excluded_from_overwrite": [

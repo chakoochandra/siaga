@@ -720,7 +720,7 @@ foreach ($fabGroupsPresent as $key => $present) {
 					<div class="accordion-item">
 						<h2 class="accordion-header" id="faq6"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse6" aria-expanded="false" aria-controls="faqCollapse6">Bagaimana cara mengisi konfigurasi DialogWA?</button></h2>
 						<div id="faqCollapse6" class="accordion-collapse collapse" aria-labelledby="faq6" data-bs-parent="#faqAccordion">
-							<div class="accordion-body">Isi <code>DIALOGWA_API_URL</code>, <code>DIALOGWA_TOKEN</code>, dan <code>DIALOGWA_SESSION</code> di menu <strong>Settings &gt; Config</strong>. Konfigurasi ini wajib diisi agar aplikasi dapat mengirim notifikasi WhatsApp.</div>
+							<div class="accordion-body"><p class="mb-2"><strong>Config:</strong> Isi <code>DIALOGWA_API_URL</code>, <code>DIALOGWA_TOKEN</code>, dan <code>DIALOGWA_SESSION</code> di menu <strong>Settings &gt; Config</strong>. Konfigurasi ini wajib diisi agar aplikasi dapat mengirim notifikasi WhatsApp.</p><p class="mb-0"><strong>Nomor Bot:</strong> Bila menggunakan sesi demo, nomor whatsapp yang digunakan adalah nomor whatsapp demo, untuk menggunakan nomor sendiri silakan sambungkan nomor whatsapp anda di <a href="https://dialogwa.com" target="_blank" rel="noopener" class="text-decoration-underline">dialogwa.com</a>.</p></div>
 						</div>
 					</div>
 					<div class="accordion-item">
