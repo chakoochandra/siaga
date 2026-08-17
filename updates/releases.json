@@ -1,10 +1,10 @@
 [
     {
-        "version": "3.3",
-        "released_at": "2026-08-17 19:53:17",
+        "version": "3.4",
+        "released_at": "2026-08-17 20:12:38",
         "min_supported_version": "2.0",
-        "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.3.zip",
-        "checksum_sha256": "ebb44c6d053eaeaf3eb129ecef59dcb564f0ba8461662aea1fd3b285cfc5eb7b",
+        "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.4.zip",
+        "checksum_sha256": "ba81b04c217faf6a94c83bbfce8fcdff0824c5feb99aecc75afba1c7270a7c27",
         "mandatory": true,
         "changelog": "update modul mediasi and notification templates",
         "excluded_from_overwrite": [
