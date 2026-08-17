@@ -1,37 +1,37 @@
-<?php if (!empty($mediasi_summary) && is_array($mediasi_summary)): ?>
-<div class="row mb-3">
-	<?php foreach ($mediasi_summary as $period): ?>
-	<?php
-		$d = $period['data'];
-		$total = (int) $d['perkara_mediasi'];
-		$pct = function($val) use ($total) {
-			return $total > 0 ? round((($val) / $total) * 100, 2) : 0;
-		};
-	?>
-	<div class="col-md-3 col-sm-6 mb-2">
-		<div class="card h-100">
-			<div class="card-header py-2">
-				<strong class="text-nowrap"><?php echo $period['label']; ?></strong>
-			</div>
-			<div class="card-body py-2">
-				<p class="mb-1 small"><strong>Hasil Mediasi:</strong></p>
-				<p class="mb-1 small">• Berhasil Akta: <?php echo number_format_indo($d['berhasil_akta']); ?> (<?php echo $pct($d['berhasil_akta']); ?>%)</p>
-				<p class="mb-1 small">• Berhasil Cabut: <?php echo number_format_indo($d['berhasil_cabut']); ?> (<?php echo $pct($d['berhasil_cabut']); ?>%)</p>
-				<p class="mb-1 small">• Berhasil Sebagian: <?php echo number_format_indo($d['berhasil_sebagian']); ?> (<?php echo $pct($d['berhasil_sebagian']); ?>%)</p>
-				<p class="mb-1 small">• Tidak Berhasil: <?php echo number_format_indo($d['tidak_berhasil']); ?> (<?php echo $pct($d['tidak_berhasil']); ?>%)</p>
-				<p class="mb-0 small">• Gagal: <?php echo number_format_indo($d['gagal']); ?> (<?php echo $pct($d['gagal']); ?>%)</p>
-			</div>
-		</div>
-	</div>
-	<?php endforeach; ?>
-</div>
-<?php endif; ?>
-
 <div class="card leaves">
 	<div class="card-header leaves align-items-center">
 		<h5 class="m-0"><?php echo $title ?></h5>
 	</div>
 	<div class="card-body">
+		<?php if (!empty($mediasi_summary) && is_array($mediasi_summary)): ?>
+			<div class="row mb-3">
+				<?php foreach ($mediasi_summary as $period): ?>
+					<?php
+					$d = $period['data'];
+					$total = (int) $d['perkara_mediasi'];
+					$pct = function ($val) use ($total) {
+						return $total > 0 ? round((($val) / $total) * 100, 2) : 0;
+					};
+					?>
+					<div class="col-md-3 col-sm-6 mb-2">
+						<div class="card h-100">
+							<div class="card-header py-2">
+								<strong class="text-nowrap"><?php echo $period['label']; ?></strong>
+							</div>
+							<div class="card-body py-2">
+								<p class="mb-1 small"><strong>Hasil Mediasi:</strong></p>
+								<p class="mb-1 small">• Berhasil Akta: <?php echo number_format_indo($d['berhasil_akta']); ?> (<?php echo $pct($d['berhasil_akta']); ?>%)</p>
+								<p class="mb-1 small">• Berhasil Cabut: <?php echo number_format_indo($d['berhasil_cabut']); ?> (<?php echo $pct($d['berhasil_cabut']); ?>%)</p>
+								<p class="mb-1 small">• Berhasil Sebagian: <?php echo number_format_indo($d['berhasil_sebagian']); ?> (<?php echo $pct($d['berhasil_sebagian']); ?>%)</p>
+								<p class="mb-1 small">• Tidak Berhasil: <?php echo number_format_indo($d['tidak_berhasil']); ?> (<?php echo $pct($d['tidak_berhasil']); ?>%)</p>
+								<p class="mb-0 small">• Gagal: <?php echo number_format_indo($d['gagal']); ?> (<?php echo $pct($d['gagal']); ?>%)</p>
+							</div>
+						</div>
+					</div>
+				<?php endforeach; ?>
+			</div>
+		<?php endif; ?>
+
 		<div class="table-responsive">
 			<table id="table-mediasi" class="display">
 				<tfoot class="collapse">
