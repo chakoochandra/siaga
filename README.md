@@ -1,4 +1,4 @@
-# SIAGA Version 3.17
+# SIAGA Version 3.19
 
 ## Sistem Informasi Alert & Monitoring Kinerja Perkara ##
 
@@ -8,6 +8,11 @@
 - **Dashboard** — Menampilkan rasio perkara, statistik, grafik, dan daftar aplikasi terintegrasi
 - **Monitoring E-Doc** — Monitoring progress unggah dokumen E-doc
 - **Kinerja Hakim** - Laporan kegiatan hakim dan rekap perkara diterima bulanan (LIPA 6)
+- **Monitoring Tunggakan Perkara**
+   * Belum putus >= 5 bulan
+   * Belum putus >= 4 bulan dan < 5 bulan
+   * Belum putus >= 3 bulan dan < 4 bulan
+   * Belum putus < 3 bulan
 - **Rekapitulasi Keadaan Perkara**
 - **Rekapitulasi Ecourt**
 - **Rekapitulasi Mediasi** — Rekapitulasi data mediasi perkara (LIPA 12)

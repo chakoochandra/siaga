@@ -425,7 +425,7 @@
 							<?php if ($category == 'Socmed') : ?>
 								<?php foreach ($socmed as $s) : ?>
 									<?php if ($s[2]) : ?>
-										<a href="<?php echo $s[1] ?>" rel="noopener noreferrer"><img src="<?php echo $s[2] ?>" class="transform-scale" alt="<?php echo $s[0] ?>" width="<?php echo $s[3] ?: 30 ?>" height="<?php echo $s[4] ?: 30 ?>"></a>
+										<a href="<?php echo $s[1] ?>" rel="noopener noreferrer"><img src="<?php echo $s[2] ?>" loading="lazy" class="transform-scale" alt="<?php echo $s[0] ?>" width="<?php echo $s[3] ?: 30 ?>" height="<?php echo $s[4] ?: 30 ?>"></a>
 									<?php else : ?>
 										<a href="<?php echo $s[1] ?>" rel="noopener noreferrer"><?php echo $s[0] ?></a>
 									<?php endif ?>
@@ -546,7 +546,7 @@
 			return {
 				type: 'image',
 				html: '<i class="' + fallbackIcon + '"></i>',
-				bgHtml: '<img src="' + iconUrl + '" alt="' + appName + '" class="w-100 h-100 object-fit-cover" style="opacity:1;">'
+				bgHtml: '<img src="' + iconUrl + '" loading="lazy" alt="' + appName + '" class="w-100 h-100 object-fit-cover" style="opacity:1;">'
 			};
 		} else if (iconUrl && typeof iconUrl === 'string' && iconUrl.includes('fa-')) {
 			return {

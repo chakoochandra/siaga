@@ -9,7 +9,7 @@
 		<p id="ub-changelog">Catatan pembaruan: <?= nl2br(htmlspecialchars(isset($manifest['changelog']) ? $manifest['changelog'] : '')) ?></p>
 		<div class="alert alert-info mt-2 mb-2">
 			<strong>Sebelum memperbarui, pastikan izin direktori sudah benar dengan menjalankan:</strong><br>
-			<code>chown apache:apache -R /var/www/html/siaga</code>
+			<code>chown apache:apache -R /var/www/html/siaga</code> [ganti <code>siaga</code> apabila nama folder aplikasi anda berbeda]
 		</div>
 		<?php if ($is_admin): ?>
 			<button onclick="applyUpdate(this)" class="btn btn-sm btn-primary">Perbarui sekarang</button>
@@ -169,7 +169,7 @@
 		window._pendingManifest = <?= json_encode($manifest) ?>;
 
 		function applyUpdate(btn) {
-			if (!confirm('Sebelum memperbarui, pastikan izin direktori sudah benar dengan menjalankan:\n\nchown apache:apache -R /var/www/html/siaga\n\nIni akan membuat cadangan sistem Anda dan menerapkan pembaruan v' + window._pendingManifest.version + '. Lanjutkan?')) return;
+			if (!confirm('Sebelum memperbarui, pastikan izin direktori sudah benar dengan menjalankan:\n\nchown apache:apache -R /var/www/html/nama_folder_aplikasi\n\nIni akan membuat cadangan sistem Anda dan menerapkan pembaruan v' + window._pendingManifest.version + '. Lanjutkan?')) return;
 			html5BusyShow();
 			btn.disabled = true;
 			btn.textContent = 'Memperbarui...';

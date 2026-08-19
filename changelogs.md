@@ -1,24 +1,28 @@
 ### Update logs:
 
+#### Version 3.19 (19/08/2026)
+- NEW! Menu monitoring tunggakan perkara
+- FIX menu jadwal sidang
+
 #### Version 3.17 (17/08/2026)
 - UPDATE menu rekapitulasi mediasi
 - UPDATE notification templates
 
 #### Version 3.0 (09/08/2026)
-- ADDED Menu Keadaan Perkara
-- ADDED Menu Rekapitulasi Ecourt
-- ADDED Menu Rekapitulasi Mediasi
-- ADDED Menu Rekapitulasi Perkara Cerai
+- NEW! Menu Keadaan Perkara
+- NEW! Menu Rekapitulasi Ecourt
+- NEW! Menu Rekapitulasi Mediasi
+- NEW! Menu Rekapitulasi Perkara Cerai
 	* Ringkasan Perkara CG, CT, Usia < 19 Tahun, Cerai Dengan DK
 	* Demografi Agama, Pendidikan, Pekerjaan, Warga Negara
 	* Daftar Perkara Cerai
-- ADDED Menu Rekapitulasi Dispensasi Kawin
-- ADDED Menu Rekapitulasi Perkara Banding
-- ADDED Menu Rekapitulasi Perkara Kasasi
-- ADDED Menu Rekapitulasi Perkara PK
+- NEW! Menu Rekapitulasi Dispensasi Kawin
+- NEW! Menu Rekapitulasi Perkara Banding
+- NEW! Menu Rekapitulasi Perkara Kasasi
+- NEW! Menu Rekapitulasi Perkara PK
 
 #### Version 2.60 (03/08/2026)
-- ADDED Module Blangko Manager
+- NEW! Module Blangko Manager
 - ADDED Authorization for user admin
 - ADDED version update checking
 - UPDATE menu pegawai

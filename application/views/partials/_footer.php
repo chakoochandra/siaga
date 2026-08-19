@@ -388,6 +388,12 @@ $fabItems = [
 		'title' => 'Kinerja Hakim',
 	],
 	[
+		'url' => base_url('kinerja/tunggakan'),
+		'icon' => 'fas fa-file-invoice',
+		'label' => 'Tunggakan Perkara',
+		'title' => 'Tunggakan Perkara',
+	],
+	[
 		'url' => base_url('ck/bht'),
 		'icon' => 'fas fa-clipboard-check',
 		'label' => 'Monitoring BHT',
@@ -690,7 +696,7 @@ foreach ($fabGroupsPresent as $key => $present) {
 					<div class="accordion-item">
 						<h2 class="accordion-header" id="faq1"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="true" aria-controls="faqCollapse1">Bagaimana cara menggunakan nomor sendiri sebagai bot WhatsApp?</button></h2>
 						<div id="faqCollapse1" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
-							<div class="accordion-body">Registrasi nomor bot di <a href="https://dialogwa.com" target="_blank">dialogwa.com</a> untuk mendapatkan kredensial API.</div>
+							<div class="accordion-body">Registrasi nomor bot di <a href="https://dialogwa.com" target="_blank">dialogwa.com</a> untuk mendapatkan kredensial API.<p class="mb-0"><strong>Nomor Bot:</strong> Bila menggunakan sesi demo, nomor whatsapp yang digunakan adalah nomor whatsapp demo, untuk menggunakan nomor sendiri silakan sambungkan nomor whatsapp anda di <a href="https://dialogwa.com" target="_blank" rel="noopener" class="text-decoration-underline">dialogwa.com</a>.</p></div>
 						</div>
 					</div>
 					<div class="accordion-item">
@@ -720,13 +726,19 @@ foreach ($fabGroupsPresent as $key => $present) {
 					<div class="accordion-item">
 						<h2 class="accordion-header" id="faq6"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse6" aria-expanded="false" aria-controls="faqCollapse6">Bagaimana cara mengisi konfigurasi DialogWA?</button></h2>
 						<div id="faqCollapse6" class="accordion-collapse collapse" aria-labelledby="faq6" data-bs-parent="#faqAccordion">
-							<div class="accordion-body"><p class="mb-2"><strong>Config:</strong> Isi <code>DIALOGWA_API_URL</code>, <code>DIALOGWA_TOKEN</code>, dan <code>DIALOGWA_SESSION</code> di menu <strong>Settings &gt; Config</strong>. Konfigurasi ini wajib diisi agar aplikasi dapat mengirim notifikasi WhatsApp.</p><p class="mb-0"><strong>Nomor Bot:</strong> Bila menggunakan sesi demo, nomor whatsapp yang digunakan adalah nomor whatsapp demo, untuk menggunakan nomor sendiri silakan sambungkan nomor whatsapp anda di <a href="https://dialogwa.com" target="_blank" rel="noopener" class="text-decoration-underline">dialogwa.com</a>.</p></div>
+							<div class="accordion-body"><p class="mb-2">Isi <code>DIALOGWA_API_URL</code>, <code>DIALOGWA_TOKEN</code>, dan <code>DIALOGWA_SESSION</code> di menu <strong>Settings &gt; Config</strong>. Konfigurasi ini wajib diisi agar aplikasi dapat mengirim notifikasi WhatsApp.</p></div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="faq7"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse7" aria-expanded="false" aria-controls="faqCollapse7">Apa yang harus dilakukan jika menu Monitoring Relaas tidak berfungsi?</button></h2>
+						<div id="faqCollapse7" class="accordion-collapse collapse" aria-labelledby="faq7" data-bs-parent="#faqAccordion">
+							<div class="accordion-body">Jika menu <strong>Monitoring Relaas</strong> tidak berfungsi, kemungkinan view vw_pekerjaan_kategori belum tersedia pada database <code>sipp</code>. Untuk mengatasinya, silakan eksekusi file SQL <code>sql/vw_pekerjaan_kategori.sql</code> pada database tersebut.</div>
 						</div>
 					</div>
 					<div class="accordion-item">
 						<h2 class="accordion-header" id="faq8"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse8" aria-expanded="false" aria-controls="faqCollapse8">Apa yang perlu diperiksa sebelum melakukan update aplikasi?</button></h2>
 						<div id="faqCollapse8" class="accordion-collapse collapse" aria-labelledby="faq8" data-bs-parent="#faqAccordion">
-							<div class="accordion-body">Sebelum melakukan update, pastikan izin direktori aplikasi sudah benar dengan menjalankan perintah berikut pada server:<br><code>chown apache:apache -R /var/www/html/siaga</code><br>Pastikan juga telah membaca changelog dan membuat cadangan data jika diperlukan.</div>
+							<div class="accordion-body">Sebelum melakukan update, pastikan izin direktori aplikasi sudah benar dengan menjalankan perintah berikut pada server:<br><code>chown apache:apache -R /var/www/html/siaga</code> [ganti <code>siaga</code> apabila nama folder aplikasi anda berbeda]<br>Pastikan juga telah membaca changelog dan membuat cadangan data jika diperlukan.</div>
 						</div>
 					</div>
 				</div>

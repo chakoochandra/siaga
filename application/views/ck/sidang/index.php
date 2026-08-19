@@ -59,6 +59,16 @@
 			}).join('<br>');
 		}
 
+		function updateHeaderSubtitle(value) {
+			const formatted = formatDate(value);
+			let $subtitle = $('#sidang-title .sidang-subtitle');
+			if (!$subtitle.length) {
+				$subtitle = $('<small class="sidang-subtitle text-muted ms-2"></small>');
+				$('#sidang-title').append($subtitle);
+			}
+			$subtitle.text(formatted);
+		}
+
 		const columns = [{
 			data: null,
 			title: "No.",

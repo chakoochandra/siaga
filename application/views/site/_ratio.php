@@ -31,7 +31,7 @@
 					</div>
 				</h5>
 
-				<div class="mx-auto my-2">
+				<a href="<?php echo base_url('kinerja/tunggakan') ?>" target="_blank" class="btn-external mx-auto my-2">
 					<h5 class="mb-0">
 						<font size="10" face="Bernard MT Condensed" class="badge-number">
 							<?php if (isset($ratio)): ?>
@@ -44,7 +44,7 @@
 							<?php endif ?>
 						</font>
 					</h5>
-				</div>
+				</a>
 			</div>
 			<div class="col d-flex flex-column">
 				<h5 align="center" style="margin: 6px auto 0px;">
@@ -53,7 +53,7 @@
 					</div>
 				</h5>
 
-				<div class="mx-auto my-2">
+				<a href="<?php echo base_url('rekapitulasi/keadaanperkara') ?>" target="_blank" class="btn-external mx-auto my-2">
 					<h5 class="mb-0">
 						<font size="10" face="Bernard MT Condensed" class="badge-number">
 							<?php if (isset($ratio)): ?>
@@ -63,7 +63,7 @@
 							<?php endif ?>
 						</font>
 					</h5>
-				</div>
+				</a>
 			</div>
 			<div class="col d-flex flex-column">
 				<h5 align="center" style="margin: 6px auto 0px;">
@@ -71,7 +71,7 @@
 						<font class="card-title" size="3" face="Segoe UI">PERKARA E-COURT</font>
 					</div>
 				</h5>
-				<div class="mx-auto my-2">
+				<a href="<?php echo base_url('rekapitulasi/keadaanperkara/index/0/1') ?>" target="_blank" class="btn-external mx-auto my-2">
 					<h5 class="mb-0">
 						<font size="10" face="Bernard MT Condensed" class="badge-number">
 							<?php if (isset($ratio)): ?>
@@ -81,7 +81,7 @@
 							<?php endif ?>
 						</font>
 					</h5>
-				</div>
+				</a>
 			</div>
 		</div>
 
@@ -93,7 +93,7 @@
 						<font class="card-title" size="3" face="Segoe UI">PUTUS SETOR PANMUD</font>
 					</div>
 				</h5>
-				<div class="mx-auto my-2">
+				<a href="<?php echo base_url('kinerja/minutasi') ?>" target="_blank" class="btn-external mx-auto my-2">
 					<h5 class="mb-0">
 						<font size="10" face="Bernard MT Condensed" class="badge-number">
 							<?php if (isset($kinerja_minutasi)): ?>
@@ -103,7 +103,7 @@
 							<?php endif ?>
 						</font>
 					</h5>
-				</div>
+				</a>
 			</div>
 			<div class="col d-flex flex-column">
 				<h5 align="center" style="margin: 6px auto 0px;">
@@ -111,7 +111,7 @@
 						<font class="card-title" size="3" face="Segoe UI">BAS SUDAH UNGGAH</font>
 					</div>
 				</h5>
-				<div class="mx-auto my-2">
+				<a href="<?php echo base_url('kinerja/bas') ?>" target="_blank" class="btn-external mx-auto my-2">
 					<h5 class="mb-0">
 						<font size="10" face="Bernard MT Condensed" class="badge-number">
 							<?php if (isset($kinerja_bas)): ?>
@@ -121,7 +121,7 @@
 							<?php endif ?>
 						</font>
 					</h5>
-				</div>
+				</a>
 			</div>
 			<div class="col d-flex flex-column">
 				<h5 align="center" style="margin: 6px auto 0px;">
@@ -129,7 +129,7 @@
 						<font class="card-title" size="3" face="Segoe UI">UPLOAD PUTUSAN</font>
 					</div>
 				</h5>
-				<div class="mx-auto my-2">
+				<a href="<?php echo base_url("rekapitulasi/keadaanperkara/perkara_list/belum_ada_edoc/" . date('Y') . "/0") ?>" target="_blank" class="btn-modal mx-auto my-2">
 					<h5 class="mb-0">
 						<font size="10" face="Bernard MT Condensed" class="badge-number">
 							<?php if (isset($ratio)): ?>
@@ -139,7 +139,7 @@
 							<?php endif ?>
 						</font>
 					</h5>
-				</div>
+				</a>
 			</div>
 		</div>
 
