@@ -1,11 +1,11 @@
 {
-    "version": "3.19",
-    "released_at": "2026-08-20 07:45:42",
+    "version": "3.20",
+    "released_at": "2026-08-21 06:02:14",
     "min_supported_version": "2.0",
-    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.19.zip",
-    "checksum_sha256": "eec9bfe3c6dfb20339a52b2f5b7c57e0e9f042429ca530c40458d67538e254fb",
+    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.20.zip",
+    "checksum_sha256": "c7e75b3ee20886860fb86d8aaea7d7a193475419eea75b5544ede26657d9ad71",
     "mandatory": true,
-    "changelog": "added menu tunggakan perkara",
+    "changelog": "update modul monitoring edoc",
     "excluded_from_overwrite": [
         "updates/",
         "uploads/",

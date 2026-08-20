@@ -1,56 +1,63 @@
-<div class="callout callout-success">
-	<h6>Keterangan</h6>
-	<p>Upload BAS terhitung mulai Juni 2021</p>
+<div class="card leaves">
+	<div class="card-header leaves align-items-center">
+		<h5 class="m-0"><?php echo $title ?></h5>
+	</div>
+	<div class="card-body">
+		<div class="callout callout-success">
+			<h6>Keterangan</h6>
+			<p>Upload BAS terhitung mulai Juni 2021</p>
+		</div>
+
+		<div class="table-responsive">
+			<table id="table-performance" class="display">
+				<thead>
+					<tr>
+						<th class="dt-center" rowspan="2">No.</th>
+						<th rowspan="2">Nama</th>
+
+						<!-- Range Group -->
+						<th class="dt-center" colspan="4" id="range-header"><?php echo format_date(date('Y-m-d'), "MMMM yyyy") ?></th>
+
+						<!-- Triwulan Ini Group -->
+						<th class="dt-center" colspan="4">Triwulan <?php echo ceil(date('n') / 3) ?> <?php echo date('Y') ?></th>
+					</tr>
+					<tr>
+						<!-- Range Columns -->
+						<th class="dt-center text-rotate">Sidang</th>
+						<th class="dt-center text-rotate">Sudah</th>
+						<th class="dt-center text-rotate">Belum</th>
+						<th class="dt-center text-rotate">Skor</th>
+
+						<!-- Triwulan Ini Columns -->
+						<th class="dt-center text-rotate">Sidang</th>
+						<th class="dt-center text-rotate">Sudah</th>
+						<th class="dt-center text-rotate">Belum</th>
+						<th class="dt-center text-rotate">Skor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Data will be loaded via AJAX -->
+				</tbody>
+				<tfoot class="collapse">
+					<td colspan="2" class="dt-right">Total</td>
+					<!-- Range Totals -->
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<!-- Triwulan Ini Totals -->
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tfoot>
+			</table>
+		</div>
+
+		<div id="chartRange" style="height: 500px;"></div>
+		<div id="chartYearToDate" style="height: 500px;"></div>
+	</div>
 </div>
-
-<div class="table-responsive">
-	<table id="table-performance" class="display">
-		<thead>
-			<tr>
-				<th class="dt-center" rowspan="2">No.</th>
-				<th rowspan="2">Nama</th>
-
-				<!-- Range Group -->
-				<th class="dt-center" colspan="4" id="range-header"><?php echo format_date(date('Y-m-d'), "MMMM yyyy") ?></th>
-
-				<!-- Triwulan Ini Group -->
-				<th class="dt-center" colspan="4">Triwulan <?php echo ceil(date('n') / 3) ?> <?php echo date('Y') ?></th>
-			</tr>
-			<tr>
-				<!-- Range Columns -->
-				<th class="dt-center text-rotate">Sidang</th>
-				<th class="dt-center text-rotate">Sudah</th>
-				<th class="dt-center text-rotate">Belum</th>
-				<th class="dt-center text-rotate">Skor</th>
-
-				<!-- Triwulan Ini Columns -->
-				<th class="dt-center text-rotate">Sidang</th>
-				<th class="dt-center text-rotate">Sudah</th>
-				<th class="dt-center text-rotate">Belum</th>
-				<th class="dt-center text-rotate">Skor</th>
-			</tr>
-		</thead>
-		<tbody>
-			<!-- Data will be loaded via AJAX -->
-		</tbody>
-		<tfoot class="collapse">
-			<td colspan="2" class="dt-right">Total</td>
-			<!-- Range Totals -->
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<!-- Triwulan Ini Totals -->
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tfoot>
-	</table>
-</div>
-
-<div id="chartRange" style="height: 500px;"></div>
-<div id="chartYearToDate" style="height: 500px;"></div>
 
 <script src="<?php echo asset_url('assets/plugins/chart.js/Chart.min.js') ?>"></script>
 <script src="<?php echo asset_url('assets/plugins/chart.js/chartjs-plugin-datalabels.js') ?>"></script>
