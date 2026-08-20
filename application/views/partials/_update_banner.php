@@ -19,16 +19,13 @@
 			<small class="text-muted">Hanya admin yang dapat melakukan pembaruan.</small>
 		<?php endif; ?>
 	</div>
-	<div id="html5-busy-overlay">
-		<div class="spinner"></div>
-	</div>
+	<div id="html5-busy-overlay"><div class="spinner"></div></div>
 
 	<script>
 		function html5BusyShow() {
 			var el = document.getElementById('html5-busy-overlay');
 			if (el) el.style.display = 'flex';
 		}
-
 		function html5BusyHide() {
 			var el = document.getElementById('html5-busy-overlay');
 			if (el) el.style.display = 'none';
@@ -43,51 +40,14 @@
 				modalEl.style.cssText = 'padding:0;border:none;border-radius:6px;width:min(500px,92vw);max-height:85vh;box-shadow:0 10px 40px rgba(0,0,0,.25);';
 				modalEl.innerHTML =
 					'<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #dee2e6;">' +
-					'<h5 class="modal-title" style="margin:0;">Login</h5>' +
-					'<button type="button" class="modal-close-btn" aria-label="Close" style="background:none;border:none;font-size:1.4rem;line-height:1;cursor:pointer;">&times;</button>' +
+						'<h5 class="modal-title" style="margin:0;">Login</h5>' +
+						'<button type="button" class="modal-close-btn" aria-label="Close" style="background:none;border:none;font-size:1.4rem;line-height:1;cursor:pointer;">&times;</button>' +
 					'</div>' +
 					'<div class="modal-body" style="padding:16px;overflow-y:auto;"></div>';
 				document.body.appendChild(modalEl);
 
-				// Extremely old browser without native <dialog> support (no
-				// showModal/close). Patch equivalent methods onto the element
-				// itself so every call site below (modalEl.showModal(),
-				// modalEl.close(), modalEl.open) works the same regardless of
-				// native support -- no branching needed at call time.
-				if (typeof modalEl.showModal !== 'function') {
-					console.warn('Native <dialog> element is not supported in this browser; using fallback modal.');
-
-					var backdrop = document.createElement('div');
-					backdrop.id = 'modal-input-backdrop';
-					backdrop.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1049;display:none;';
-					document.body.appendChild(backdrop);
-
-					modalEl.open = false;
-
-					modalEl.showModal = function() {
-						modalEl.style.display = 'block';
-						modalEl.style.position = 'fixed';
-						modalEl.style.top = '50%';
-						modalEl.style.left = '50%';
-						modalEl.style.transform = 'translate(-50%, -50%)';
-						modalEl.style.margin = '0';
-						modalEl.style.zIndex = '1050';
-						backdrop.style.display = 'block';
-						document.body.style.overflow = 'hidden';
-						modalEl.open = true;
-					};
-
-					modalEl.close = function() {
-						modalEl.style.display = 'none';
-						backdrop.style.display = 'none';
-						document.body.style.overflow = '';
-						modalEl.open = false;
-					};
-				}
-
 				// Native <dialog> closes on Escape by default (fires 'cancel').
-				// Block that to mimic data-bs-keyboard="false". (No-op on the
-				// fallback path since a plain <div>-like element never fires it.)
+				// Block that to mimic data-bs-keyboard="false".
 				modalEl.addEventListener('cancel', function(e) {
 					e.preventDefault();
 				});
@@ -98,16 +58,26 @@
 
 				// showModal() already prevents outside-click dismissal by default
 				// (there's no listener closing it on backdrop click), matching
-				// data-bs-backdrop="static". The fallback backdrop above has no
-				// click listener either, for the same reason.
+				// data-bs-backdrop="static".
 			}
 
 			var $modal = $(modalEl);
 			$modal.find('.modal-title').html('Login');
 			$modal.find('.modal-body').html('<div class="text-center p-4"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></div>');
 
-			if (!modalEl.open) {
-				modalEl.showModal();
+			if (typeof modalEl.showModal === 'function') {
+				if (!modalEl.open) {
+					modalEl.showModal();
+				}
+			} else {
+				// Extremely old browser without <dialog> support.
+				console.error('Native <dialog> element is not supported in this browser.');
+				modalEl.setAttribute('open', 'open');
+				modalEl.style.position = 'fixed';
+				modalEl.style.top = '10vh';
+				modalEl.style.left = '50%';
+				modalEl.style.transform = 'translateX(-50%)';
+				modalEl.style.zIndex = 1050;
 			}
 
 			$.ajax({
