@@ -1,10 +1,10 @@
 [
     {
         "version": "3.19",
-        "released_at": "2026-08-20 07:16:36",
+        "released_at": "2026-08-20 07:45:42",
         "min_supported_version": "2.0",
         "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.19.zip",
-        "checksum_sha256": "f4c35b19ad31108ffd800117822af9ede0c20a3042786e217f6aeb922cf856cc",
+        "checksum_sha256": "eec9bfe3c6dfb20339a52b2f5b7c57e0e9f042429ca530c40458d67538e254fb",
         "mandatory": true,
         "changelog": "added menu tunggakan perkara",
         "excluded_from_overwrite": [

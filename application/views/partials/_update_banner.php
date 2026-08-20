@@ -19,65 +19,125 @@
 			<small class="text-muted">Hanya admin yang dapat melakukan pembaruan.</small>
 		<?php endif; ?>
 	</div>
-	<div id="html5-busy-overlay"><div class="spinner"></div></div>
+	<div id="html5-busy-overlay">
+		<div class="spinner"></div>
+	</div>
 
 	<script>
 		function html5BusyShow() {
 			var el = document.getElementById('html5-busy-overlay');
 			if (el) el.style.display = 'flex';
 		}
+
 		function html5BusyHide() {
 			var el = document.getElementById('html5-busy-overlay');
 			if (el) el.style.display = 'none';
 		}
 
+		// Cached once, at module scope, rather than re-derived (or patched onto
+		// the element) on every call. Some browsers/polyfills define
+		// showModal/close as getter-only accessors on the prototype, which makes
+		// direct assignment like `modalEl.showModal = fn` silently no-op in
+		// non-strict mode -- so we never attempt that again. Kept null until the
+		// first modal creation actually probes it.
+		var nativeDialogSupported = null;
+		var fallbackBackdrop = null;
+
+		function showLoginModalEl(modalEl) {
+			if (nativeDialogSupported) {
+				try {
+					modalEl.showModal();
+					return;
+				} catch (err) {
+					// Feature-detected as supported but failed at call time anyway
+					// (e.g. sandboxed iframe). Fall through to the manual path below.
+					console.warn('showModal() failed despite being detected as supported; falling back.', err);
+					nativeDialogSupported = false;
+				}
+			}
+			modalEl.style.display = 'block';
+			modalEl.style.position = 'fixed';
+			modalEl.style.top = '50%';
+			modalEl.style.left = '50%';
+			modalEl.style.transform = 'translate(-50%, -50%)';
+			modalEl.style.margin = '0';
+			modalEl.style.zIndex = '1050';
+			if (fallbackBackdrop) fallbackBackdrop.style.display = 'block';
+			document.body.style.overflow = 'hidden';
+			modalEl.open = true;
+		}
+
+		function closeLoginModalEl(modalEl) {
+			if (nativeDialogSupported) {
+				try {
+					modalEl.close();
+					return;
+				} catch (err) {
+					console.warn('close() failed despite being detected as supported; falling back.', err);
+					nativeDialogSupported = false;
+				}
+			}
+			modalEl.style.display = 'none';
+			if (fallbackBackdrop) fallbackBackdrop.style.display = 'none';
+			document.body.style.overflow = '';
+			modalEl.open = false;
+		}
+
 		function openLoginModal() {
-			var modalEl = document.getElementById('modal-input');
+			var modalEl = document.getElementById('ub-login-modal');
 
 			if (!modalEl) {
 				modalEl = document.createElement('dialog');
-				modalEl.id = 'modal-input';
+				modalEl.id = 'ub-login-modal';
 				modalEl.style.cssText = 'padding:0;border:none;border-radius:6px;width:min(500px,92vw);max-height:85vh;box-shadow:0 10px 40px rgba(0,0,0,.25);';
 				modalEl.innerHTML =
 					'<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #dee2e6;">' +
-						'<h5 class="modal-title" style="margin:0;">Login</h5>' +
-						'<button type="button" class="modal-close-btn" aria-label="Close" style="background:none;border:none;font-size:1.4rem;line-height:1;cursor:pointer;">&times;</button>' +
+					'<h5 class="modal-title" style="margin:0;">Login</h5>' +
+					'<button type="button" class="modal-close-btn" aria-label="Close" style="background:none;border:none;font-size:1.4rem;line-height:1;cursor:pointer;">&times;</button>' +
 					'</div>' +
 					'<div class="modal-body" style="padding:16px;overflow-y:auto;"></div>';
 				document.body.appendChild(modalEl);
 
+				// Probed once and cached. We never assign showModal/close onto the
+				// element itself -- see the comment on nativeDialogSupported above.
+				if (nativeDialogSupported === null) {
+					nativeDialogSupported = typeof modalEl.showModal === 'function';
+				}
+
+				if (!nativeDialogSupported) {
+					console.warn('Native <dialog> element is not supported in this browser; using fallback modal.');
+
+					fallbackBackdrop = document.createElement('div');
+					fallbackBackdrop.id = 'ub-login-modal-backdrop';
+					fallbackBackdrop.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1049;display:none;';
+					document.body.appendChild(fallbackBackdrop);
+
+					modalEl.open = false;
+				}
+
 				// Native <dialog> closes on Escape by default (fires 'cancel').
-				// Block that to mimic data-bs-keyboard="false".
+				// Block that to mimic data-bs-keyboard="false". (No-op on the
+				// fallback path since a plain <div>-like element never fires it.)
 				modalEl.addEventListener('cancel', function(e) {
 					e.preventDefault();
 				});
 
 				modalEl.querySelector('.modal-close-btn').addEventListener('click', function() {
-					modalEl.close();
+					closeLoginModalEl(modalEl);
 				});
 
 				// showModal() already prevents outside-click dismissal by default
 				// (there's no listener closing it on backdrop click), matching
-				// data-bs-backdrop="static".
+				// data-bs-backdrop="static". The fallback backdrop above has no
+				// click listener either, for the same reason.
 			}
 
 			var $modal = $(modalEl);
 			$modal.find('.modal-title').html('Login');
 			$modal.find('.modal-body').html('<div class="text-center p-4"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></div>');
 
-			if (typeof modalEl.showModal === 'function') {
-				if (!modalEl.open) {
-					modalEl.showModal();
-				}
-			} else {
-				// Extremely old browser without <dialog> support.
-				console.error('Native <dialog> element is not supported in this browser.');
-				modalEl.setAttribute('open', 'open');
-				modalEl.style.position = 'fixed';
-				modalEl.style.top = '10vh';
-				modalEl.style.left = '50%';
-				modalEl.style.transform = 'translateX(-50%)';
-				modalEl.style.zIndex = 1050;
+			if (!modalEl.open) {
+				showLoginModalEl(modalEl);
 			}
 
 			$.ajax({
@@ -104,18 +164,18 @@
 			});
 		}
 
-		// The login form itself is injected dynamically into #modal-input
+		// The login form itself is injected dynamically into #ub-login-modal
 		// .modal-body (both on initial modal open and after a failed
 		// attempt), so a static selector won't catch it — delegate the
 		// submit listener from document instead. Without this, the <form>
 		// does a normal native POST: the browser navigates away from the
 		// page entirely and lands on site/login's raw JSON response,
 		// because CodeIgniter can tell it wasn't an AJAX request.
-		$(document).on('submit', '#modal-input form', function(e) {
+		$(document).on('submit', '#ub-login-modal form', function(e) {
 			e.preventDefault();
 
 			var $form = $(this);
-			var $modal = $form.closest('#modal-input');
+			var $modal = $form.closest('#ub-login-modal');
 			var $submitBtn = $form.find('[type="submit"]');
 			var originalBtnText = $submitBtn.html();
 
