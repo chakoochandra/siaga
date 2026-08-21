@@ -1,7 +1,9 @@
 ### Update logs:
 
-#### Version 3.19 (19/08/2026)
+#### Version 3.21 (19/08/2026)
 - NEW! Menu monitoring tunggakan perkara
+- UPDATE link pdf edoc
+- FIX notifikasi monitoring edoc
 - FIX menu jadwal sidang
 
 #### Version 3.17 (17/08/2026)
