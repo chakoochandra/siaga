@@ -8,6 +8,7 @@
 				<div class="callout callout-info m-2 mt-0">
 					<h6>Informasi</h6>
 					<ul>
+						<li><strong>Notifikasi tidak akan dikirimkan</strong> pada hari libur yang telah diset</li>
 						<li>Gunakan filter tahun untuk melihat libur pada tahun tertentu.</li>
 						<li><strong>Libur Nasional Tanggal Tetap</strong> akan otomatis berlaku setiap tahun.</li>
 					</ul>

@@ -741,6 +741,12 @@ foreach ($fabGroupsPresent as $key => $present) {
 							<div class="accordion-body">Sebelum melakukan update, pastikan izin direktori aplikasi sudah benar dengan menjalankan perintah berikut pada server:<br><code>chown apache:apache -R /var/www/html/siaga</code> [ganti <code>siaga</code> apabila nama folder aplikasi anda berbeda]<br>Pastikan juga telah membaca changelog dan membuat cadangan data jika diperlukan.</div>
 						</div>
 					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="faq9"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse9" aria-expanded="false" aria-controls="faqCollapse9">Apakah notifikasi tetap dikirim jika tanggal tersebut merupakan hari libur?</button></h2>
+						<div id="faqCollapse9" class="accordion-collapse collapse" aria-labelledby="faq9" data-bs-parent="#faqAccordion">
+							<div class="accordion-body">Tidak. Notifikasi tidak akan dikirim jika tanggal tersebut telah diatur sebagai <strong>hari libur</strong> di menu <strong>Settings &gt; Hari Libur</strong>.</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -1,9 +1,9 @@
 {
     "version": "3.22",
-    "released_at": "2026-08-25 16:35:26",
+    "released_at": "2026-08-25 22:33:46",
     "min_supported_version": "2.0",
     "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.22.zip",
-    "checksum_sha256": "1cdf4efa9b2c91689024a1972e204880060901dbde1ca37f9e4741cd760570b6",
+    "checksum_sha256": "9b8e785a6cd116c1f86919715b049a7129003965161bbb9e5b3a3509af2377f1",
     "mandatory": true,
     "changelog": "perbaikan bugs",
     "excluded_from_overwrite": [
