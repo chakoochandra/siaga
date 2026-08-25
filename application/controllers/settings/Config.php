@@ -1,3 +1,114 @@
 <?php
- defined("\x42\101\x53\x45\120\x41\124\110") or die("\116\157\x20\144\x69\x72\x65\143\x74\40\x73\143\x72\x69\160\164\x20\x61\x63\143\145\163\x73\40\141\x6c\154\157\x77\x65\x64"); class Config extends Admin_Controller { public function __construct() { parent::__construct(); $this->load->model("\163\145\x74\164\151\x6e\147\163\57\103\157\156\x66\151\x67\x5f\115\x6f\x64\145\x6c", "\x63\157\x6e\x66\151\147\x73"); $this->load->model("\127\x69\x6c\x61\171\141\x68\x5f\x4d\x6f\144\145\x6c", "\x77\x69\x6c\141\171\141\150"); $this->model = $this->configs; $this->kota_options = $this->wilayah->findKota(); $this->indexTitle = "\113\x6f\156\x66\151\x67\165\162\x61\163\151\40\101\160\154\x69\x6b\x61\163\x69"; $this->indexSubtitle = "\115\x6f\x64\165\x6c\x20\x69\x6e\151\x20\x6d\145\156\x67\x65\154\x6f\154\x61\40\153\x6f\156\146\x69\147\165\x72\x61\x73\x69\x20\141\160\154\151\153\141\x73\x69\x20\x64\x61\x6e\x20\x70\x65\x6e\147\x61\x74\x75\162\141\x6e\40\163\151\163\x74\145\155\x2e"; $this->indexIcon = "\146\x61\x2d\163\157\x6c\151\144\40\146\141\55\x67\145\x61\x72\x73"; $this->indexView = "\163\x65\164\x74\151\x6e\x67\x73\57\x63\157\x6e\146\x69\147\x2f\151\156\144\x65\170"; $this->module_id = "\x73\x65\x74\164\x69\156\147\163\x5f\x63\x6f\156\146\151\x67"; } function save($id = null) { $config = $id ? $this->model->findOne($id) : null; if ($id && !$config) { return $this->redirectAjax(array("\x72\145\144\x69\x72\145\143\x74" => base_url("\x73\x65\164\x74\x69\x6e\147\163\57\x63\157\x6e\146\x69\147"), "\163\164\141\x74\165\163" => false, "\155\x65\163\163\141\x67\x65" => "\113\157\156\x66\x69\x67\165\162\141\x73\x69\40\x79\141\x6e\147\40\151\x6e\147\151\x6e\40\x64\x69\x75\x62\141\x68\x20\164\151\x64\x61\153\40\144\x69\164\x65\x6d\x75\153\x61\x6e\56")); } $actionText = $id ? "\155\145\155\x70\x65\162\142\x61\x72\165\x69" : "\155\145\x6e\141\155\x62\x61\x68"; $this->form_validation->set_rules("\x6b\x65\171", "\113\x65\171", "\162\145\161\165\151\162\145\144\x7c\155\x61\170\137\x6c\x65\156\147\x74\150\133\x31\x30\60\x5d"); $this->form_validation->set_rules("\x76\x61\x6c\x75\x65", "\x56\x61\x6c\165\x65", "\x72\145\x71\165\x69\162\x65\144"); $this->form_validation->set_rules("\156\157\164\145", "\x4e\x6f\164\x65", "\155\141\170\x5f\x6c\145\156\147\x74\150\x5b\x32\x35\60\135"); $this->form_validation->set_rules("\x63\x61\164\145\147\x6f\x72\171", "\103\141\164\x65\147\157\x72\171", "\162\145\x71\x75\151\162\x65\144\174\x69\156\x5f\154\x69\x73\164\133\x31\x2c\62\x2c\x33\x2c\64\54\70\x5d"); $this->vars["\164\x69\164\154\145"] = ($id ? "\x55\x70\144\x61\164\145" : "\x54\x61\155\x62\x61\x68") . "\40\113\157\x6e\146\151\147\165\162\141\x73\151"; $this->vars["\x6d\x65\163\x73\141\x67\x65"] = ''; if (isset($_POST) && !empty($_POST)) { if ($this->form_validation->run() === TRUE) { $data = array("\153\145\171" => $this->input->post("\x6b\x65\171"), "\x76\141\154\x75\x65" => $this->input->post("\x76\141\x6c\x75\145"), "\156\x6f\x74\x65" => $this->input->post("\156\157\164\145"), "\143\141\164\145\x67\x6f\x72\x79" => $this->input->post("\143\141\164\145\x67\x6f\x72\171")); if ($id ? $this->model->update($id, $data) : $this->model->insert($data)) { return $this->redirectAjax(array("\x72\145\144\x69\162\x65\143\164" => base_url("\163\x65\x74\x74\151\156\x67\163\57\x63\157\x6e\146\x69\147"), "\163\164\141\x74\165\163" => true, "\x6d\x65\163\x73\141\x67\x65" => "\102\x65\162\150\x61\x73\x69\x6c\x20{$actionText}\40{$data["\x6b\x65\x79"]}")); } $this->vars["\155\145\x73\x73\141\147\145"] = "\107\x61\x67\141\154\x20{$actionText}\40\x6b\157\x6e\146\x69\147\165\162\x61\x73\x69\56\x20\123\151\x6c\x61\153\x61\x6e\x20\160\145\x72\151\153\163\x61\40\153\x65\x6d\x62\x61\154\151\40\144\141\x74\x61\40\x79\x61\x6e\147\40\x64\151\x6d\x61\x73\x75\x6b\153\141\156\x2e"; } else { $this->vars["\155\145\163\x73\141\147\x65"] = my_validation_errors(); } } $this->vars["\146\157\x72\155"]["\153\x65\x79"] = array("\x74\x79\x70\x65" => "\146\157\162\x6d\x5f\x69\156\160\165\164", "\156\141\155\x65" => "\x6b\x65\x79", "\160\x6c\141\x63\x65\x68\157\x6c\144\145\x72" => "\x4b\145\171", "\x76\x61\x6c\165\145" => $this->form_validation->set_value("\153\x65\171", $config ? $config->key : null), "\162\145\x71\165\151\162\145\144" => true); $this->vars["\x66\x6f\x72\155"]["\166\141\x6c\x75\145"] = array("\x74\171\160\x65" => "\x66\157\x72\x6d\137\151\156\x70\165\x74", "\x6e\x61\x6d\145" => "\166\141\x6c\165\145", "\160\154\141\x63\x65\150\157\x6c\x64\145\x72" => "\126\x61\x6c\165\x65", "\x76\x61\154\x75\x65" => $this->form_validation->set_value("\166\141\x6c\x75\145", $config ? $config->value : null), "\x72\x65\161\x75\151\x72\145\144" => true); $this->vars["\x66\x6f\162\x6d"]["\x6e\157\164\145"] = array("\164\171\x70\145" => "\x66\157\162\x6d\137\151\156\160\x75\x74", "\x6e\141\155\145" => "\x6e\157\164\x65", "\x70\154\141\143\145\x68\x6f\x6c\144\145\162" => "\116\x6f\x74\x65", "\166\x61\154\x75\145" => $this->form_validation->set_value("\x6e\157\x74\145", $config ? $config->note : null)); $category_options = array('' => "\120\151\x6c\151\x68\40\x4b\x61\x74\145\147\x6f\162\x69", "\61" => "\x55\x6d\165\x6d", "\62" => "\x44\x61\x74\141\x62\x61\x73\x65", "\x33" => "\x45\155\x61\x69\x6c", "\x34" => "\x4c\141\x69\156\x6e\x79\x61", "\70" => "\x54\141\156\x67\x67\x61\154"); $this->vars["\146\157\162\x6d"]["\x63\x61\164\145\x67\x6f\162\x79"] = array("\164\x79\160\x65" => "\146\x6f\x72\155\x5f\x64\162\x6f\x70\144\157\167\156", "\x6e\141\155\x65" => "\143\141\164\145\x67\x6f\x72\171", "\157\x70\164\151\157\x6e\x73" => $category_options, "\x73\x65\x6c\x65\x63\x74\145\x64" => $this->form_validation->set_value("\143\141\x74\x65\x67\157\162\171", $config ? $config->category : null), "\x72\145\x71\165\x69\162\145\144" => true); $this->load->vars($this->vars); return $this->viewAjax("\167\151\x64\147\x65\x74\163\57\x66\x6f\x72\x6d", array("\x73\164\141\x74\x75\x73" => false, "\x6d\x65\163\x73\x61\x67\x65" => $this->vars["\155\145\163\x73\141\x67\x65"])); } }
- 
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class Config extends Admin_Controller
+{
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->load->model('settings/Config_Model', 'configs');
+		$this->load->model('Wilayah_Model', 'wilayah');
+		$this->model = $this->configs;
+		$this->kota_options = $this->wilayah->findKota();
+
+		$this->indexTitle = 'Konfigurasi Aplikasi';
+		$this->indexSubtitle = 'Modul ini mengelola konfigurasi aplikasi dan pengaturan sistem.';
+		$this->indexIcon = 'fa-solid fa-gears';
+		$this->indexView = 'settings/config/index';
+		$this->module_id = 'settings_config';
+	}
+
+	function save($id = null)
+	{
+		$config = $id ? $this->model->findOne($id) : null;
+
+		if ($id && !$config) {
+			return $this->redirectAjax([
+				'redirect' => base_url('settings/config'),
+				'status' => false,
+				'message' => 'Konfigurasi yang ingin diubah tidak ditemukan.',
+			]);
+		}
+
+		$actionText = $id ? 'memperbarui' : 'menambah';
+
+		$this->form_validation->set_rules('key', 'Key', 'required|max_length[100]');
+		$this->form_validation->set_rules('value', 'Value', 'required');
+		$this->form_validation->set_rules('note', 'Note', 'max_length[250]');
+		$this->form_validation->set_rules('category', 'Category', 'required|in_list[1,2,3,4,8]');
+
+		$this->vars['title'] = ($id ? 'Update' : 'Tambah') . ' Konfigurasi';
+		$this->vars['message'] = '';
+
+		if (isset($_POST) && !empty($_POST)) {
+			if ($this->form_validation->run() === TRUE) {
+				$data = [
+					'key' => $this->input->post('key'),
+					'value' => $this->input->post('value'),
+					'note' => $this->input->post('note'),
+					'category' => $this->input->post('category'),
+				];
+
+				if ($id ? $this->model->update($id, $data) : $this->model->insert($data)) {
+					return $this->redirectAjax([
+						'redirect' => base_url('settings/config'),
+						'status' => true,
+						'message' => "Berhasil {$actionText} {$data['key']}",
+					]);
+				}
+
+				$this->vars['message'] = "Gagal {$actionText} konfigurasi. Silakan periksa kembali data yang dimasukkan.";
+			} else {
+				$this->vars['message'] = my_validation_errors();
+			}
+		}
+
+		$this->vars['form']['key'] = [
+			'type' => 'form_input',
+			'name' => 'key',
+			'placeholder' => 'Key',
+			'value' => $this->form_validation->set_value('key', $config ? $config->key : null),
+			'required' => true,
+		];
+
+		$this->vars['form']['value'] = [
+			'type' => 'form_input',
+			'name' => 'value',
+			'placeholder' => 'Value',
+			'value' => $this->form_validation->set_value('value', $config ? $config->value : null),
+			'required' => true,
+		];
+
+		$this->vars['form']['note'] = [
+			'type' => 'form_input',
+			'name' => 'note',
+			'placeholder' => 'Note',
+			'value' => $this->form_validation->set_value('note', $config ? $config->note : null),
+		];
+
+		$category_options = [
+			'' => 'Pilih Kategori',
+			'1' => 'Umum',
+			'2' => 'Database',
+			'3' => 'Email',
+			'4' => 'Lainnya',
+			'8' => 'Tanggal',
+		];
+
+		$this->vars['form']['category'] = [
+			'type' => 'form_dropdown',
+			'name' => 'category',
+			'options' => $category_options,
+			'selected' => $this->form_validation->set_value('category', $config ? $config->category : null),
+			'required' => true,
+		];
+
+		$this->load->vars($this->vars);
+
+		return $this->viewAjax('widgets/form', [
+			'status' => false,
+			'message' => $this->vars['message'],
+		]);
+	}
+}

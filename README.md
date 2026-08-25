@@ -1,4 +1,4 @@
-# SIAGA Version 3.21
+# SIAGA Version 3.22
 
 ## Sistem Informasi Alert & Monitoring Kinerja Perkara ##
 

@@ -1,4 +1,4 @@
-<div class="row">
+﻿<div class="row">
 	<div class="col-12">
 		<div class="card leaves">
 			<div class="card-header leaves align-items-center">
@@ -8,7 +8,7 @@
 				<div class="callout callout-info m-4 mt-3">
 					<h6>Informasi</h6>
 					<ul>
-						<li>Klik kolom VALUE atau KETERANGAN untuk mengubah data.</li>
+						<li>Klik kolom <code>VALUE</code> untuk mengubah data.</li>
 					</ul>
 				</div>
 
@@ -26,32 +26,45 @@
 			ajax: {
 				url: "<?php echo base_url("settings/config/get_list") ?>",
 			},
-			layout: {
-				topEnd: {
-					buttons: [{
-						extend: 'customButton',
-						text: '<span class="fa fa-plus" aria-hidden="true"></span> Tambah Konfigurasi',
-						url: '<?php echo base_url('settings/config/save') ?>',
-						className: 'btn btn-sm btn-outline-success btn-modal',
-					}]
-				}
-			},
+			// layout: {
+			// 	topEnd: {
+			// 		buttons: [{
+			// 			extend: 'customButton',
+			// 			text: '<span class="fas fa-plus" aria-hidden="true"></span> Tambah Konfigurasi',
+			// 			url: '<?php echo base_url('settings/config/save') ?>',
+			// 			className: 'btn btn-sm btn-outline-success btn-modal',
+			// 		}]
+			// 	}
+			// },
 			ajaxCellInput: [{
 					column: 2,
 					type: function(row) {
 						if (row.key === 'ID_WILAYAH') return 'dropdown';
+						if (row.category == 3) return "number";
+						if (row.category == 4) return "dropdown";
 						return row.category == 8 ? "datepicker" : "textfield";
 					},
-					options: [{
-							value: '',
-							label: 'Pilih Kota/Kabupaten'
-						},
-						<?php foreach ($this->kota_options as $kode => $nama): ?> {
+					options: function(row) {
+						if (row.key === 'ID_WILAYAH') {
+							return [{
+								value: '',
+								label: 'Pilih Kota/Kabupaten'
+							}, <?php foreach ($this->kota_options as $kode => $nama): ?> {
 								value: '<?php echo $kode ?>',
 								label: '<?php echo addslashes($nama) ?>'
-							},
-						<?php endforeach; ?>
-					],
+							}, <?php endforeach; ?>];
+						}
+						if (row.category == 4) {
+							return [{
+								value: '1',
+								label: 'Ya'
+							}, {
+								value: '0',
+								label: 'Tidak'
+							}];
+						}
+						return [];
+					},
 					url: "<?php echo base_url('settings/config/update_value/value') ?>",
 					editable: 1,
 				},
@@ -75,11 +88,17 @@
 					title: "Key",
 					className: "text-nowrap",
 				},
-				{
-					data: "value",
-					title: "Value",
-					className: "text-break-all", // Added this class
-				},
+			{
+				data: "value",
+				title: "Value",
+				className: "text-break-all",
+				render: function(data, type, row) {
+					if (row.category == 4 && (data === '1' || data === '0')) {
+						return data === '1' ? '<span class="badge bg-success">Ya</span>' : '<span class="badge bg-secondary">Tidak</span>';
+					}
+					return data;
+				}
+			},
 				{
 					data: "note",
 					title: "Keterangan",

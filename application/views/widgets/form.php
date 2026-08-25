@@ -1,5 +1,5 @@
 <?php if (isset($showProfile) ? $showProfile : false) : ?>
-    <div class="profile-small">
+    <div class="profile-small mb-2">
         <?php $this->load->view('widgets/profile_small') ?>
     </div>
 <?php endif ?>

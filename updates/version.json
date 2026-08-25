@@ -1,11 +1,11 @@
 {
-    "version": "3.21",
-    "released_at": "2026-08-21 11:13:54",
+    "version": "3.22",
+    "released_at": "2026-08-25 16:35:26",
     "min_supported_version": "2.0",
-    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.21.zip",
-    "checksum_sha256": "df6788b8f16ccd4cf381f6217533f0966f417ba026610558bfc00bb966c82311",
+    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.22.zip",
+    "checksum_sha256": "1cdf4efa9b2c91689024a1972e204880060901dbde1ca37f9e4741cd760570b6",
     "mandatory": true,
-    "changelog": "fix notifikasi monitoring edoc",
+    "changelog": "perbaikan bugs",
     "excluded_from_overwrite": [
         "updates/",
         "uploads/",

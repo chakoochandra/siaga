@@ -1,4 +1,4 @@
-<div class="row">
+﻿<div class="row">
 	<div class="col-12">
 		<div class="card leaves">
 			<div class="card-header leaves align-items-center">
@@ -8,7 +8,7 @@
 				<div class="callout callout-info m-4 mt-3">
 					<h6>Informasi</h6>
 					<ul>
-						<li>Taruh icon/thumbnail untuk web di folder assets\images</li>
+						<li>Klik kolom <code>Nama</code>, <code>URL</code>, <code>Urutan</code>, <code>Kategori</code>, <code>Status</code>, atau <code>Tampilkan Online</code> untuk mengubah data.</li>
 					</ul>
 				</div>
 
@@ -19,9 +19,6 @@
 		</div>
 	</div>
 </div>
-
-
-
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -34,12 +31,102 @@
 				topEnd: {
 					buttons: [{
 						extend: 'customButton',
-						text: '<span class="fa fa-plus" aria-hidden="true"></span> Tambah Web',
+						text: '<span class="fas fa-plus" aria-hidden="true"></span> Tambah Web',
 						url: '<?php echo base_url('settings/web/save') ?>',
 						className: 'btn btn-sm btn-outline-success btn-modal',
 					}]
 				}
 			},
+			ajaxCellInput: [{
+					column: 1,
+					type: "textfield",
+					url: "<?php echo base_url('settings/web/update_value/name') ?>",
+					editable: 1,
+				},
+				{
+					column: 2,
+					type: "textfield",
+					url: "<?php echo base_url('settings/web/update_value/url') ?>",
+					editable: 1,
+				},
+				{
+					column: 3,
+					type: "number",
+					url: "<?php echo base_url('settings/web/update_value/order') ?>",
+					editable: 1,
+				},
+			{
+				column: 4,
+				type: function(row) {
+					return 'dropdown';
+				},
+				options: [{
+						value: 'Socmed',
+						label: 'Socmed'
+					},
+					{
+						value: 'Lokal',
+						label: 'Lokal'
+					},
+					{
+						value: 'Web',
+						label: 'Web'
+					},
+					{
+						value: 'MA',
+						label: 'MA'
+					},
+					{
+						value: '<?php echo SATKER_ESELON_1 ?>',
+						label: '<?php echo SATKER_ESELON_1 ?>'
+					},
+					{
+						value: '<?php echo SATKER_BANDING ?>',
+						label: '<?php echo SATKER_BANDING ?>'
+					},
+					{
+						value: 'Lain-lain',
+						label: 'Lain-lain'
+					},
+				],
+				url: "<?php echo base_url('settings/web/update_value/category') ?>",
+				editable: 1,
+			},
+			{
+				column: 5,
+				type: function(row) {
+					return 'dropdown';
+				},
+				options: [{
+						value: '1',
+						label: 'Aktif'
+					},
+					{
+						value: '0',
+						label: 'Tidak Aktif'
+					},
+				],
+				url: "<?php echo base_url('settings/web/update_value/is_active') ?>",
+				editable: 1,
+			},
+			{
+				column: 6,
+				type: function(row) {
+					return 'dropdown';
+				},
+				options: [{
+						value: '1',
+						label: 'Ya'
+					},
+					{
+						value: '0',
+						label: 'Tidak'
+					},
+				],
+				url: "<?php echo base_url('settings/web/update_value/show_online') ?>",
+				editable: 1,
+			},
+		],
 			columns: [{
 					data: null,
 					title: "No.",
@@ -57,6 +144,11 @@
 					title: "URL",
 				},
 				{
+					data: "order",
+					title: "Urutan",
+					className: "dt-center",
+				},
+				{
 					data: "category",
 					title: "Kategori",
 					className: "dt-center",
@@ -70,14 +162,23 @@
 					}
 				},
 				{
+					data: "show_online",
+					title: "Tampilkan Online",
+					className: "dt-center",
+					render: function(data) {
+						return data == 1 ? '<span class="badge bg-success">Ya</span>' : '<span class="badge bg-secondary">Tidak</span>';
+					}
+				},
+				{
 					data: null,
 					title: "Aksi",
 					className: "dt-center text-nowrap",
 					orderable: false,
 					searchable: false,
 					render: function(data, type, row) {
-						return '<a class="btn btn-sm btn-outline-primary btn-modal" href="' + '<?php echo base_url("settings/web/save/") ?>' + row.id + '" title="Edit Web"><i class="fa fa-pencil"></i></a> ' +
-							'<a class="btn btn-sm btn-outline-danger btn-confirm" href="' + '<?php echo base_url("settings/web/delete/") ?>' + row.id + '" data-confirm-message="Anda yakin akan menghapus web ' + row.name + '?" title="Hapus Web"><i class="fa fa-trash"></i></a>';
+						return '<a class="btn btn-sm btn-outline-success btn-modal" href="' + '<?php echo base_url("settings/web/view/") ?>' + row.id + '" title="Detail Web"><i class="fas fa-eye"></i></a> ' +
+							'<a class="btn btn-sm btn-outline-primary btn-modal" href="' + '<?php echo base_url("settings/web/save/") ?>' + row.id + '" title="Edit Web"><i class="fas fa-pen"></i></a> ' +
+							'<a class="btn btn-sm btn-outline-danger btn-confirm" href="' + '<?php echo base_url("settings/web/delete/") ?>' + row.id + '" data-confirm-message="Anda yakin akan menghapus web ' + row.name + '?" title="Hapus Web"><i class="fas fa-trash"></i></a>';
 					}
 				},
 			]

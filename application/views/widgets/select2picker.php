@@ -11,13 +11,17 @@ $unique = $sanitized_field_id . time();
 ?>
 <?php $field['class'] .= ' myselect2_' . $unique ?>
 
-<?php
-// Add multiple attribute if needed
-if ($is_multiple) {
-	$field['multiple'] = 'multiple';
-}
-echo form_dropdown($field);
-?>
+<div class="form-group w-100">
+	<div class="input-wrap">
+		<?php
+		// Add multiple attribute if needed
+		if ($is_multiple) {
+			$field['multiple'] = 'multiple';
+		}
+		echo form_dropdown($field);
+		?>
+	</div>
+</div>
 
 <script type="text/javascript">
 	$(function() {

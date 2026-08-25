@@ -784,23 +784,23 @@ foreach ($fabGroupsPresent as $key => $present) {
 
 <script src="<?php echo asset_url('assets/plugins/select2/select2.min.js') ?>"></script>
 
-<?php if ($useKnob): ?>
+<?php //if ($useKnob): ?>
 	<script src="<?php echo asset_url('assets/plugins/jquery-knob/jquery.knob.min.js') ?>" defer></script>
-<?php endif; ?>
+<?php //endif; ?>
 
-<?php if ($useViewer): ?>
+<?php //if ($useViewer): ?>
 	<!-- Viewer.js -->
 	<link rel="stylesheet" href="<?php echo asset_url('assets/plugins/viewerjs/viewer.min.css') ?>">
 	<script src="<?php echo asset_url('assets/plugins/viewerjs/viewer.min.js') ?>" defer></script>
-<?php endif; ?>
+<?php //endif; ?>
 
-<?php if ($useDaterange): ?>
+<?php //if ($useDaterange): ?>
 	<!-- Daterangepicker -->
 	<link rel="stylesheet" href="<?php echo asset_url('assets/plugins/daterange/daterangepicker.css') ?>">
 	<script src="<?php echo asset_url('assets/plugins/daterange/daterangepicker.js') ?>" defer></script>
-<?php endif; ?>
+<?php //endif; ?>
 
-<?php if ($useDataTables): ?>
+<?php //if ($useDataTables): ?>
 	<!-- DataTables -->
 	<link rel="stylesheet" href="<?php echo asset_url('assets/plugins/datatables/2.1.2/dataTables.dataTables.css') ?>">
 	<script src="<?php echo asset_url('assets/plugins/datatables/init.js') ?>" defer></script>
@@ -809,13 +809,13 @@ foreach ($fabGroupsPresent as $key => $present) {
 	<!-- DataTables Plugins -->
 	<link rel="stylesheet" href="<?php echo asset_url('assets/plugins/datatables/dataTables.dataTables.plugins.css') ?>">
 	<script src="<?php echo asset_url('assets/plugins/datatables/dataTables.plugins.min.js') ?>" defer></script>
-<?php endif; ?>
+<?php //endif; ?>
 
-<?php if ($useExport): ?>
+<?php //if ($useExport): ?>
 	<script src="<?php echo asset_url('assets/plugins/jszip/jszip.min.js') ?>" defer></script>
 	<script src="<?php echo asset_url('assets/plugins/pdfmake/pdfmake.min.js') ?>" defer></script>
 	<script src="<?php echo asset_url('assets/plugins/pdfmake/vfs_fonts.js') ?>" defer></script>
-<?php endif; ?>
+<?php //endif; ?>
 
 <?php
 // Prepare toast data before opening the script block to avoid nested <script> tags.

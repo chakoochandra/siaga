@@ -14,6 +14,7 @@
 
 // Extract attributes for the textarea
 $fieldName = isset($field['name']) ? $field['name'] : 'textarea_field';
+$fieldId = isset($field['id']) ? $field['id'] : $fieldName;
 $fieldValue = isset($field['value']) ? $field['value'] : '';
 $autocompleteUrl = isset($field['data-autocomplete-url']) ? $field['data-autocomplete-url'] : '';
 $placeholder = isset($field['placeholder']) ? $field['placeholder'] : '';
@@ -26,10 +27,11 @@ if (strpos($classes, 'form-control') === false) {
 }
 
 // Check if field is required
-$is_required = isset($field['required']) && $field['required'] === true;
+$is_required = !empty($field['required']);
 
 // Prepare attributes for the textarea
 $attributes = [
+	'id' => $fieldId,
 	'name' => $fieldName,
 	'rows' => $rows,
 	'placeholder' => $placeholder,
@@ -55,7 +57,11 @@ foreach ($field as $key => $value) {
 <?php if (!$autocompleteUrl): ?>
 	<?php $attributes['autocomplete'] = 'on'; // Enable browser autocomplete if not using custom
 	?>
-	<?php echo form_textarea($attributes, $textareaValue) ?>
+	<div class="form-group w-100">
+		<div class="input-wrap">
+			<?php echo form_textarea($attributes, $textareaValue) ?>
+		</div>
+	</div>
 <?php else: ?>
 	<?php
 	$attributes['autocomplete'] = 'off'; // Disable browser autocomplete if using custom
@@ -249,7 +255,7 @@ foreach ($field as $key => $value) {
 				if (currentSuggestions.length > 0) {
 					// Check if any of the current suggestions start with the new query
 					const hasPotentialMatches = currentSuggestions.some(item => {
-						const label = typeof item === 'string' ? item.label : (item.label || item.value || '');
+						const label = typeof item === 'string' ? item : (item.label || item.value || '');
 						return label.toLowerCase().startsWith(value.toLowerCase());
 					});
 					if (!hasPotentialMatches) {
@@ -281,7 +287,7 @@ foreach ($field as $key => $value) {
 					currentQuery = query;
 				} else {
 					filteredSuggestions = currentSuggestions.filter(item => {
-						const label = typeof item === 'string' ? item.label : (item.label || item.value || '');
+						const label = typeof item === 'string' ? item : (item.label || item.value || '');
 						return label.toLowerCase().startsWith(query.toLowerCase());
 					});
 

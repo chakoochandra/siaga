@@ -1,3 +1,87 @@
-<?php
- if (!defined("\102\101\x53\105\x50\101\x54\110")) { die("\x4e\157\40\144\151\x72\145\x63\x74\x20\x73\x63\162\151\160\x74\x20\x61\x63\x63\145\163\x73\40\141\x6c\x6c\157\x77\x65\x64"); } class Config_Model extends Crud_Model { public function __construct() { parent::__construct(); $this->tableName = $this->config->item("\x74\x62\x6c\137\x63\x6f\x6e\x66\151\147\x73"); } protected function list_query($where, $do_filter = true) { $this->colSearch = array("\153\145\171", "\166\141\x6c\x75\145"); $this->colOrder = array("\153\x65\x79" => "\141\163\143"); $this->db->from($this->tableName); parent::list_query($where, $do_filter); } public function get_all() { return array_merge($this->_get_sipp_configs(), $this->_get_app_configs()); } private function _get_sipp_configs() { $db_groups = $this->config->item("\144\x62\x5f\x73\x69\160\x70", "\144\141\x74\141\142\x61\163\x65"); if (empty($db_groups)) { return array(); } $db = $this->load->database("\x64\x62\137\x73\x69\x70\x70", TRUE); if (!$db instanceof CI_DB) { return array(); } $query = $db->get("\x73\x79\x73\x5f\x63\157\156\x66\151\x67"); return $query ? $query->result() : array(); } private function _get_app_configs() { $table = $this->db->database . "\56" . $this->config->item("\x74\x62\154\x5f\143\157\x6e\146\x69\x67\x73"); $query = $this->db->order_by("\x63\141\x74\145\147\157\x72\x79\40\x41\x53\x43\54\x20\x6b\x65\x79\x20\x41\x53\103\x2c\40\x76\141\154\x75\145\x20\x41\x53\x43")->get($table); return $query ? $query->result() : array(); } }
- 
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+class Config_Model extends Crud_Model
+{
+	protected $sipp_is_defined = false;
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->tableName = $this->config->item('tbl_configs');
+
+		$db_config = array();
+		if (file_exists(APPPATH . 'config/' . ENVIRONMENT . '/database.php')) {
+			include(APPPATH . 'config/' . ENVIRONMENT . '/database.php');
+			if (isset($db)) {
+				$db_config = $db;
+			}
+		} elseif (file_exists(APPPATH . 'config/database.php')) {
+			include(APPPATH . 'config/database.php');
+			if (isset($db)) {
+				$db_config = $db;
+			}
+		}
+
+		if (isset($db_config['db_sipp']) && !empty($db_config['db_sipp']['hostname'])) {
+			$this->sipp_is_defined = true;
+		}
+	}
+
+	protected function list_query($where, $do_filter = true)
+	{
+		$this->colSearch = ['key', 'value'];
+		$this->colOrder = ['key' => 'asc'];
+
+		$this->db->from($this->tableName);
+
+		parent::list_query($where, $do_filter);
+	}
+
+	/**
+	 * Fetch merged configs from db_sipp (sys_config) and main DB (tbl_configs).
+	 * db_sipp rows come first, main DB rows appended after.
+	 *
+	 * @return array
+	 */
+	public function get_all()
+	{
+		return array_merge(
+			$this->_get_sipp_configs(),
+			$this->_get_app_configs()
+		);
+	}
+
+    // -------------------------------------------------------------------------
+
+	/**
+	 * @return array
+	 */
+	private function _get_sipp_configs()
+	{
+		if (!$this->sipp_is_defined) {
+			return array();
+		}
+
+		$db = $this->load->database('db_sipp', TRUE);
+		if (!$db instanceof CI_DB) {
+			return array();
+		}
+
+		$query = $db->get('sys_config');
+
+		return $query ? $query->result() : array();
+	}
+
+	/**
+	 * @return array
+	 */
+	private function _get_app_configs()
+	{
+		$table = $this->db->database . '.' . $this->config->item('tbl_configs');
+		$query = $this->db
+			->order_by('category ASC, key ASC, value ASC')
+			->get($table);
+
+		return $query ? $query->result() : array();
+	}
+}

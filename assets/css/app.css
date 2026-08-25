@@ -3,7 +3,7 @@
 	--font-head: 'Plus Jakarta Sans', sans-serif;
 	--font-body: 'Plus Jakarta Sans', sans-serif;
 	font-family: 'Plus Jakarta Sans', sans-serif;
-	--dash-welcome-gradient: linear-gradient(135deg, #1d4ed8 0%, #1e40af 60%, #1e3a8a 100%);
+	--dash-welcome-gradient: linear-gradient(135deg, #059669 0%, #047857 60%, #065f46 100%);
 }
 
 /* ─── Form ──────────────────────────────────────────── */
@@ -19,7 +19,7 @@
 	/* color: var(--text-mid); */
 	letter-spacing: 0.04em;
 	text-transform: uppercase;
-	margin-bottom: 0.5rem;
+	margin-bottom: 0;
 }
 
 .input-wrap {
@@ -219,7 +219,7 @@
 
 .badge-manual {
 	color: white;
-	background-color: cadetblue !important;
+	background-color: #0d9488 !important;
 }
 
 .badge-status {
@@ -339,7 +339,7 @@
 }
 
 .page-header {
-	background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+	background: linear-gradient(135deg, #065f46 0%, #10b981 100%);
 	color: #fff;
 	padding: 22px 32px 20px;
 	border-radius: var(--bs-border-radius);
@@ -432,8 +432,10 @@ big,
 }
 
 .card-header h4,
-.card-header h5 {
-	color: var(--bs-heading-color);
+.card-header h5,
+.card-header .subtitle {
+	color: var(--bs-heading-color) !important;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .dt-column-title,
@@ -442,7 +444,6 @@ big,
 .card-header i,
 .card-header span,
 .accordion-button {
-	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 	margin-bottom: 0;
 	text-transform: uppercase;
 	font-weight: 500;
@@ -511,7 +512,7 @@ input {
 .img-circle {
 	border-radius: 50%;
 	border: 1.5px solid;
-	border-color: rgb(255, 219, 88, 0.5);
+	border-color: rgb(16, 185, 129, 0.5);
 }
 
 .transform-scale:hover {

@@ -35,7 +35,6 @@
 	<?php endforeach; ?>
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-	<link rel="stylesheet" href="<?php echo asset_url('assets/plugins/font-awesome/css/font-awesome.min.css') ?>">
 	<?php if ($useJqueryUI): ?>
 		<link rel="stylesheet" href="<?php echo asset_url('assets/plugins/jquery-ui/jquery-ui.min.css') ?>">
 	<?php endif; ?>

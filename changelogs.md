@@ -1,5 +1,8 @@
 ### Update logs:
 
+#### Version 3.22 (25/08/2026)
+- FIX bugs
+
 #### Version 3.21 (19/08/2026)
 - NEW! Menu monitoring tunggakan perkara
 - UPDATE link pdf edoc

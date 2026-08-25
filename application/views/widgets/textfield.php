@@ -62,11 +62,11 @@ $fieldId         = isset($field['id']) ? $field['id'] : $fieldName;
 $fieldValue      = isset($field['value']) ? $field['value'] : '';
 $autocompleteUrl = isset($field['data-autocomplete-url']) ? $field['data-autocomplete-url'] : '';
 $placeholder     = isset($field['placeholder']) ? $field['placeholder'] : '';
-$label           = isset($field['label']) ? $field['label'] : '';
+$label           = isset($field['label']) ? $field['label'] : (isset($field['placeholder']) ? $field['placeholder'] : '');
 $help            = isset($field['help']) ? $field['help'] : '';
 $required        = !empty($field['required']);
 $inputClass      = isset($field['inputClass']) ? $field['inputClass'] : 'form-control';
-$fieldType       = isset($field['type']) ? $field['type'] : 'text';
+$fieldType       = isset($field['type']) ? ($field['type'] === 'form_input' ? 'text' : $field['type']) : 'text';
 $icon            = isset($field['icon']) ? $field['icon'] : '';
 
 // Support both 'minlength' and 'minLength' from caller. Use '' as the
@@ -126,11 +126,6 @@ $attributes += $extraAttributes; // pass-through attrs, forwarded in both modes
 
 <?php if (!$autocompleteUrl): ?>
 	<div class="form-group w-100">
-		<?php if ($label !== ''): ?>
-			<label class="form-label" for="<?php echo $safeId; ?>">
-				<?php echo $safeLabel; ?><?php if ($required): ?> <span class="text-danger">*</span><?php endif; ?>
-			</label>
-		<?php endif; ?>
 		<div class="input-wrap">
 			<?php if ($hasIcon): ?>
 				<span class="input-icon"><?php echo $iconSvg; ?></span>
@@ -187,12 +182,6 @@ $attributes += $extraAttributes; // pass-through attrs, forwarded in both modes
 	<?php endif; ?>
 
 	<div class="form-group w-100">
-		<?php if ($label !== ''): ?>
-			<label class="form-label" for="<?php echo $safeId; ?>">
-				<?php echo $safeLabel; ?><?php if ($required): ?> <span class="text-danger">*</span><?php endif; ?>
-			</label>
-		<?php endif; ?>
-
 		<div class="autocomplete-input-wrapper" id="autocomplete-input-<?php echo $safeId; ?>">
 			<?php if ($hasIcon): ?>
 				<span class="input-icon"><?php echo $iconSvg; ?></span>
