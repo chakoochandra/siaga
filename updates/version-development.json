@@ -1,0 +1,22 @@
+{
+    "version": "3.28",
+    "released_at": "2026-08-27 12:58:22",
+    "min_supported_version": "2.0",
+    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.28.zip",
+    "checksum_sha256": "b632a62de4283f62bf15fec24d60da57c66754917b77bacd0f7ac392789887a2",
+    "mandatory": true,
+    "changelog": "test cron isolation",
+    "excluded_from_overwrite": [
+        "updates/",
+        "uploads/",
+        "application/config/database.php",
+        "application/config/config.php",
+        "writable/uploads/",
+        "writable/logs/",
+        "writable/cache/",
+        "writable/backups/",
+        "writable/updates/",
+        ".env"
+    ],
+    "channel": "development"
+}
