@@ -1,11 +1,11 @@
 {
-    "version": "3.24",
-    "released_at": "2026-08-27 10:03:15",
+    "version": "3.25",
+    "released_at": "2026-08-27 10:16:12",
     "min_supported_version": "2.0",
-    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.24.zip",
+    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.25.zip",
     "checksum_sha256": "6ada9824c13f69571a816fe641d39dbf05cca630214bdc5bac76e73596c7cc50",
     "mandatory": true,
-    "changelog": "bugs fixing",
+    "changelog": "bug fixing",
     "excluded_from_overwrite": [
         "updates/",
         "uploads/",
