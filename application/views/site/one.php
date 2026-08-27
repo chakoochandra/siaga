@@ -87,6 +87,7 @@
 		height: 44px;
 		background: var(--card-icon-bg, rgba(99, 179, 237, 0.1));
 		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		overflow: hidden;
 		z-index: 3;
 	}
 
@@ -203,35 +204,21 @@
 		font-size: 15px;
 	}
 
-	/* Card tag */
-	#box-apps .card .card-tag,
-	#box-recommendation .card .card-tag,
-	#box-result .card .card-tag {
-		font-size: 10px;
+	/* Category badge (shown when apps are merged across categories) */
+	#box-apps .card .card-category-badge {
+		display: inline-block;
+		align-self: flex-start;
+		width: fit-content;
+		font-size: 12px;
 		font-family: 'DM Mono', monospace;
-		letter-spacing: 0.3px;
-	}
-
-	/* Card arrow */
-	#box-apps .card .card-arrow,
-	#box-recommendation .card .card-arrow,
-	#box-result .card .card-arrow {
-		width: 22px;
-		height: 22px;
-		transition: background 0.2s, transform 0.2s;
-	}
-
-	#box-apps .card:hover .card-arrow,
-	#box-recommendation .card:hover .card-arrow,
-	#box-result .card:hover .card-arrow {
-		transform: translate(2px, -2px);
-	}
-
-	#box-apps .card .card-arrow svg,
-	#box-recommendation .card .card-arrow svg,
-	#box-result .card .card-arrow svg {
-		width: 12px;
-		height: 12px;
+		text-transform: uppercase;
+		letter-spacing: 0.4px;
+		font-weight: 700;
+		line-height: 1.4;
+		padding: 3px 9px;
+		border-radius: 999px;
+		background: var(--card-icon-bg, rgba(99, 179, 237, 0.1));
+		color: var(--card-accent, var(--bs-purple));
 	}
 
 	/* Color variants */
@@ -307,9 +294,78 @@
 		--card-shadow: rgba(246, 173, 85, 0.15);
 	}
 
+	#box-apps .my-apps .col,
+	#box-recommendation .my-apps .col,
+	#box-result .my-apps .col {
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+		transition: box-shadow 0.25s ease, transform 0.25s ease;
+	}
+
+	#box-apps .my-apps .col:hover,
+	#box-recommendation .my-apps .col:hover,
+	#box-result .my-apps .col:hover {
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+	}
+
+	.input-wrap {
+		max-width: 100%;
+	}
+
+	@media (max-width: 575.98px) {
+		.input-wrap {
+			max-width: 92%;
+		}
+	}
+
+	#box-logo .brand-link {
+		max-width: 100%;
+		flex-wrap: nowrap;
+	}
+
+	#box-logo .brand-link .logo-img {
+		max-width: 100%;
+	}
+
+	#box-logo p {
+		font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	@font-face {
+		font-family: 'Saved By Zero';
+		src: url('<?php echo asset_url('assets/fonts/SavedByZero.woff') ?>') format('woff');
+		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	#box-logo .brand-link .app-short-name {
+		font-family: 'Saved By Zero', sans-serif;
+		white-space: nowrap;
+		color: #084a3d;
+	}
+
 	.fixed-bottom-right {
+		position: fixed;
 		bottom: 50px;
 		right: 10px;
+		z-index: 9999;
+		display: none;
+		width: 40px;
+		height: 40px;
+		padding: 6px;
+		background: rgba(255, 255, 255, 0.9);
+		border-radius: 50%;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+		text-align: center;
+		line-height: 28px;
+		transition: opacity 0.3s, visibility 0.3s;
+	}
+
+	.fixed-bottom-right.visible {
+		display: block;
 	}
 
 	.figure-img {
@@ -346,10 +402,7 @@
 	#box-result .card .card-icon,
 	#box-apps .card .card-content,
 	#box-recommendation .card .card-content,
-	#box-result .card .card-content,
-	#box-apps .card .card-footer,
-	#box-recommendation .card .card-footer,
-	#box-result .card .card-footer {
+	#box-result .card .card-content {
 		position: relative;
 		z-index: 3;
 	}
@@ -406,19 +459,119 @@
 	#box-result .card .card-desc {
 		text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 	}
+
+	/* ===== Linktr.ee-style app cards on mobile ===== */
+	@media (max-width: 575.98px) {
+
+		#box-apps .my-apps,
+		#box-recommendation .my-apps,
+		#box-result .my-apps {
+			row-gap: 0.85rem !important;
+		}
+
+		#box-apps .card,
+		#box-recommendation .card,
+		#box-result .card {
+			flex-direction: row !important;
+			align-items: center !important;
+			gap: 0.85rem !important;
+			padding: 0.5rem 0.5rem !important;
+			border-radius: 1rem !important;
+			background: var(--bs-secondary-bg, #e2e8f0) !important;
+			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+			border-color: transparent !important;
+		}
+
+		#box-apps .card:hover,
+		#box-recommendation .card:hover,
+		#box-result .card:hover {
+			transform: none !important;
+			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 0 0 1px var(--card-accent, var(--bs-purple)) !important;
+		}
+
+		/* drop the decorative big bg icon, accent bar and status dot */
+		#box-apps .card .card-bg-icon,
+		#box-recommendation .card .card-bg-icon,
+		#box-result .card .card-bg-icon,
+		#box-apps .card .card-bar,
+		#box-recommendation .card .card-bar,
+		#box-result .card .card-bar,
+		#box-apps .card .dot,
+		#box-recommendation .card .dot,
+		#box-result .card .dot {
+			display: none !important;
+		}
+
+		/* small round icon on the left, like a linktr.ee avatar */
+		#box-apps .card .card-icon,
+		#box-recommendation .card .card-icon,
+		#box-result .card .card-icon {
+			width: 50px !important;
+			height: 50px !important;
+			border-radius: 50% !important;
+			flex-shrink: 0 !important;
+			margin: 0 !important;
+			overflow: hidden !important;
+		}
+
+		#box-apps .card .card-icon i,
+		#box-recommendation .card .card-icon i,
+		#box-result .card .card-icon i {
+			font-size: 17px !important;
+		}
+
+		/* centered single-line title, description hidden for a clean link-button look */
+		#box-apps .card .card-content,
+		#box-recommendation .card .card-content,
+		#box-result .card .card-content {
+			flex: 1 1 auto !important;
+			text-align: center !important;
+			gap: 0 !important;
+			min-width: 0;
+		}
+
+		#box-apps .card .card-title,
+		#box-recommendation .card .card-title,
+		#box-result .card .card-title {
+			font-size: 0.95rem !important;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		#box-apps .card .card-desc,
+		#box-recommendation .card .card-desc,
+		#box-result .card .card-desc {
+			display: none !important;
+		}
+	}
 </style>
+
+
+
+<?php
+$appShortName = is_local_ip() ? APP_SHORT_NAME : 'DELTA';
+$appName = is_local_ip() ? APP_NAME : 'DERETAN APLIKASI LAYANAN TERINTEGRASI';
+$appLogo = is_local_ip() ? asset_url('assets/images/joss.png') : asset_url('assets/images/delta.png');
+?>
 
 <section>
 	<div class="card-body py-0">
 		<div class="d-flex justify-content-center mx-auto p-4">
 			<div id="box-logo-login" class="row row-cols-1 row-cols-sm-1 justify-content-center g-3 mt-2 w-100">
 				<div id="box-logo" class="col<?php if ($this->ion_auth->logged_in()): ?> col-sm-8<?php endif; ?> d-flex flex-column align-items-center mt-4 text-center">
-					<div class="text-nowrap">
-						<a href="<?php echo base_url('/') ?>" class="brand-link d-flex justify-content-center">
-							<img src="<?php echo asset_url('assets/images/joss.png') ?>" alt="Logo JOSS" class="logo-img" style="height: calc(2rem + 4.5vw);">
-							<span class="display-2 fw-bold"><?php echo APP_SHORT_NAME ?></span>
+					<div>
+						<a href="<?php echo base_url('/') ?>" class="brand-link d-flex flex-nowrap justify-content-center align-items-center gap-2">
+							<?php if ($appLogo): ?>
+								<img src="<?php echo $appLogo ?>" alt="Logo <?php echo $appShortName ?>" class="logo-img" style="height: calc(2rem + 4.5vw);">
+							<?php endif; ?>
+							<?php if ($appShortName): ?>
+								<span class="display-2 fw-bold m-0 app-short-name"><?php echo $appShortName ?></span>
+							<?php endif; ?>
 						</a>
-						<span class="text-center fw-bold h5 m-0"><?php echo APP_NAME ?></span>
+						<?php if ($appName): ?>
+							<p class="text-center fw-bold h5 m-0 mt-2"><?php echo $appName ?></p>
+						<?php endif; ?>
 					</div>
 					<div class="text-center p-2">
 						<?php foreach ($apps as $category => $socmed) : ?>
@@ -434,7 +587,7 @@
 						<?php endforeach ?>
 					</div>
 				</div>
-				<!-- <php if (!$this->ion_auth->logged_in()/* && is_local_ip()*/): ?>
+				<!-- <php if (!$this->ion_auth->logged_in() && is_local_ip()): ?>
 					<php $this->load->view('site/_login_form') ?>
 				<php endif ?> -->
 			</div>
@@ -487,7 +640,6 @@
 	}
 
 	var numOfRecommendation = 4;
-	var is_local_ip = '<?php echo is_local_ip() ?>' == true;
 	var allApps = [];
 
 	function sortFunction(a, b) {
@@ -585,24 +737,16 @@
 				var iconData = getIconHTML(value[2], value[0]);
 
 				$(target).find('#' + elId).find('.my-apps').append(
-					'<div class="col">' +
+					'<div class="col mt-0">' +
 					' <a href="' + value[1] + '" target="_blank" style="text-decoration:none;color:inherit;">' +
 					'   <div class="card position-relative overflow-hidden border rounded-4 p-3 h-100 d-flex flex-column gap-3 ' + getColorClass(value[0]) + '">' +
 					'     <div class="card-bar rounded-top-4"></div>' +
 					(value[4] ? '     <div class="dot rounded-circle"></div>' : '') +
 					'     <div class="card-bg-icon d-flex align-items-center justify-content-center overflow-hidden">' + iconData.bgHtml + '</div>' +
-					'     <div class="card-icon d-flex align-items-center justify-content-center flex-shrink-0 rounded-3 position-relative">' + iconData.html + '</div>' +
+					'     <div class="card-icon d-flex align-items-center justify-content-center flex-shrink-0 rounded-3 position-relative">' + iconData.bgHtml + '</div>' +
 					'     <div class="card-content flex-fill d-flex flex-column gap-2">' +
 					'       <div class="card-title fs-5 fw-semibold lh-sm text-start">' + value[0] + '</div>' +
-					(value[7] ? '       <div class="card-desc lh-base">' + value[7] + '</div>' : '') +
-					'     </div>' +
-					'     <div class="card-footer d-flex align-items-center justify-content-between pt-3 border-top">' +
-					(value[3] ? '       <span class="card-tag text-uppercase fw-bold rounded-pill py-1 px-2">' + value[3].toUpperCase() + '</span>' : '') +
-					'       <div class="card-arrow d-flex align-items-center justify-content-center rounded-1">' +
-					'         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">' +
-					'           <path d="M7 17L17 7M17 7H7M17 7v10"/>' +
-					'         </svg>' +
-					'       </div>' +
+					(value[5] ? '       <div class="card-desc lh-base">' + value[5] + '</div>' : '') +
 					'     </div>' +
 					'   </div>' +
 					' </a>' +
@@ -611,6 +755,45 @@
 			});
 		} else {
 			$(target).find('#' + elId).find('.my-apps').append('<span class="text-muted m-0"><i class="fa-solid fa-magnifying-glass text-danger" aria-hidden="true"></i> Web tidak ditemukan</span>');
+		}
+
+		$(target).show();
+	}
+
+	function showFlatApps(target, items) {
+		$(target).html('');
+		$(target).append('<div id="all-apps" class="leaves border my-1 p-3"></div>');
+		$(target).find('#all-apps').append('<div class="my-apps row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 mt-2"></div>');
+
+		if (items.length > 0) {
+			$.each(items, function(index, entry) {
+				var value = entry.value;
+				var category = entry.category;
+
+				allApps.push(value);
+
+				var iconData = getIconHTML(value[2], value[0]);
+
+				$(target).find('#all-apps').find('.my-apps').append(
+					'<div class="col mt-0">' +
+					' <a href="' + value[1] + '" target="_blank" style="text-decoration:none;color:inherit;">' +
+					'   <div class="card position-relative overflow-hidden border rounded-4 p-3 h-100 d-flex flex-column gap-3 ' + getColorClass(value[0]) + '">' +
+					'     <div class="card-bar rounded-top-4"></div>' +
+					(value[4] ? '     <div class="dot rounded-circle"></div>' : '') +
+					'     <div class="card-bg-icon d-flex align-items-center justify-content-center overflow-hidden">' + iconData.bgHtml + '</div>' +
+					'     <div class="card-icon d-flex align-items-center justify-content-center flex-shrink-0 rounded-3 position-relative">' + iconData.bgHtml + '</div>' +
+					'     <div class="card-content flex-fill d-flex flex-column gap-2">' +
+					'       <div class="card-title fs-5 fw-semibold lh-sm text-start">' + value[0] + '</div>' +
+					'       <span class="card-category-badge">' + category + '</span>' +
+					(value[5] ? '       <div class="card-desc lh-base">' + value[5] + '</div>' : '') +
+					'     </div>' +
+					'   </div>' +
+					' </a>' +
+					'</div>'
+				);
+			});
+		} else {
+			$(target).find('#all-apps').find('.my-apps').append('<span class="text-muted m-0"><i class="fa-solid fa-magnifying-glass text-danger" aria-hidden="true"></i> Web tidak ditemukan</span>');
 		}
 
 		$(target).show();
@@ -631,9 +814,10 @@
 		return uniques;
 	}
 
-	if (!(mycookie = localStorage.getItem('joss-favs'))) {
+	var mycookie;
+	if (!(mycookie = localStorage.getItem('joss-favs1'))) {
 		var my_recommendation = [];
-		localStorage.setItem('joss-favs', JSON.stringify(my_recommendation));
+		localStorage.setItem('joss-favs1', JSON.stringify(my_recommendation));
 	} else {
 		var my_recommendation = JSON.parse(mycookie);
 	}
@@ -643,16 +827,27 @@
 	if (my_recommendation.length > 0)
 		showApps('#box-recommendation', my_recommendation, 'Rekomendasi', numOfRecommendation);
 
-	// Populate all apps — skip 'Menu' category so it doesn't show in box-apps
-	$.each(<?php echo json_encode($apps) ?>, function(category, apps) {
+	// Populate all apps — merged into a single flat grid, in the exact global order
+	// (order nulls-last, then name) returned by the backend — category no longer affects sort order.
+	// Each card still carries its own category as a badge. 'Menu' category is skipped so it doesn't show in box-apps
+	var mergedAppsList = [];
+	$.each(<?php echo json_encode($appsFlat) ?>, function(index, value) {
+		var category = value[3];
+
 		if (category == 'Lokal') {
-			if (is_local_ip) {
-				showApps('#box-apps', apps, category);
+			if (!is_local_ip) {
+				return;
 			}
-		} else if (category != 'Socmed' && category != 'Menu') {
-			showApps('#box-apps', apps, category);
+		} else if (category == 'Socmed' || category == 'Menu') {
+			return;
 		}
+
+		mergedAppsList.push({
+			value: value,
+			category: category
+		});
 	});
+	showFlatApps('#box-apps', mergedAppsList);
 
 	// Add 'Menu' apps directly to allApps (once) so they appear in search results
 	// but are NOT rendered in box-apps
@@ -671,7 +866,6 @@
 		var clickedWebName = $(this).find('.card-title').text();
 		var clickedWebUrl = $(this).parent('a').attr('href');
 		var clickedWebIcon = $(this).find('.card-icon img').length ? $(this).find('.card-icon img').attr('src') : $(this).find('.card-icon i').attr('class');
-		var clickedWebType = $(this).find('.card-tag').text();
 
 		my_recommendation.sort(sortFunction);
 
@@ -688,14 +882,14 @@
 				clickedWebName,
 				clickedWebUrl,
 				clickedWebIcon,
-				clickedWebType,
+				'',
 				1,
 			]);
 		} else {
 			my_recommendation.unshift(my_recommendation.splice(clickedIndex, 1)[0]);
 		}
 
-		localStorage.setItem('joss-favs', JSON.stringify(my_recommendation));
+		localStorage.setItem('joss-favs1', JSON.stringify(my_recommendation));
 
 		showApps('#box-recommendation', my_recommendation, 'Rekomendasi', numOfRecommendation, true);
 	});
@@ -703,19 +897,10 @@
 	$('#textfield-search').focus();
 
 	// Search logic
-	function escapeHTML(str) {
-		return String(str)
-			.replace(/&/g, '&amp;')
-			.replace(/</g, '&lt;')
-			.replace(/>/g, '&gt;')
-			.replace(/"/g, '&quot;')
-			.replace(/'/g, '&#39;');
-	}
-
 	$('#textfield-search').on('input', function(e) {
 		if ($(this).val()) {
 			var filterApps = [];
-			var keyword = escapeHTML($(this).val());
+			var keyword = $(this).val();
 			$.each(getUniqueApps(allApps), function(index, item) {
 				var appName = item[0] || '';
 				var appUrl = item[1] || '';
@@ -736,4 +921,22 @@
 			$('#box-ratio').slideDown();
 		}
 	});
+
+	var $backToTop = $('.fixed-bottom-right');
+	if ($backToTop.length) {
+		$(window).on('scroll', function() {
+			if ($(this).scrollTop() > 300) {
+				$backToTop.addClass('visible');
+			} else {
+				$backToTop.removeClass('visible');
+			}
+		});
+
+		$backToTop.on('click', function(e) {
+			e.preventDefault();
+			$('html, body').animate({
+				scrollTop: 0
+			}, 300);
+		});
+	}
 </script>

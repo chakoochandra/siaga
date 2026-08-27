@@ -5,16 +5,16 @@
 				<h5 class="m-0"><?php echo $title ?></h5>
 			</div>
 			<div class="card-body">
-				<div class="callout callout-info m-4 mt-3">
-					<h6>Informasi</h6>
-					<ul>
-						<li>Klik kolom <code>Nama</code>, <code>URL</code>, <code>Urutan</code>, <code>Kategori</code>, <code>Status</code>, atau <code>Tampilkan Online</code> untuk mengubah data.</li>
-					</ul>
-				</div>
+<div class="callout callout-info m-4 mt-3">
+	<h6>Informasi</h6>
+	<ul>
+		<li>Klik kolom <code>Nama</code>, <code>URL</code>, <code>Urutan</code>, <code>Kategori</code>, <code>Status</code>, atau <code>Tampilkan Online</code> untuk mengubah data.</li>
+	</ul>
+</div>
 
-				<div class="table-responsive">
-					<table id="table-web" class="display table-striped table-hover"></table>
-				</div>
+<div class="table-responsive">
+	<table id="table-web" class="display table-striped table-hover"></table>
+</div>
 			</div>
 		</div>
 	</div>
@@ -22,19 +22,70 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		const theTime = '<?php echo time() ?>';
 		initDataTable("#table-web", {
 			title: "<?php echo $title ?>",
 			ajax: {
 				url: "<?php echo base_url('settings/web/get_list') ?>",
+				data: function(d) {
+					d['selectedCategory'] = $(`.dropdown-category-${theTime} select`).val();
+					d['selectedStatus'] = $(`.dropdown-status-${theTime} select`).val();
+					d['selectedShowOnline'] = $(`.dropdown-show-online-${theTime} select`).val();
+					d[localStorage.getItem('csrfName')] = localStorage.getItem('csrfToken');
+				}
 			},
 			layout: {
-				topEnd: {
+				topStart: {
 					buttons: [{
+						extend: 'dropdown',
+						config: {
+							id: 'dropdown-category-' + theTime,
+							class: 'dropdown-category-' + theTime,
+							placeholder: 'Kategori',
+							allowClear: true,
+							options: {
+								'Socmed': 'Socmed',
+								'Lokal': 'Lokal',
+								'Web': 'Web',
+								'MA': 'MA',
+								'<?php echo SATKER_ESELON_1 ?>': '<?php echo SATKER_ESELON_1 ?>',
+								'<?php echo SATKER_BANDING ?>': '<?php echo SATKER_BANDING ?>',
+								'Lain-lain': 'Lain-lain',
+							},
+						},
+					}, {
+						extend: 'dropdown',
+						config: {
+							id: 'dropdown-status-' + theTime,
+							class: 'dropdown-status-' + theTime,
+							placeholder: 'Status',
+							allowClear: true,
+							options: {
+								1: 'Aktif',
+								0: 'Tidak Aktif',
+							},
+						},
+					}, {
+						extend: 'dropdown',
+						config: {
+							id: 'dropdown-show-online-' + theTime,
+							class: 'dropdown-show-online-' + theTime,
+							placeholder: 'Tampilkan Online',
+							allowClear: true,
+							options: {
+								1: 'Ya',
+								0: 'Tidak',
+							},
+						},
+					}, {
 						extend: 'customButton',
 						text: '<span class="fas fa-plus" aria-hidden="true"></span> Tambah Web',
 						url: '<?php echo base_url('settings/web/save') ?>',
 						className: 'btn btn-sm btn-outline-success btn-modal',
 					}]
+				},
+				topEnd: {
+					buttons: []
 				}
 			},
 			ajaxCellInput: [{
@@ -55,78 +106,78 @@
 					url: "<?php echo base_url('settings/web/update_value/order') ?>",
 					editable: 1,
 				},
-			{
-				column: 4,
-				type: function(row) {
-					return 'dropdown';
+				{
+					column: 4,
+					type: function(row) {
+						return 'dropdown';
+					},
+					options: [{
+							value: 'Socmed',
+							label: 'Socmed'
+						},
+						{
+							value: 'Lokal',
+							label: 'Lokal'
+						},
+						{
+							value: 'Web',
+							label: 'Web'
+						},
+						{
+							value: 'MA',
+							label: 'MA'
+						},
+						{
+							value: '<?php echo SATKER_ESELON_1 ?>',
+							label: '<?php echo SATKER_ESELON_1 ?>'
+						},
+						{
+							value: '<?php echo SATKER_BANDING ?>',
+							label: '<?php echo SATKER_BANDING ?>'
+						},
+						{
+							value: 'Lain-lain',
+							label: 'Lain-lain'
+						},
+					],
+					url: "<?php echo base_url('settings/web/update_value/category') ?>",
+					editable: 1,
 				},
-				options: [{
-						value: 'Socmed',
-						label: 'Socmed'
+				{
+					column: 5,
+					type: function(row) {
+						return 'dropdown';
 					},
-					{
-						value: 'Lokal',
-						label: 'Lokal'
-					},
-					{
-						value: 'Web',
-						label: 'Web'
-					},
-					{
-						value: 'MA',
-						label: 'MA'
-					},
-					{
-						value: '<?php echo SATKER_ESELON_1 ?>',
-						label: '<?php echo SATKER_ESELON_1 ?>'
-					},
-					{
-						value: '<?php echo SATKER_BANDING ?>',
-						label: '<?php echo SATKER_BANDING ?>'
-					},
-					{
-						value: 'Lain-lain',
-						label: 'Lain-lain'
-					},
-				],
-				url: "<?php echo base_url('settings/web/update_value/category') ?>",
-				editable: 1,
-			},
-			{
-				column: 5,
-				type: function(row) {
-					return 'dropdown';
+					options: [{
+							value: '1',
+							label: 'Aktif'
+						},
+						{
+							value: '0',
+							label: 'Tidak Aktif'
+						},
+					],
+					url: "<?php echo base_url('settings/web/update_value/is_active') ?>",
+					editable: 1,
 				},
-				options: [{
-						value: '1',
-						label: 'Aktif'
+				{
+					column: 6,
+					type: function(row) {
+						return 'dropdown';
 					},
-					{
-						value: '0',
-						label: 'Tidak Aktif'
-					},
-				],
-				url: "<?php echo base_url('settings/web/update_value/is_active') ?>",
-				editable: 1,
-			},
-			{
-				column: 6,
-				type: function(row) {
-					return 'dropdown';
+					options: [{
+							value: '1',
+							label: 'Ya'
+						},
+						{
+							value: '0',
+							label: 'Tidak'
+						},
+					],
+					url: "<?php echo base_url('settings/web/update_value/show_online') ?>",
+					editable: 1,
 				},
-				options: [{
-						value: '1',
-						label: 'Ya'
-					},
-					{
-						value: '0',
-						label: 'Tidak'
-					},
-				],
-				url: "<?php echo base_url('settings/web/update_value/show_online') ?>",
-				editable: 1,
-			},
-		],
+			],
 			columns: [{
 					data: null,
 					title: "No.",
