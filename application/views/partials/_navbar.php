@@ -1,3 +1,10 @@
+<style>
+	.font-saved-by-zero {
+		font-family: 'Saved By Zero', sans-serif;
+		white-space: nowrap;
+		color: #084a3d !important;
+	}
+</style>
 <nav class="<?php echo get_layout_classes((!isset($navbarClass) ? 'navbar' : $navbarClass)) ?> <?php echo $this->session->userdata('disableApiRequest') ? 'bg-red' : '' ?>">
 	<div class="container-fluid mb-0">
 		<ul class="navbar-nav">
@@ -11,6 +18,7 @@
 				<div class="sidebar-brand" style="height: 36px; border: none;">
 					<a href="<?php echo base_url('/') ?>" class="brand-link" style="align-items: end;">
 						<img src="<?php echo asset_url('assets/images/joss.png') ?>" alt="Logo <?php echo APP_SHORT_NAME ?>" class="brand-image">
+						<span class="brand-text font-saved-by-zero fw-bolder fs-2 ms-0" style="line-height: .9 !important"><?php echo APP_SHORT_NAME ?></span>
 					</a>
 				</div>
 			<?php endif ?>
@@ -30,29 +38,6 @@
 					</span>
 				</li>
 			<?php endif; ?>
-
-			<?php /*if (($antrianIndex = array_search_key_index('title', 'Antrian', $menus))) {
-            $configs = get_queue_config();
-            foreach ($configs as $c => $conf) {
-                if ((!isset($conf['active']) || $conf['active'] === true) && isset($conf['show_in_display']) && $conf['show_in_display']  && $conf['enable']) {
-                    $menus[$antrianIndex]['child'][] = [
-                        'title' => str_replace('Antrian ', '', $conf['title_list']),
-                        'icon' => 'circle-o text-' . ($conf['class']),
-                        'href' => base_url("antrian/$c"),
-                    ];
-                }
-            }
-        } ?>
-
-        <?php if ($antrianIndex) : ?>
-            <?php foreach ($configs as $c => $conf) : ?>
-                <?php if ((!isset($conf['active']) || $conf['active'] === true) && isset($conf['show_in_display']) && $conf['show_in_display']  && $conf['enable']) : ?>
-                    <li class="nav-item nav-item-antrian d-none d-sm-inline-block">
-                        <a href="<?php echo base_url("antrian/$c") ?>" class="nav-link px-2 text-truncate <?php echo $type == $c ? 'active' : '' ?>" style="max-width: 135px;"><?php echo str_replace('Antrian ', '', $conf['title_list']) ?></a>
-                    </li>
-                <?php endif ?>
-            <?php endforeach ?>
-        <?php endif*/ ?>
 		</ul>
 		<ul class="navbar-nav ms-auto">
 			<?php if ($this->ion_auth->logged_in()): ?>

@@ -164,6 +164,15 @@ class Sidang_Model extends Sipp_Base_Model
     public function get_sidang_tomorrow_for_notif()
     {
         $this->prepare_sidang_query(date('Y-m-d', strtotime('+1 day')));
+
+        // Same restriction as get_sidang_for_notif(): pihak notifications are
+        // only sent for sidang in ruang 10x (kode starting with "10"). This
+        // also means sidang with no ruangan_id at all (e.g. "Pemeriksaan
+        // Setempat", which has no courtroom) are naturally excluded, since
+        // ruangan_sidang.kode is NULL for those rows and NULL never matches
+        // a LIKE.
+        $this->database->like('ruangan_sidang.kode', '10', 'after');
+
         $rows = $this->database->get()->result();
         return $rows;
     }
@@ -191,11 +200,6 @@ class Sidang_Model extends Sipp_Base_Model
         }
 
         $this->prepare_sidang_base($target_date);
-
-        // Notification dispatch is limited to ruang sidang 10x (kode starting
-        // with "10") - other rooms' sidang still show in the DataTables list
-        // (prepare_sidang_query/list_query), just not in the notif blast.
-        $this->database->like('ruangan_sidang.kode', '10', 'after');
 
         // Join panitera_pn to resolve pp NIP — valid because pp subquery exposes panitera_id
         $this->database->join('panitera_pn', 'panitera_pn.id = pp.panitera_id', 'left');

@@ -1,12 +1,12 @@
 [
     {
-        "version": "3.27",
-        "released_at": "2026-08-27 11:41:47",
+        "version": "3.29",
+        "released_at": "2026-08-27 16:25:03",
         "min_supported_version": "2.0",
-        "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.27.zip",
-        "checksum_sha256": "44a43269ffe038c09dd4d001eae557ee30a3b239818c55013fd703346bc25496",
+        "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.29.zip",
+        "checksum_sha256": "bb873c67d5c673ab37bd00e51b38c9e035bd65556ab9b90cacf1de2cf100ec72",
         "mandatory": true,
-        "changelog": "update logic send jadwal sidang to pihak",
+        "changelog": "send notif only for sidang kode ruang 10x",
         "excluded_from_overwrite": [
             "updates/",
             "uploads/",
@@ -20,27 +20,5 @@
             ".env"
         ],
         "channel": "stable"
-    },
-    {
-        "version": "3.28",
-        "released_at": "2026-08-27 12:58:22",
-        "min_supported_version": "2.0",
-        "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.28.zip",
-        "checksum_sha256": "b632a62de4283f62bf15fec24d60da57c66754917b77bacd0f7ac392789887a2",
-        "mandatory": true,
-        "changelog": "test cron isolation",
-        "excluded_from_overwrite": [
-            "updates/",
-            "uploads/",
-            "application/config/database.php",
-            "application/config/config.php",
-            "writable/uploads/",
-            "writable/logs/",
-            "writable/cache/",
-            "writable/backups/",
-            "writable/updates/",
-            ".env"
-        ],
-        "channel": "development"
     }
 ]

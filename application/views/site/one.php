@@ -341,10 +341,10 @@
 		font-display: swap;
 	}
 
-	#box-logo .brand-link .app-short-name {
+	#box-logo .brand-link .font-saved-by-zero {
 		font-family: 'Saved By Zero', sans-serif;
 		white-space: nowrap;
-		color: #084a3d;
+		color: #084a3d !important;
 	}
 
 	.fixed-bottom-right {
@@ -558,15 +558,15 @@ $appLogo = is_local_ip() ? asset_url('assets/images/joss.png') : asset_url('asse
 <section>
 	<div class="card-body py-0">
 		<div class="d-flex justify-content-center mx-auto p-4">
-			<div id="box-logo-login" class="row row-cols-1 row-cols-sm-1 justify-content-center g-3 mt-2 w-100">
-				<div id="box-logo" class="col<?php if ($this->ion_auth->logged_in()): ?> col-sm-8<?php endif; ?> d-flex flex-column align-items-center mt-4 text-center">
+			<div id="box-logo-login" class="row row-cols-1 <?php if ($this->ion_auth->logged_in() && is_local_ip()): ?>row-cols-sm-1 <?php else: ?> row-cols-sm-2<?php endif; ?> justify-content-center g-3 mt-2 w-100">
+				<div id="box-logo" class="col<?php if ($this->ion_auth->logged_in() && is_local_ip()): ?> col-sm-8<?php endif; ?> d-flex flex-column align-items-center justify-content-center mt-4 text-center">
 					<div>
 						<a href="<?php echo base_url('/') ?>" class="brand-link d-flex flex-nowrap justify-content-center align-items-center gap-2">
 							<?php if ($appLogo): ?>
 								<img src="<?php echo $appLogo ?>" alt="Logo <?php echo $appShortName ?>" class="logo-img" style="height: calc(2rem + 4.5vw);">
 							<?php endif; ?>
 							<?php if ($appShortName): ?>
-								<span class="display-2 fw-bold m-0 app-short-name"><?php echo $appShortName ?></span>
+								<span class="display-2 fw-bold m-0 font-saved-by-zero"><?php echo $appShortName ?></span>
 							<?php endif; ?>
 						</a>
 						<?php if ($appName): ?>
