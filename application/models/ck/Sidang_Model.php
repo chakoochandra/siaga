@@ -1,3 +1,287 @@
 <?php
- defined("\102\101\123\x45\x50\x41\124\x48") or die("\116\157\40\x64\x69\162\x65\143\x74\40\163\143\162\151\160\164\40\141\143\x63\x65\x73\163\40\x61\154\x6c\157\167\x65\144"); class Sidang_Model extends Sipp_Base_Model { private $sipandu_available = false; public function __construct() { parent::__construct(); } protected function list_query($where, $do_filter = true) { $selectedDateSidang = $this->input->post("\163\145\x6c\145\143\x74\x65\144\x44\x61\x74\x65\x53\151\x64\141\x6e\147") ?: date("\x59\x2d\x6d\55\x64"); $selectedRuang = $this->input->post("\x73\145\154\145\143\164\145\144\122\165\141\x6e\x67") ?: null; $this->colSearch = array("\x70\x65\162\x6b\x61\162\x61\x2e\156\x6f\x6d\157\x72\137\x70\145\162\x6b\x61\162\x61", "\160\145\162\x6b\141\162\x61\x5f\x6a\x61\144\167\x61\154\x5f\163\x69\x64\x61\x6e\x67\56\141\147\145\156\144\141", "\160\145\x72\153\141\x72\x61\x2e\160\x61\x72\x61\x5f\160\x69\150\x61\x6b"); $this->colOrder = array("\x70\145\162\x6b\141\x72\141\137\152\141\x64\167\x61\x6c\137\x73\x69\x64\141\x6e\x67\x2e\164\x61\156\147\147\x61\154\137\x73\151\144\x61\156\147" => "\141\x73\143", "\162\x75\x61\x6e\x67\141\156\x5f\163\x69\x64\141\156\x67\x2e\x6b\x6f\144\145" => "\x61\163\x63", "\x70\x65\x72\x6b\x61\162\141\x5f\152\x61\x64\167\x61\154\x5f\163\151\x64\x61\x6e\147\56\x6a\x61\155\137\163\x69\144\x61\156\147" => "\141\x73\143", "\160\145\x72\x6b\x61\162\141\56\156\x6f\x6d\157\x72\137\x70\145\x72\153\141\x72\x61" => "\141\x73\143"); $this->prepare_sidang_query($selectedDateSidang); if ($selectedRuang) { $this->database->where("\x72\x75\x61\156\147\x61\x6e\x5f\163\x69\144\x61\156\x67\56\151\144", $selectedRuang); } parent::list_query($where, $do_filter); } protected function prepare_sidang_base($tanggal_sidang) { $subqueryHk = $this->get_hakim_subquery(); $subqueryPp = $this->get_panitera_subquery(); $this->database->from("\x70\x65\x72\x6b\x61\162\x61\x5f\x6a\141\144\x77\x61\x6c\x5f\x73\x69\144\x61\156\147"); $this->database->join("\160\145\x72\153\141\162\141", "\160\145\162\153\141\x72\x61\x2e\x70\145\162\153\x61\162\141\x5f\x69\x64\40\x3d\x20\x70\145\162\153\x61\162\141\137\x6a\141\144\x77\x61\154\137\163\151\x64\x61\x6e\147\56\160\x65\x72\x6b\x61\x72\x61\x5f\151\144", "\x6c\x65\146\x74"); $this->database->join("\x70\145\162\153\x61\162\141\x5f\x70\145\156\145\x74\x61\160\141\156", "\160\x65\x72\153\x61\x72\141\x5f\160\145\156\145\x74\141\160\141\x6e\x2e\x70\145\x72\153\141\162\141\x5f\x69\144\40\x3d\x20\160\145\x72\153\141\x72\141\x2e\x70\145\162\x6b\x61\162\141\x5f\x69\144", "\154\x65\146\164"); $this->database->join("\50{$subqueryPp}\x29\40\101\x53\x20\x70\x70", "\x70\x70\56\x70\145\162\x6b\x61\x72\x61\x5f\x69\144\x20\75\40\160\x65\x72\153\x61\x72\x61\x5f\152\141\144\x77\x61\154\137\x73\151\144\x61\156\x67\56\x70\145\x72\153\141\162\141\137\x69\144", "\x6c\145\x66\164"); $this->database->join("\x28{$subqueryHk}\51\40\x41\x53\x20\150\x6b", "\x68\x6b\x2e\160\145\162\153\x61\x72\x61\137\151\144\x20\x3d\x20\160\145\162\153\x61\x72\141\137\152\141\x64\167\141\154\x5f\163\151\x64\x61\156\x67\x2e\160\145\x72\x6b\x61\x72\141\x5f\x69\x64", "\x6c\145\146\164"); $this->database->join("\162\165\x61\156\x67\x61\x6e\x5f\163\x69\x64\141\x6e\x67", "\162\165\x61\156\147\x61\x6e\137\163\x69\144\x61\156\147\x2e\x69\144\x20\75\x20\160\145\x72\153\141\162\x61\137\x6a\141\x64\x77\x61\154\137\163\151\x64\141\156\x67\x2e\x72\165\x61\x6e\147\141\156\x5f\151\x64", "\x6c\x65\x66\x74"); $this->database->join("\160\145\x72\x6b\x61\x72\x61\x5f\160\x69\x68\141\x6b\61", "\160\145\162\x6b\x61\x72\141\56\x70\x65\162\153\x61\162\x61\x5f\x69\x64\x20\75\40\x70\145\162\153\x61\x72\x61\137\x70\151\150\x61\153\61\x2e\x70\145\162\153\x61\x72\x61\x5f\x69\x64\40\101\116\x44\40\x70\145\162\153\x61\x72\141\137\x70\x69\x68\141\153\x31\56\x75\x72\x75\164\141\x6e\40\75\40\61", "\154\145\146\164"); $this->database->join("\x70\145\x72\153\141\162\141\x5f\160\151\150\141\153\x32", "\160\145\x72\x6b\x61\x72\141\56\x70\145\162\153\141\x72\141\x5f\151\144\x20\x3d\40\160\x65\x72\153\141\162\141\x5f\160\151\x68\141\153\x32\56\160\145\162\153\x61\162\x61\137\x69\x64\x20\x41\x4e\104\x20\x70\x65\x72\153\x61\162\x61\137\x70\x69\150\x61\x6b\x32\56\x75\x72\165\x74\141\156\40\x3d\x20\61", "\x6c\145\x66\164"); $this->database->join("\x70\151\150\x61\x6b", "\160\x65\x72\x6b\141\162\x61\137\x70\151\x68\x61\x6b\x31\x2e\x70\x69\x68\x61\153\137\x69\144\x20\x3d\40\160\x69\x68\x61\x6b\56\151\144", "\x6c\x65\146\x74"); $this->database->join("\160\151\x68\141\x6b\40\160\x69\x68\141\153\137\x54", "\160\x65\162\x6b\141\162\x61\137\160\151\x68\x61\153\62\56\x70\x69\x68\141\x6b\137\x69\144\x20\x3d\x20\160\151\x68\141\153\137\124\56\x69\144", "\x6c\145\x66\x74"); $this->database->join("\160\145\162\x6b\x61\x72\141\x5f\x70\x65\156\147\x61\x63\141\x72\x61\x20\160\x65\x72\x6b\x61\162\141\137\x70\x65\x6e\147\141\x63\x61\x72\x61\x5f\x50", "\160\x65\162\x6b\141\x72\141\56\160\x65\x72\x6b\x61\162\x61\x5f\x69\x64\x20\75\40\160\145\x72\153\141\162\x61\137\x70\145\x6e\147\141\143\141\x72\x61\137\120\56\160\x65\162\153\x61\x72\x61\x5f\x69\x64\x20\x41\x4e\104\x20\x70\145\x72\153\x61\162\x61\137\160\145\156\x67\x61\x63\x61\162\141\x5f\x50\56\160\151\150\141\x6b\137\151\x64\x20\75\40\160\151\x68\x61\153\x2e\151\x64", "\x6c\145\x66\x74"); $this->database->join("\160\x65\x72\x6b\141\162\141\137\160\x65\156\147\x61\143\141\162\141\x20\x70\x65\x72\153\141\x72\x61\137\x70\145\156\x67\x61\x63\x61\x72\x61\x5f\124", "\x70\145\x72\153\x61\x72\x61\56\160\x65\162\x6b\141\x72\x61\x5f\151\x64\40\x3d\x20\160\145\x72\x6b\x61\x72\x61\137\160\x65\156\x67\x61\x63\x61\x72\x61\x5f\x54\56\160\x65\x72\153\x61\x72\141\137\x69\144\x20\101\116\104\40\160\x65\x72\x6b\x61\162\x61\137\160\x65\x6e\x67\141\143\141\x72\x61\137\x54\x2e\x70\x69\150\x61\x6b\x5f\x69\x64\40\75\x20\x70\151\x68\141\153\x5f\124\56\x69\x64", "\154\x65\x66\x74"); $this->database->join("\160\151\150\141\153\40\160\x65\156\x67\141\x63\x61\162\x61\x5f\x50", "\160\145\x72\x6b\141\x72\x61\137\x70\x65\x6e\x67\x61\143\x61\x72\x61\x5f\x50\56\x70\145\x6e\147\141\x63\141\x72\x61\x5f\151\x64\40\75\40\x70\x65\156\x67\x61\x63\x61\x72\x61\137\x50\x2e\x69\x64", "\154\x65\146\x74"); $this->database->join("\160\x69\150\141\x6b\x20\160\x65\156\147\x61\x63\141\x72\x61\137\x54", "\160\x65\x72\x6b\x61\x72\141\137\160\x65\x6e\x67\x61\143\x61\162\141\x5f\x54\x2e\x70\145\x6e\x67\x61\x63\x61\x72\141\137\151\144\x20\75\40\x70\145\x6e\x67\141\x63\141\x72\141\137\x54\x2e\151\x64", "\x6c\x65\x66\x74"); $this->sipandu_available = is_db_sipandu_available(); if ($this->sipandu_available) { $this->db_sipandu = $this->load->database("\144\142\137\x73\x69\x70\x61\x6e\x64\x75", TRUE); $this->database->join($this->db_sipandu->database . "\56\144\141\164\x61\137\141\x6e\x74\162\151\x61\156\137\x73\x69\144\141\156\147\40\105", "\x70\x65\x72\153\x61\162\141\x2e\x6e\x6f\155\x6f\162\x5f\x70\145\162\x6b\x61\x72\x61\40\x3d\x20\105\x2e\156\x6f\x6d\157\x72\x5f\160\x65\x72\x6b\x61\162\141\x20\101\116\x44\40\x70\145\x72\153\x61\x72\x61\137\x6a\141\x64\167\141\154\x5f\x73\x69\144\141\156\147\x2e\x74\x61\x6e\147\x67\141\x6c\137\163\151\144\141\x6e\x67\x20\75\40\x44\101\124\x45\50\105\56\164\x67\x6c\51", "\x6c\145\x66\x74"); } $this->database->where("\160\x65\162\x6b\141\162\141\x5f\x6a\141\x64\167\141\154\x5f\163\151\x64\x61\156\x67\x2e\164\x61\x6e\147\147\x61\154\137\x73\151\x64\141\156\x67", $tanggal_sidang); } protected function prepare_sidang_query($tanggal_sidang) { $this->prepare_sidang_base($tanggal_sidang); $this->database->select("\xa\x9\11\x9\x70\145\x72\153\141\x72\x61\x5f\152\141\144\167\x61\x6c\x5f\x73\x69\144\x61\x6e\x67\56\x69\x64\x2c\12\x9\11\x9\x70\x65\x72\153\141\162\x61\137\x6a\141\x64\x77\x61\x6c\x5f\163\151\144\141\x6e\147\56\160\145\162\x6b\x61\162\141\x5f\151\144\54\12\11\x9\x9\160\145\x72\x6b\141\x72\x61\x5f\152\141\144\167\x61\154\x5f\163\x69\x64\x61\156\147\x2e\165\x72\165\164\141\x6e\54\xa\x9\x9\11\x70\145\162\x6b\x61\x72\x61\137\x6a\141\x64\167\141\154\x5f\163\x69\x64\x61\156\x67\x2e\x73\x69\144\141\156\147\137\153\145\x6c\x69\x6c\151\x6e\147\x2c\12\11\11\11\160\x65\162\x6b\141\162\141\137\160\x65\x6e\145\x74\x61\x70\x61\156\x2e\x6d\x61\x6a\145\x6c\151\163\137\x68\141\x6b\151\x6d\x5f\153\157\x64\145\x2c\12\11\11\11\160\x70\x2e\160\x61\156\x69\164\145\162\141\137\156\141\155\x61\40\40\x41\x53\x20\x6e\141\155\x61\137\160\x70\54\12\11\11\11\150\153\56\150\141\153\151\155\137\156\141\155\x61\x20\40\x20\40\x20\101\x53\40\x6e\x61\x6d\141\137\x68\x61\x6b\151\x6d\54\xa\11\11\x9\x70\x65\162\153\141\x72\x61\56\x6e\157\155\x6f\x72\137\160\x65\x72\x6b\x61\x72\x61\x2c\xa\x9\x9\x9\x70\145\162\x6b\141\x72\x61\56\x6a\145\156\151\163\137\160\x65\162\153\x61\x72\x61\137\156\141\155\141\x2c\xa\x9\11\11\x70\x65\162\x6b\141\x72\141\56\160\x61\162\141\x5f\x70\x69\150\141\x6b\x2c\12\x9\x9\x9\x43\x4f\x4e\103\101\x54\x28\x22\133\x50\x5d\40\x22\54\x20\x70\x65\x72\x6b\141\x72\141\56\x70\x69\x68\141\x6b\61\137\x74\x65\170\x74\54\12\x9\11\11\x9\x28\x43\101\x53\x45\40\127\x48\105\x4e\40\160\x65\x72\153\x61\x72\141\56\160\151\150\x61\x6b\62\x5f\x74\x65\170\164\x20\x49\123\x20\116\x4f\x54\40\x4e\x55\x4c\114\xa\11\x9\x9\x9\40\40\x20\40\40\x20\124\x48\x45\116\40\x43\117\x4e\103\x41\x54\50\x22\x3c\57\142\x72\x3e\133\x54\x5d\x20\42\x2c\x20\160\145\x72\153\x61\162\x61\x2e\160\151\x68\x61\x6b\62\x5f\164\x65\170\164\x29\xa\x9\x9\11\x9\40\40\40\x20\x20\40\x45\x4c\x53\105\x20\42\42\40\x45\x4e\x44\x29\12\11\11\11\x29\x20\x41\123\40\x70\x69\150\x61\x6b\x2c\12\11\11\11\160\145\162\153\x61\162\141\x5f\152\141\144\167\x61\154\x5f\163\151\x64\x61\156\147\56\164\x61\x6e\x67\147\141\x6c\137\x73\x69\x64\141\x6e\x67\x2c\12\11\11\11\x70\145\162\x6b\141\162\x61\137\152\x61\144\x77\141\x6c\137\163\151\144\141\156\x67\56\152\141\x6d\137\x73\x69\144\x61\x6e\147\x2c\xa\11\x9\x9\x70\145\162\x6b\x61\x72\x61\x5f\x6a\141\x64\x77\x61\x6c\137\163\151\x64\x61\156\147\x2e\x73\x61\155\160\x61\151\137\152\x61\x6d\x2c\xa\11\11\11\160\145\162\153\141\162\x61\x5f\152\x61\x64\167\141\154\x5f\x73\151\x64\141\156\x67\56\162\x75\x61\x6e\147\141\156\x5f\151\x64\54\12\11\x9\x9\x43\x4f\x4e\103\x41\124\x28\x72\x75\x61\x6e\147\x61\x6e\137\163\151\x64\141\156\147\56\x6e\x61\155\x61\54\x20\x49\x46\116\x55\x4c\x4c\x28\103\x4f\x4e\103\x41\x54\50\42\x20\133\42\x2c\x20\x72\x75\x61\156\x67\x61\x6e\x5f\163\x69\144\141\156\x67\x2e\x6b\157\x64\x65\54\x20\42\135\42\x29\54\x20\42\42\51\51\40\101\x53\x20\x6e\141\x6d\x61\x5f\x72\165\x61\x6e\147\x2c\xa\11\x9\x9\x70\x65\162\x6b\141\162\x61\137\x6a\x61\x64\167\141\x6c\137\x73\x69\144\141\x6e\x67\56\x61\147\145\156\x64\141\54\12\11\x9\11\141\154\141\163\x61\156\137\144\151\164\165\156\x64\x61\54\12\x9\x9\11\x69\x6b\162\x61\162\x5f\x74\x61\154\x61\x6b\x2c\xa\11\11\11\50\x43\x41\123\x45\x20\127\x48\105\116\40\151\153\x72\141\162\137\x74\x61\x6c\141\153\40\75\x20\x22\x59\x22\x20\124\110\x45\116\40\42\131\141\42\40\105\x4c\123\x45\40\x22\x42\165\x6b\141\x6e\42\40\105\116\x44\51\x20\x41\x53\40\151\x6b\162\x61\162\x2c\xa\x9\x9\11\x28\x43\101\x53\x45\xa\11\11\11\x9\127\x48\x45\x4e\40\x70\145\162\x6b\141\162\x61\56\141\154\x75\162\x5f\x70\145\x72\153\141\162\141\137\151\144\x20\75\x20\x31\x36\40\x54\110\x45\x4e\x20\71\x39\x38\12\x9\x9\11\x9\x57\110\105\x4e\40\160\x65\x72\x6b\141\x72\x61\56\164\x61\150\141\x70\141\x6e\x5f\164\x65\162\141\x6b\x68\151\162\x5f\151\x64\x20\x3d\x20\61\x32\x20\x54\110\x45\x4e\x20\71\71\71\xa\x9\x9\x9\x9\127\110\x45\116\40\x28\x70\x65\x72\153\141\162\x61\137\152\x61\144\167\x61\154\x5f\x73\151\x64\141\156\x67\x2e\141\x67\145\156\144\x61\x20\x4c\111\x4b\105\40\x22\45\160\165\x74\x75\163\x61\x6e\45\42\40\117\122\40\x70\x65\162\153\x61\x72\x61\x5f\152\141\x64\x77\x61\x6c\x5f\163\x69\144\x61\156\147\56\141\x67\x65\x6e\x64\141\x20\114\x49\113\x45\x20\x22\x25\x6d\x75\163\x79\x61\x77\141\x72\x61\150\x25\x22\x29\x20\x54\x48\105\116\40\x38\x30\x30\xa\x9\x9\x9\x9\x57\110\105\x4e\40\50\160\x65\162\153\141\x72\141\137\152\141\144\167\141\154\x5f\163\x69\x64\x61\156\147\56\x61\x67\x65\x6e\x64\141\40\x4c\x49\x4b\x45\x20\x22\45\154\141\x6e\x6a\x75\x74\x61\156\45\x22\x29\x20\124\110\x45\x4e\40\x39\71\67\12\11\x9\11\x9\127\x48\x45\x4e\x20\x28\xa\x9\x9\x9\11\11\160\145\x72\x6b\141\162\141\x5f\x6a\x61\x64\x77\141\154\x5f\163\151\x64\141\156\147\x2e\141\x67\145\156\x64\x61\x20\114\x49\113\x45\40\42\x25\155\x65\x6d\x61\156\x67\x67\x69\154\45\x22\xa\x9\x9\11\11\x9\x4f\x52\x20\160\145\x72\x6b\x61\x72\141\137\x6a\141\x64\x77\x61\x6c\137\x73\151\x64\x61\156\x67\x2e\x61\147\145\x6e\x64\x61\40\114\x49\x4b\x45\x20\42\45\155\x65\162\x6d\x61\156\147\x67\151\154\x25\42\xa\x9\11\x9\x9\x9\117\122\x20\160\x65\x72\153\x61\162\x61\137\152\x61\x64\x77\x61\154\x5f\x73\x69\144\x61\156\x67\x2e\141\147\x65\x6e\144\x61\x20\114\111\x4b\x45\x20\42\45\160\141\156\x67\x67\x69\x6c\x25\42\xa\11\x9\11\11\x29\x20\x54\110\105\x4e\40\x28\x43\x41\x53\105\40\x57\x48\x45\x4e\x20\x70\145\x72\x6b\x61\162\141\x2e\152\x65\156\151\163\x5f\160\145\162\153\x61\x72\x61\137\x69\x64\x20\x49\116\40\50\63\64\x36\x2c\40\x33\x34\67\51\12\11\11\11\11\40\x20\x20\40\x20\40\x20\x20\x20\x20\40\x20\40\124\110\x45\x4e\40\50\x43\x41\123\105\x20\127\x48\x45\x4e\40\160\x65\x72\153\141\162\141\137\x6a\x61\x64\x77\x61\x6c\x5f\x73\x69\144\x61\156\x67\x2e\x61\x67\x65\x6e\144\x61\x20\x4c\111\113\x45\40\x22\45\142\x75\x6b\x74\x69\x25\x22\40\x54\110\x45\x4e\40\70\65\x30\40\105\114\x53\x45\40\x39\x30\60\x20\105\116\x44\x29\xa\x9\x9\x9\11\40\x20\x20\40\x20\40\x20\40\x20\x20\x20\40\x20\x45\x4c\123\105\x20\x39\x39\67\x20\105\x4e\x44\51\12\x9\x9\11\11\105\x4c\123\x45\x20\x39\71\x37\12\11\11\11\105\x4e\104\x29\x20\x41\123\x20\164\141\x68\141\160\141\x6e\x2c\xa\x9\x9\x9\x28\103\x41\x53\x45\40\127\x48\105\116\40\x70\x65\x72\153\x61\x72\x61\56\164\x61\x68\141\160\141\156\137\x74\145\x72\x61\x6b\150\151\x72\137\x69\x64\x20\x3d\x20\61\62\x20\x54\110\x45\x4e\40\63\40\105\x4c\x53\x45\40\65\40\x45\x4e\x44\x29\x20\x41\x53\x20\152\141\155\x2c\12\11\x9\x9\x70\x65\x72\153\x61\162\141\x2e\x70\x69\x68\x61\x6b\61\x5f\164\x65\x78\164\40\x41\x53\40\160\151\150\141\153\61\54\12\11\11\11\160\x65\x72\x6b\x61\x72\141\x2e\160\151\150\141\153\x32\137\164\x65\170\164\40\x41\x53\40\x70\x69\x68\141\x6b\62\54\12\11\x9\x9\x70\151\150\141\153\x2e\x6e\141\155\x61\x20\x20\x20\x20\40\40\40\40\40\40\101\x53\40\x6e\141\x6d\x61\x5f\120\54\12\x9\x9\x9\50\103\x41\123\x45\x20\x57\x48\x45\116\x20\160\x65\x6e\147\x61\x63\141\162\141\137\x50\x2e\x69\x64\x20\111\x53\x20\x4e\125\x4c\114\x20\x54\x48\x45\x4e\x20\x70\151\x68\x61\x6b\56\164\x65\154\145\160\157\x6e\x20\40\x20\105\x4c\x53\x45\40\x4e\125\114\114\40\105\x4e\x44\51\40\101\123\40\164\145\154\x65\x70\x6f\x6e\137\x50\x2c\xa\11\11\x9\160\x69\x68\x61\153\x5f\124\56\x6e\x61\x6d\141\40\40\40\40\x20\x20\40\x20\101\123\40\x6e\x61\155\141\137\124\54\12\11\x9\x9\x28\x43\x41\x53\105\40\x57\x48\105\116\40\160\145\156\147\141\x63\x61\162\141\137\124\56\151\144\x20\x49\x53\40\116\x55\114\x4c\x20\x54\110\105\116\x20\x70\151\x68\141\153\137\x54\56\x74\145\154\x65\x70\157\x6e\40\105\114\123\105\40\116\125\114\x4c\x20\x45\116\x44\51\x20\101\x53\x20\164\x65\x6c\145\x70\157\x6e\x5f\x54\54\xa\x9\x9\11\160\x65\x6e\147\141\x63\141\x72\141\x5f\x50\x2e\156\x61\x6d\x61\x20\40\40\40\101\x53\40\x6e\x61\x6d\x61\x5f\x70\x65\x6e\x67\141\143\x61\162\x61\x5f\x50\54\xa\x9\11\x9\x70\145\x6e\x67\141\x63\x61\162\x61\x5f\x50\56\164\x65\154\x65\160\x6f\156\x20\x41\123\40\x74\145\x6c\x65\x70\x6f\x6e\137\x70\145\x6e\x67\141\x63\x61\x72\141\137\x50\54\12\x9\x9\x9\x70\145\156\147\141\x63\141\x72\141\137\x54\56\x6e\141\x6d\141\x20\40\40\40\x41\x53\x20\156\x61\155\x61\137\160\145\x6e\x67\141\x63\x61\x72\141\x5f\124\x2c\12\x9\x9\11\x70\145\x6e\147\141\x63\141\162\x61\x5f\x54\x2e\164\145\154\145\160\x6f\156\x20\x41\123\x20\164\145\154\x65\x70\x6f\156\x5f\160\145\x6e\x67\x61\143\141\162\141\137\124\xa\x9\x9"); if ($this->sipandu_available) { $this->database->select("\x45\x2e\x6e\157\155\x6f\162\137\160\141\156\147\147\x69\x6c\x2c\40\x45\x2e\160\145\162\153\x69\x72\x61\x61\x6e\137\x6a\x61\155"); } } public function get_sidang_tomorrow_for_notif() { $this->prepare_sidang_query(date("\131\55\155\x2d\x64", strtotime("\x2b\x31\40\144\x61\x79"))); $rows = $this->database->get()->result(); return $rows; } public function get_sidang_target_date() { if (is_development()) { return $this->_find_nearest_sidang_date(); } return date("\x59\55\x6d\55\x64"); } public function get_sidang_for_notif($target_date = null) { if ($target_date === null) { $target_date = $this->get_sidang_target_date(); } $this->prepare_sidang_base($target_date); $this->database->join("\x70\141\156\151\x74\145\x72\x61\x5f\160\156", "\160\x61\x6e\151\164\x65\162\141\137\160\156\56\x69\x64\40\75\x20\160\160\56\x70\141\156\x69\164\145\x72\141\137\x69\144", "\x6c\x65\x66\x74"); $this->database->join("\x76\x5f\x73\165\x6d\137\160\x65\x72\x6b\x61\162\x61\x5f\x62\151\141\171\x61", "\x76\x5f\163\x75\x6d\x5f\x70\145\x72\x6b\x61\x72\x61\x5f\142\151\141\171\x61\56\160\145\x72\x6b\141\x72\x61\137\x69\x64\40\75\x20\160\145\x72\153\x61\162\141\x2e\x70\x65\162\153\x61\162\141\137\151\x64", "\x6c\x65\146\164"); $this->database->join("\166\x5f\x70\x65\x72\x6b\x61\x72\141", "\166\137\x70\x65\x72\x6b\141\162\141\56\160\x65\x72\153\x61\x72\141\x5f\x69\x64\40\x3d\40\160\x65\162\153\141\x72\141\56\160\x65\x72\153\x61\x72\141\137\151\x64", "\154\x65\146\x74"); $subqueryEfiling = $this->db->select("\160\x65\162\153\x61\162\141\137\x69\x64\54\x20\x4d\x49\x4e\50\x65\146\x69\x6c\151\156\x67\x5f\151\x64\x29\x20\x41\x53\x20\x65\x66\x69\154\x69\x6e\x67\137\151\x64")->from("\160\145\162\x6b\141\162\x61\x5f\x65\x66\151\x6c\151\x6e\147\137\151\x64")->group_by("\x70\145\x72\153\141\x72\x61\x5f\x69\x64")->get_compiled_select(); $this->database->join("\50{$subqueryEfiling}\51\40\x41\x53\40\160\145", "\x70\x65\x2e\x70\x65\x72\x6b\141\x72\x61\x5f\x69\x64\x20\x3d\40\x70\x65\162\153\141\x72\x61\56\x70\x65\162\x6b\141\x72\x61\137\x69\144", "\x6c\145\146\x74"); $this->database->select("\xa\x9\11\x9\x70\x65\162\153\x61\162\141\137\x6a\141\x64\167\141\x6c\137\x73\151\x64\141\156\147\x2e\x70\x65\162\x6b\x61\162\141\137\x69\x64\54\12\11\11\11\x70\145\x72\153\141\162\x61\x5f\x6a\141\144\x77\141\154\x5f\x73\x69\x64\141\x6e\147\x2e\x75\x72\x75\164\x61\156\x2c\12\x9\11\11\x70\145\162\153\141\162\141\x2e\156\157\x6d\157\162\137\x70\x65\x72\153\x61\162\141\x2c\12\x9\11\11\160\x65\162\x6b\141\x72\x61\x5f\x6a\x61\144\x77\141\x6c\137\163\x69\x64\x61\156\147\56\x74\x61\156\x67\147\x61\154\137\x73\x69\144\141\156\x67\54\xa\11\x9\11\160\x65\162\153\x61\162\141\137\152\x61\144\x77\x61\154\137\x73\x69\x64\x61\156\x67\x2e\x61\x67\145\x6e\x64\141\54\xa\11\x9\x9\x70\x70\x2e\x70\141\156\x69\x74\x65\x72\x61\137\x6e\141\x6d\x61\x20\x20\101\x53\x20\156\x61\x6d\x61\x5f\x70\x70\54\xa\x9\x9\11\160\x61\x6e\x69\x74\x65\162\141\x5f\x70\156\x2e\156\x69\160\40\40\40\x41\123\40\160\160\x5f\x6e\x69\160\54\12\x9\x9\x9\x68\153\56\x68\x61\153\x69\155\137\156\141\x6d\x61\40\x20\x20\40\x20\x41\x53\40\x68\x61\x6b\151\155\137\156\x61\155\x61\54\xa\11\x9\11\x68\x6b\56\150\x61\153\151\x6d\137\x6e\x69\160\x20\40\40\x20\40\40\x41\123\x20\x68\x61\153\151\155\137\156\x69\x70\x2c\xa\11\x9\11\x43\x4f\116\x43\101\x54\50\42\x5b\x22\x2c\40\162\165\141\156\x67\x61\156\x5f\x73\x69\144\x61\156\147\56\x6b\x6f\144\x65\54\40\x22\x5d\40\42\x2c\40\x72\165\x61\x6e\x67\x61\156\137\163\x69\x64\x61\156\147\56\156\x61\155\141\x29\40\101\x53\x20\x72\x75\x61\156\147\137\x73\151\x64\x61\x6e\147\54\12\11\x9\11\x76\x5f\x70\145\162\153\141\x72\141\56\152\145\156\151\163\137\160\x65\162\x6b\x61\x72\141\x5f\x74\x65\170\x74\54\xa\11\x9\11\x76\137\160\x65\x72\x6b\141\162\141\56\x70\x69\x68\141\153\61\137\x74\145\x78\164\x20\101\x53\x20\156\x61\155\x61\137\x70\x2c\xa\x9\11\x9\x76\x5f\x70\145\162\x6b\x61\162\141\56\x70\x69\150\x61\x6b\x32\x5f\164\145\170\x74\40\x41\123\40\x6e\141\x6d\141\x5f\x74\54\xa\11\x9\11\x76\137\160\145\162\x6b\x61\x72\141\x2e\x6d\x61\152\145\x6c\151\163\x5f\x68\x61\153\x69\x6d\x5f\164\145\x78\164\x2c\xa\11\x9\11\166\137\x70\145\162\153\x61\x72\x61\x2e\x70\x61\x6e\x69\164\145\x72\x61\x5f\x70\x65\156\x67\x67\x61\x6e\x74\151\137\x74\x65\x78\x74\54\12\11\11\x9\160\145\x72\153\141\x72\141\x5f\160\x69\150\x61\153\62\x2e\147\x68\141\151\142\12\11\11"); if ($this->sipandu_available) { $this->database->select("\105\56\156\x6f\x6d\x6f\162\137\160\141\156\x67\x67\151\154\x2c\40\x45\56\x70\x65\x72\x6b\x69\x72\x61\x61\x6e\137\152\141\x6d"); } $this->database->select("\x28\x76\137\163\x75\155\x5f\160\145\x72\153\x61\162\141\x5f\x62\x69\x61\x79\x61\x2e\160\145\x6d\141\163\x75\153\141\x6e\x20\x2d\x20\x76\x5f\163\165\155\137\x70\x65\162\153\141\162\141\137\142\151\141\x79\x61\x2e\x70\145\x6e\x67\x65\154\165\141\x72\141\x6e\51\x20\101\123\40\163\x69\163\x61\137\x70\x61\156\152\x61\x72", false); $this->database->select("\x70\145\56\145\146\x69\154\151\x6e\147\x5f\x69\144"); $this->database->select("\50\x43\x41\123\105\x20\x57\x48\x45\x4e\x20\160\145\56\x65\146\151\154\x69\x6e\147\137\x69\x64\40\x49\x53\40\116\117\124\x20\116\125\x4c\x4c\x20\124\x48\105\x4e\40\42\131\141\x22\40\105\114\123\105\x20\42\x54\151\144\141\153\x22\40\x45\116\104\x29\40\x41\x53\40\x65\x63\x6f\165\x72\164\x5f\x73\164\x61\164\x75\x73"); $this->database->select("\x28\x43\x41\x53\105\x20\x57\x48\105\x4e\x20\x70\145\x72\x6b\141\x72\141\x5f\160\x69\150\x61\153\62\x2e\x67\150\141\151\x62\40\x3d\x20\x31\40\124\x48\105\116\x20\x22\131\x61\x22\40\x45\x4c\x53\105\x20\42\x54\x69\144\141\153\42\x20\x45\116\104\51\x20\101\123\40\147\x68\141\x69\142"); $this->database->order_by("\162\x75\141\x6e\147\141\156\137\x73\x69\x64\141\x6e\x67\x2e\156\141\x6d\x61", "\101\123\x43"); $this->database->order_by("\x70\x65\162\153\x61\162\141\x5f\152\x61\144\167\141\x6c\x5f\x73\151\144\141\x6e\147\x2e\x6a\x61\x6d\x5f\x73\x69\x64\x61\x6e\x67", "\x41\123\103"); $this->database->order_by("\160\x65\x72\x6b\x61\x72\x61\137\x6a\x61\x64\x77\x61\154\137\163\x69\144\x61\156\x67\x2e\165\x72\165\x74\x61\x6e", "\101\123\103"); $rows = $this->database->get()->result(); return $rows; } private function _find_nearest_sidang_date() { $sql = "\x53\x45\114\105\103\x54\40\x74\141\x6e\147\147\141\154\x5f\x73\151\144\141\156\x67\x20\101\x53\x20\x74\141\156\x67\x67\x61\154\x20\106\x52\117\x4d\40\x28\xa\x9\11\11\123\x45\x4c\x45\103\x54\x20\104\111\123\124\x49\116\103\124\40\164\x61\156\x67\147\141\154\x5f\163\x69\x64\x61\156\147\x20\106\122\117\115\40\x70\x65\x72\x6b\x61\x72\141\x5f\x6a\141\144\x77\x61\x6c\137\163\151\x64\x61\156\x67\12\11\11\11\x57\x48\105\122\x45\x20\141\x67\145\x6e\144\x61\40\111\123\x20\116\x4f\124\x20\116\x55\114\114\12\11\x9\51\40\101\x53\40\143\x6f\155\x62\x69\156\145\x64\12\x9\x9\117\x52\x44\x45\x52\x20\102\x59\40\x41\102\123\50\x44\101\124\x45\x44\111\x46\x46\50\164\141\x6e\x67\x67\141\154\x5f\x73\151\144\141\x6e\x67\54\x20\103\125\122\x44\101\124\x45\50\51\x29\x29\40\x41\123\x43\xa\x9\11\x4c\x49\x4d\111\124\40\x31"; $query = $this->database->query($sql); if (!$query) { return date("\x59\55\x6d\55\144"); } $row = $query->row(); return isset($row->tanggal) ? $row->tanggal : date("\x59\55\x6d\x2d\x64"); } }
- 
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class Sidang_Model extends Sipp_Base_Model
+{
+    /**
+     * Cached result of is_db_sipandu_available() for this instance, set by
+     * prepare_sidang_base and read by prepare_sidang_query()/
+     * get_sidang_for_notif() so they only select E.nomor_panggil/
+     * E.perkiraan_jam when the E join was actually added.
+     */
+    private $sipandu_available = false;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    protected function list_query($where, $do_filter = true)
+    {
+        $selectedDateSidang = $this->input->post('selectedDateSidang') ?: date('Y-m-d');
+        $selectedRuang      = $this->input->post('selectedRuang') ?: null;
+
+        $this->colSearch = [
+            'perkara.nomor_perkara',
+            'perkara_jadwal_sidang.agenda',
+            'perkara.para_pihak',
+        ];
+
+        $this->colOrder = [
+            'perkara_jadwal_sidang.tanggal_sidang' => 'asc',
+            'ruangan_sidang.kode'   => 'asc',
+            'perkara_jadwal_sidang.jam_sidang'            => 'asc',
+            'perkara.nomor_perkara' => 'asc',
+        ];
+
+        $this->prepare_sidang_query($selectedDateSidang);
+
+        if ($selectedRuang) {
+            $this->database->where('ruangan_sidang.id', $selectedRuang);
+        }
+
+        parent::list_query($where, $do_filter);
+    }
+
+    // -------------------------------------------------------------------------
+    // Base join builder (no SELECT — callers add their own selects)
+    // -------------------------------------------------------------------------
+
+    protected function prepare_sidang_base($tanggal_sidang)
+    {
+        $subqueryHk = $this->get_hakim_subquery();
+        $subqueryPp = $this->get_panitera_subquery();
+
+        $this->database->from('perkara_jadwal_sidang');
+        $this->database->join('perkara',              'perkara.perkara_id = perkara_jadwal_sidang.perkara_id',                                                          'left');
+        $this->database->join('perkara_penetapan',    'perkara_penetapan.perkara_id = perkara.perkara_id',                                                              'left');
+        $this->database->join("($subqueryPp) AS pp",  'pp.perkara_id = perkara_jadwal_sidang.perkara_id',                                                               'left');
+        $this->database->join("($subqueryHk) AS hk",  'hk.perkara_id = perkara_jadwal_sidang.perkara_id',                                                               'left');
+        $this->database->join('ruangan_sidang',       'ruangan_sidang.id = perkara_jadwal_sidang.ruangan_id',                                                           'left');
+        $this->database->join('perkara_pihak1',       'perkara.perkara_id = perkara_pihak1.perkara_id AND perkara_pihak1.urutan = 1',                                   'left');
+        $this->database->join('perkara_pihak2',       'perkara.perkara_id = perkara_pihak2.perkara_id AND perkara_pihak2.urutan = 1',                                   'left');
+        $this->database->join('pihak',                'perkara_pihak1.pihak_id = pihak.id',                                                                             'left');
+        $this->database->join('pihak pihak_T',        'perkara_pihak2.pihak_id = pihak_T.id',                                                                          'left');
+        $this->database->join('perkara_pengacara perkara_pengacara_P', 'perkara.perkara_id = perkara_pengacara_P.perkara_id AND perkara_pengacara_P.pihak_id = pihak.id',    'left');
+        $this->database->join('perkara_pengacara perkara_pengacara_T', 'perkara.perkara_id = perkara_pengacara_T.perkara_id AND perkara_pengacara_T.pihak_id = pihak_T.id', 'left');
+        $this->database->join('pihak pengacara_P',    'perkara_pengacara_P.pengacara_id = pengacara_P.id',                                                              'left');
+        $this->database->join('pihak pengacara_T',    'perkara_pengacara_T.pengacara_id = pengacara_T.id',                                                              'left');
+
+        // db_sipandu (pasidoa14_antrian_ptsp) can be unreachable independently
+        // of the primary DB - wrong host, table dropped, grants revoked. Only
+        // add this join (and, below, only select E.* columns) when a real
+        // connect-and-query check confirms it's actually available. Cache the
+        // result on the instance so prepare_sidang_query()/get_sidang_for_notif()
+        // can consult the SAME answer without re-checking, and so Generate.php's
+        // sidang_today_columns() (via the same is_db_sipandu_available() helper)
+        // stays in agreement about whether these columns exist on the rows.
+        $this->sipandu_available = is_db_sipandu_available();
+
+        if ($this->sipandu_available) {
+            $this->db_sipandu = $this->load->database('db_sipandu', TRUE);
+            $this->database->join(
+                $this->db_sipandu->database . '.data_antrian_sidang E',
+                "perkara.nomor_perkara = E.nomor_perkara AND perkara_jadwal_sidang.tanggal_sidang = DATE(E.tgl)",
+                'left'
+            );
+        }
+
+        $this->database->where('perkara_jadwal_sidang.tanggal_sidang', $tanggal_sidang);
+    }
+
+    // -------------------------------------------------------------------------
+    // Full SELECT used by the DataTables list and the pihak notification query
+    // -------------------------------------------------------------------------
+
+    protected function prepare_sidang_query($tanggal_sidang)
+    {
+        $this->prepare_sidang_base($tanggal_sidang);
+
+        $this->database->select('
+			perkara_jadwal_sidang.id,
+			perkara_jadwal_sidang.perkara_id,
+			perkara_jadwal_sidang.urutan,
+			perkara_jadwal_sidang.sidang_keliling,
+			perkara_penetapan.majelis_hakim_kode,
+			pp.panitera_nama  AS nama_pp,
+			hk.hakim_nama     AS nama_hakim,
+			perkara.nomor_perkara,
+			perkara.jenis_perkara_nama,
+			perkara.para_pihak,
+			CONCAT("[P] ", perkara.pihak1_text,
+				(CASE WHEN perkara.pihak2_text IS NOT NULL
+				      THEN CONCAT("</br>[T] ", perkara.pihak2_text)
+				      ELSE "" END)
+			) AS pihak,
+			perkara_jadwal_sidang.tanggal_sidang,
+			perkara_jadwal_sidang.jam_sidang,
+			perkara_jadwal_sidang.sampai_jam,
+			perkara_jadwal_sidang.ruangan_id,
+			CONCAT(ruangan_sidang.nama, IFNULL(CONCAT(" [", ruangan_sidang.kode, "]"), "")) AS nama_ruang,
+			perkara_jadwal_sidang.agenda,
+			alasan_ditunda,
+			ikrar_talak,
+			(CASE WHEN ikrar_talak = "Y" THEN "Ya" ELSE "Bukan" END) AS ikrar,
+			(CASE
+				WHEN perkara.alur_perkara_id = 16 THEN 998
+				WHEN perkara.tahapan_terakhir_id = 12 THEN 999
+				WHEN (perkara_jadwal_sidang.agenda LIKE "%putusan%" OR perkara_jadwal_sidang.agenda LIKE "%musyawarah%") THEN 800
+				WHEN (perkara_jadwal_sidang.agenda LIKE "%lanjutan%") THEN 997
+				WHEN (
+					perkara_jadwal_sidang.agenda LIKE "%memanggil%"
+					OR perkara_jadwal_sidang.agenda LIKE "%mermanggil%"
+					OR perkara_jadwal_sidang.agenda LIKE "%panggil%"
+				) THEN (CASE WHEN perkara.jenis_perkara_id IN (346, 347)
+				             THEN (CASE WHEN perkara_jadwal_sidang.agenda LIKE "%bukti%" THEN 850 ELSE 900 END)
+				             ELSE 997 END)
+				ELSE 997
+			END) AS tahapan,
+			(CASE WHEN perkara.tahapan_terakhir_id = 12 THEN 3 ELSE 5 END) AS jam,
+			perkara.pihak1_text AS pihak1,
+			perkara.pihak2_text AS pihak2,
+			pihak.nama          AS nama_P,
+			(CASE WHEN pengacara_P.id IS NULL THEN pihak.telepon   ELSE NULL END) AS telepon_P,
+			pihak_T.nama        AS nama_T,
+			(CASE WHEN pengacara_T.id IS NULL THEN pihak_T.telepon ELSE NULL END) AS telepon_T,
+			pengacara_P.nama    AS nama_pengacara_P,
+			pengacara_P.telepon AS telepon_pengacara_P,
+			pengacara_T.nama    AS nama_pengacara_T,
+			pengacara_T.telepon AS telepon_pengacara_T
+		');
+
+        // Only select E.* if prepare_sidang_base actually added the E join
+        // above - selecting an alias that was never joined would throw an
+        // "Unknown column" SQL error rather than degrading gracefully.
+        if ($this->sipandu_available) {
+            $this->database->select('E.nomor_panggil, E.perkiraan_jam');
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Notification queries
+    // -------------------------------------------------------------------------
+
+    public function get_sidang_tomorrow_for_notif()
+    {
+        $this->prepare_sidang_query(date('Y-m-d', strtotime('+1 day')));
+        $rows = $this->database->get()->result();
+        return $rows;
+    }
+
+    public function get_sidang_target_date()
+    {
+        if (is_development()) {
+            return $this->_find_nearest_sidang_date();
+        }
+        return date('Y-m-d');
+    }
+
+    /**
+     * Fetch today's sidang with PP and Hakim NIP for notification dispatch.
+     *
+     * Use prepare_sidang_base (joins only, no SELECT), then declare a
+     * minimal SELECT. PP NIP comes from joining panitera_pn against the pp
+     * subquery alias. Hakim NIP/nama stay as GROUP_CONCAT pipe-strings from the
+     * hk subquery — the controller already splits them with explode('|', ...).
+     */
+    public function get_sidang_for_notif($target_date = null)
+    {
+        if ($target_date === null) {
+            $target_date = $this->get_sidang_target_date();
+        }
+
+        $this->prepare_sidang_base($target_date);
+
+        // Notification dispatch is limited to ruang sidang 10x (kode starting
+        // with "10") - other rooms' sidang still show in the DataTables list
+        // (prepare_sidang_query/list_query), just not in the notif blast.
+        $this->database->like('ruangan_sidang.kode', '10', 'after');
+
+        // Join panitera_pn to resolve pp NIP — valid because pp subquery exposes panitera_id
+        $this->database->join('panitera_pn', 'panitera_pn.id = pp.panitera_id', 'left');
+
+        // Join v_sum_perkara_biaya for sisa_panjar (same pattern as Jadwal_Model)
+        $this->database->join('v_sum_perkara_biaya', 'v_sum_perkara_biaya.perkara_id = perkara.perkara_id', 'left');
+
+        // Join v_perkara for majelis_hakim_text, jenis_perkara_text, pihak texts,
+        // and panitera_pengganti_text (same pattern as Jadwal_Model)
+        $this->database->join('v_perkara', 'v_perkara.perkara_id = perkara.perkara_id', 'left');
+
+        // Join perkara_efiling_id subquery for e-Court / efiling status
+        // (same pattern as Durasi_Putus_Model)
+        $subqueryEfiling = $this->db->select('perkara_id, MIN(efiling_id) AS efiling_id')
+            ->from('perkara_efiling_id')
+            ->group_by('perkara_id')
+            ->get_compiled_select();
+        $this->database->join("($subqueryEfiling) AS pe", 'pe.perkara_id = perkara.perkara_id', 'left');
+
+        $this->database->select('
+			perkara_jadwal_sidang.perkara_id,
+			perkara_jadwal_sidang.urutan,
+			perkara.nomor_perkara,
+			perkara_jadwal_sidang.tanggal_sidang,
+			perkara_jadwal_sidang.agenda,
+			pp.panitera_nama  AS nama_pp,
+			panitera_pn.nip   AS pp_nip,
+			hk.hakim_nama     AS hakim_nama,
+			hk.hakim_nip      AS hakim_nip,
+			CONCAT("[", ruangan_sidang.kode, "] ", ruangan_sidang.nama) AS ruang_sidang,
+			v_perkara.jenis_perkara_text,
+			v_perkara.pihak1_text AS nama_p,
+			v_perkara.pihak2_text AS nama_t,
+			v_perkara.majelis_hakim_text,
+			v_perkara.panitera_pengganti_text,
+			perkara_pihak2.ghaib
+		');
+
+        // Only select E.* if prepare_sidang_base actually added the E join
+        // above (see is_db_sipandu_available() / sipandu_available). Doing
+        // this unconditionally used to succeed only by accident - it would
+        // throw an SQL error the moment db_sipandu became unreachable, since
+        // the join wasn't added defensively before this fix.
+        if ($this->sipandu_available) {
+            $this->database->select('E.nomor_panggil, E.perkiraan_jam');
+        }
+
+        $this->database->select("(v_sum_perkara_biaya.pemasukan - v_sum_perkara_biaya.pengeluaran) AS sisa_panjar", false);
+        $this->database->select('pe.efiling_id');
+        $this->database->select('(CASE WHEN pe.efiling_id IS NOT NULL THEN "Ya" ELSE "Tidak" END) AS ecourt_status');
+        $this->database->select('(CASE WHEN perkara_pihak2.ghaib = 1 THEN "Ya" ELSE "Tidak" END) AS ghaib');
+
+        // NOTE: hakim_nip must be exposed by get_hakim_subquery() as a
+        // GROUP_CONCAT of NIPs separated by "|", matching hakim_nama ordering.
+        // If hakim_nip is not available from the subquery, add it there.
+
+        // Ordered by ruang sidang then jam sidang (not panitera_nama) since
+        // Generate.php's group_rows_for_report() buckets these rows into one
+        // Excel tab per ruang_sidang - this keeps each tab in chronological
+        // order instead of PP-name order. The old order_by('tanggal_sidang')
+        // was a no-op here: prepare_sidang_base already filters this whole
+        // query to a single day, so every row shares the same date.
+        $this->database->order_by('ruangan_sidang.nama', 'ASC');
+        $this->database->order_by('perkara_jadwal_sidang.jam_sidang', 'ASC');
+        $this->database->order_by('perkara_jadwal_sidang.urutan', 'ASC');
+
+        $rows = $this->database->get()->result();
+        return $rows;
+    }
+
+    private function _find_nearest_sidang_date()
+    {
+        $sql = "SELECT tanggal_sidang AS tanggal FROM (
+			SELECT DISTINCT tanggal_sidang FROM perkara_jadwal_sidang
+			WHERE agenda IS NOT NULL
+		) AS combined
+		ORDER BY ABS(DATEDIFF(tanggal_sidang, CURDATE())) ASC
+		LIMIT 1";
+
+        $query = $this->database->query($sql);
+        if (!$query) {
+            return date('Y-m-d');
+        }
+
+        $row = $query->row();
+
+        return isset($row->tanggal) ? $row->tanggal : date('Y-m-d');
+    }
+}

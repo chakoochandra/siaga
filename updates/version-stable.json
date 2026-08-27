@@ -1,11 +1,11 @@
 {
-    "version": "3.26",
-    "released_at": "2026-08-27 11:14:54",
+    "version": "3.27",
+    "released_at": "2026-08-27 11:41:47",
     "min_supported_version": "2.0",
-    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.26.zip",
-    "checksum_sha256": "2d819bc006f9cf1c764b1e6231be22f8b8f1e342f5540c395199e76d702b1d07",
+    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.27.zip",
+    "checksum_sha256": "44a43269ffe038c09dd4d001eae557ee30a3b239818c55013fd703346bc25496",
     "mandatory": true,
-    "changelog": "bug fixing",
+    "changelog": "update logic send jadwal sidang to pihak",
     "excluded_from_overwrite": [
         "updates/",
         "uploads/",
