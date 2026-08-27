@@ -20,6 +20,7 @@
 				data: function(d) {
 					d.type_filter = $(`.dropdown-type-${theTime} select`).val();
 					d.sent_time_range = $('.daterange_wa_log input.form-control').val();
+					d.success_filter = $(`.dropdown-success-${theTime} select`).val();
 					d[localStorage.getItem('csrfName')] = localStorage.getItem('csrfToken');
 				}
 			},
@@ -47,7 +48,21 @@
 									<?php endforeach; ?>
 								},
 							},
-						}],
+						},
+						{
+							extend: 'dropdown',
+							config: {
+								id: 'dropdown-success-' + theTime,
+								class: 'dropdown-success-' + theTime,
+								placeholder: 'Status Pengiriman',
+								options: {
+									'': 'Semua Status',
+									'1': 'Berhasil',
+									'0': 'Gagal'
+								},
+							},
+						},
+					],
 				}
 			},
 			columns: [{

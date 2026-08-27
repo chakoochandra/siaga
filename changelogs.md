@@ -1,6 +1,6 @@
 ### Update logs:
 
-#### Version 3.24 (27/08/2026)
+#### Version 3.26 (27/08/2026)
 - FIX bugs
 
 #### Version 3.21 (19/08/2026)
