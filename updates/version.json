@@ -1,9 +1,9 @@
 {
     "version": "3.29",
-    "released_at": "2026-08-28 09:17:49",
+    "released_at": "2026-08-28 09:19:13",
     "min_supported_version": "2.0",
     "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.29.zip",
-    "checksum_sha256": "d566fb7d25fd2559888c8b188408e8d660c1b15fac47afb1b8be7c4d245c219e",
+    "checksum_sha256": "100d778e4236d9940702d8175c83a470bb1a2684416c8981a9a7688a6bd665f7",
     "mandatory": true,
     "changelog": "testing",
     "excluded_from_overwrite": [
