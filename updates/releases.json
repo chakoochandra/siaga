@@ -1,10 +1,10 @@
 [
     {
-        "version": "3.35",
-        "released_at": "2026-08-28 13:48:53",
+        "version": "3.36",
+        "released_at": "2026-08-28 23:43:38",
         "min_supported_version": "2.0",
-        "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.35.zip",
-        "checksum_sha256": "ee93753ae24cf010388613ed08d5c670486e9e1616c87fbdd963c142a8eb8f04",
+        "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.36.zip",
+        "checksum_sha256": "9e826bea3800acf0b4366476d11b76a706e9e4e451f76b0eed79ac9770b6f479",
         "mandatory": true,
         "changelog": "fix presensi reminder notification for friday",
         "excluded_from_overwrite": [

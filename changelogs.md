@@ -1,7 +1,7 @@
 ### Update logs:
 
-#### Version 3.35 (28/08/2026)
-- FIX bugs
+#### Version 3.36 (28/08/2026)
+- UPDATE notifikasi mediasi
 
 #### Version 3.21 (19/08/2026)
 - NEW! Menu monitoring tunggakan perkara
