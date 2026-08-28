@@ -5,16 +5,16 @@
 				<h5 class="m-0"><?php echo $title ?></h5>
 			</div>
 			<div class="card-body">
-<div class="callout callout-info m-4 mt-3">
-	<h6>Informasi</h6>
-	<ul>
-		<li>Klik kolom <code>Nama</code>, <code>URL</code>, <code>Urutan</code>, <code>Kategori</code>, <code>Status</code>, atau <code>Tampilkan Online</code> untuk mengubah data.</li>
-	</ul>
-</div>
+				<div class="callout callout-info m-4 mt-3">
+					<h6>Informasi</h6>
+					<ul>
+						<li>Klik kolom <code>Nama</code>, <code>URL</code>, <code>Urutan</code>, <code>Kategori</code>, <code>Status</code>, atau <code>Tampilkan Online</code> untuk mengubah data.</li>
+					</ul>
+				</div>
 
-<div class="table-responsive">
-	<table id="table-web" class="display table-striped table-hover"></table>
-</div>
+				<div class="table-responsive">
+					<table id="table-web" class="display table-striped table-hover"></table>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -25,6 +25,7 @@
 		const theTime = '<?php echo time() ?>';
 		initDataTable("#table-web", {
 			title: "<?php echo $title ?>",
+			ordering: true,
 			ajax: {
 				url: "<?php echo base_url('settings/web/get_list') ?>",
 				data: function(d) {
@@ -77,15 +78,15 @@
 								0: 'Tidak',
 							},
 						},
-					}, {
+					}]
+				},
+				topEnd: {
+					buttons: [{
 						extend: 'customButton',
 						text: '<span class="fas fa-plus" aria-hidden="true"></span> Tambah Web',
 						url: '<?php echo base_url('settings/web/save') ?>',
 						className: 'btn btn-sm btn-outline-success btn-modal',
 					}]
-				},
-				topEnd: {
-					buttons: []
 				}
 			},
 			ajaxCellInput: [{
@@ -189,26 +190,32 @@
 				{
 					data: "name",
 					title: "Nama",
+					type: "string-empty-last",
 				},
 				{
 					data: "url",
 					title: "URL",
+					type: "string-empty-last",
 				},
 				{
 					data: "order",
 					title: "Urutan",
 					className: "dt-center",
+					type: "numeric-empty-last",
 				},
 				{
 					data: "category",
 					title: "Kategori",
 					className: "dt-center",
+					type: "string-empty-last",
 				},
 				{
 					data: "is_active",
 					title: "Status",
 					className: "dt-center",
-					render: function(data) {
+					render: function(data, type) {
+						const label = data == 1 ? 'Aktif' : 'Tidak Aktif';
+						if (type !== 'display') return label;
 						return data == 1 ? '<span class="badge bg-success">Aktif</span>' : '<span class="badge bg-danger">Tidak Aktif</span>';
 					}
 				},
@@ -216,7 +223,9 @@
 					data: "show_online",
 					title: "Tampilkan Online",
 					className: "dt-center",
-					render: function(data) {
+					render: function(data, type) {
+						const label = data == 1 ? 'Ya' : 'Tidak';
+						if (type !== 'display') return label;
 						return data == 1 ? '<span class="badge bg-success">Ya</span>' : '<span class="badge bg-secondary">Tidak</span>';
 					}
 				},

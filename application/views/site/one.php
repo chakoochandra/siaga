@@ -333,20 +333,6 @@
 		text-overflow: ellipsis;
 	}
 
-	@font-face {
-		font-family: 'Saved By Zero';
-		src: url('<?php echo asset_url('assets/fonts/SavedByZero.woff') ?>') format('woff');
-		font-weight: 400;
-		font-style: normal;
-		font-display: swap;
-	}
-
-	#box-logo .brand-link .font-saved-by-zero {
-		font-family: 'Saved By Zero', sans-serif;
-		white-space: nowrap;
-		color: #084a3d !important;
-	}
-
 	.fixed-bottom-right {
 		position: fixed;
 		bottom: 50px;

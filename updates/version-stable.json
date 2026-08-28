@@ -1,11 +1,11 @@
 {
     "version": "3.29",
-    "released_at": "2026-08-27 16:25:03",
+    "released_at": "2026-08-28 09:17:49",
     "min_supported_version": "2.0",
     "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.29.zip",
-    "checksum_sha256": "bb873c67d5c673ab37bd00e51b38c9e035bd65556ab9b90cacf1de2cf100ec72",
+    "checksum_sha256": "d566fb7d25fd2559888c8b188408e8d660c1b15fac47afb1b8be7c4d245c219e",
     "mandatory": true,
-    "changelog": "send notif only for sidang kode ruang 10x",
+    "changelog": "testing",
     "excluded_from_overwrite": [
         "updates/",
         "uploads/",
