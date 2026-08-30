@@ -1,11 +1,11 @@
 {
-    "version": "3.37",
-    "released_at": "2026-08-30 13:23:01",
+    "version": "3.38",
+    "released_at": "2026-08-31 06:59:27",
     "min_supported_version": "2.0",
-    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.37.zip",
-    "checksum_sha256": "0c2550963d89e8ff904d5319c0f16b84c0af5cd9be8d6cf6030ac1155c06ba0f",
+    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.38.zip",
+    "checksum_sha256": "f086f111069f203743cf204bd331289b4c95dc2c8c497fd81202b05824362044",
     "mandatory": true,
-    "changelog": "update dashboard layout",
+    "changelog": "update sikep url",
     "excluded_from_overwrite": [
         "updates/",
         "uploads/",
