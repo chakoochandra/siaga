@@ -1,15 +1,11 @@
 <style>
 	/* Modern Card Styling - Scoped to app boxes */
-	#box-apps .card,
-	#box-recommendation .card,
-	#box-result .card {
+	#box-apps .card {
 		cursor: pointer;
 		transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 	}
 
-	#box-apps .card::before,
-	#box-recommendation .card::before,
-	#box-result .card::before {
+	#box-apps .card::before {
 		content: '';
 		position: absolute;
 		inset: 0;
@@ -18,24 +14,18 @@
 		transition: opacity 0.3s;
 	}
 
-	#box-apps .card:hover,
-	#box-recommendation .card:hover,
-	#box-result .card:hover {
+	#box-apps .card:hover {
 		transform: translateY(-3px);
 		border-color: var(--card-accent, var(--bs-purple));
 		box-shadow: 0 8px 32px var(--card-shadow, rgba(99, 179, 237, 0.12)), 0 0 0 1px var(--card-accent, var(--bs-purple));
 	}
 
-	#box-apps .card:hover::before,
-	#box-recommendation .card:hover::before,
-	#box-result .card:hover::before {
+	#box-apps .card:hover::before {
 		opacity: 1;
 	}
 
 	/* Card accent bar */
-	#box-apps .card .card-bar,
-	#box-recommendation .card .card-bar,
-	#box-result .card .card-bar {
+	#box-apps .card .card-bar {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -46,16 +36,12 @@
 		transition: opacity 0.25s;
 	}
 
-	#box-apps .card:hover .card-bar,
-	#box-recommendation .card:hover .card-bar,
-	#box-result .card:hover .card-bar {
+	#box-apps .card:hover .card-bar {
 		opacity: 1;
 	}
 
 	/* Status dot */
-	#box-apps .card .dot,
-	#box-recommendation .card .dot,
-	#box-result .card .dot {
+	#box-apps .card .dot {
 		position: absolute;
 		top: 14px;
 		right: 14px;
@@ -80,9 +66,7 @@
 	}
 
 	/* Card icon */
-	#box-apps .card .card-icon,
-	#box-recommendation .card .card-icon,
-	#box-result .card .card-icon {
+	#box-apps .card .card-icon {
 		width: 44px;
 		height: 44px;
 		background: var(--card-icon-bg, rgba(99, 179, 237, 0.1));
@@ -91,24 +75,18 @@
 		z-index: 3;
 	}
 
-	#box-apps .card .card-icon i,
-	#box-recommendation .card .card-icon i,
-	#box-result .card .card-icon i {
+	#box-apps .card .card-icon i {
 		font-size: 20px;
 		line-height: 1;
 		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	#box-apps .card .card-icon img,
-	#box-recommendation .card .card-icon img,
-	#box-result .card .card-icon img {
+	#box-apps .card .card-icon img {
 		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	/* Large background icon/image on hover */
-	#box-apps .card .card-bg-icon,
-	#box-recommendation .card .card-bg-icon,
-	#box-result .card .card-bg-icon {
+	#box-apps .card .card-bg-icon {
 		position: absolute;
 		inset: 0;
 		z-index: 1;
@@ -117,16 +95,12 @@
 		transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	#box-apps .card:hover .card-bg-icon,
-	#box-recommendation .card:hover .card-bg-icon,
-	#box-result .card:hover .card-bg-icon {
+	#box-apps .card:hover .card-bg-icon {
 		opacity: 0.9;
 	}
 
 	/* FontAwesome background icon */
-	#box-apps .card .card-bg-icon i,
-	#box-recommendation .card .card-bg-icon i,
-	#box-result .card .card-bg-icon i {
+	#box-apps .card .card-bg-icon i {
 		font-size: 180px;
 		color: var(--card-accent, var(--bs-purple));
 		opacity: 1;
@@ -134,33 +108,25 @@
 		transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	#box-apps .card:hover .card-bg-icon i,
-	#box-recommendation .card:hover .card-bg-icon i,
-	#box-result .card:hover .card-bg-icon i {
+	#box-apps .card:hover .card-bg-icon i {
 		transform: scale(1) rotate(-20deg);
 		opacity: 1;
 	}
 
 	/* Image background */
-	#box-apps .card .card-bg-icon img,
-	#box-recommendation .card .card-bg-icon img,
-	#box-result .card .card-bg-icon img {
+	#box-apps .card .card-bg-icon img {
 		opacity: 1;
 		transform: scale(1);
 		transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	#box-apps .card:hover .card-bg-icon img,
-	#box-recommendation .card:hover .card-bg-icon img,
-	#box-result .card:hover .card-bg-icon img {
+	#box-apps .card:hover .card-bg-icon img {
 		opacity: 1;
 		transform: scale(1);
 	}
 
 	/* Circular glow effect */
-	#box-apps .card::after,
-	#box-recommendation .card::after,
-	#box-result .card::after {
+	#box-apps .card::after {
 		content: '';
 		position: absolute;
 		top: 50%;
@@ -174,33 +140,25 @@
 		z-index: 2;
 	}
 
-	#box-apps .card:hover::after,
-	#box-recommendation .card:hover::after,
-	#box-result .card:hover::after {
+	#box-apps .card:hover::after {
 		width: 350px;
 		height: 350px;
 		opacity: 0.2;
 		transform: translate(-50%, -50%) scale(1);
 	}
 
-	#box-apps .card:hover .card-icon,
-	#box-recommendation .card:hover .card-icon,
-	#box-result .card:hover .card-icon {
+	#box-apps .card:hover .card-icon {
 		transform: scale(1.15) rotate(-5deg);
 		background: var(--card-accent, var(--bs-purple));
 		color: #fff;
 	}
 
-	#box-apps .card:hover .card-icon i,
-	#box-recommendation .card:hover .card-icon i,
-	#box-result .card:hover .card-icon i {
+	#box-apps .card:hover .card-icon i {
 		font-size: 24px;
 	}
 
 	/* Card content */
-	#box-apps .card .card-desc,
-	#box-recommendation .card .card-desc,
-	#box-result .card .card-desc {
+	#box-apps .card .card-desc {
 		font-size: 15px;
 	}
 
@@ -209,101 +167,90 @@
 		display: inline-block;
 		align-self: flex-start;
 		width: fit-content;
-		font-size: 12px;
+		font-size: 11px;
 		font-family: 'DM Mono', monospace;
 		text-transform: uppercase;
-		letter-spacing: 0.4px;
+		letter-spacing: 0.5px;
 		font-weight: 700;
 		line-height: 1.4;
-		padding: 3px 9px;
+		padding: 3px 10px;
 		border-radius: 999px;
-		background: var(--card-icon-bg, rgba(99, 179, 237, 0.1));
+		background: var(--card-icon-bg, rgba(99, 179, 237, 0.15));
 		color: var(--card-accent, var(--bs-purple));
+		border: 1px solid var(--card-accent, var(--bs-purple));
+		transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+	}
+
+	#box-apps .card:hover .card-category-badge {
+		background: var(--card-accent, var(--bs-purple));
+		color: #fff;
+		box-shadow: 0 2px 10px var(--card-shadow, rgba(99, 179, 237, 0.35));
+		transform: translateY(-1px);
 	}
 
 	/* Color variants */
-	#box-apps .card.c-blue,
-	#box-recommendation .card.c-blue,
-	#box-result .card.c-blue {
+	#box-apps .card.c-blue {
 		--card-accent: #63b3ed;
 		--card-icon-bg: rgba(99, 179, 237, 0.1);
 		--card-glow: rgba(99, 179, 237, 0.08);
 		--card-shadow: rgba(99, 179, 237, 0.15);
 	}
 
-	#box-apps .card.c-green,
-	#box-recommendation .card.c-green,
-	#box-result .card.c-green {
+	#box-apps .card.c-green {
 		--card-accent: #68d391;
 		--card-icon-bg: rgba(104, 211, 145, 0.1);
 		--card-glow: rgba(104, 211, 145, 0.08);
 		--card-shadow: rgba(104, 211, 145, 0.15);
 	}
 
-	#box-apps .card.c-amber,
-	#box-recommendation .card.c-amber,
-	#box-result .card.c-amber {
+	#box-apps .card.c-amber {
 		--card-accent: #f6ad55;
 		--card-icon-bg: rgba(246, 173, 85, 0.1);
 		--card-glow: rgba(246, 173, 85, 0.08);
 		--card-shadow: rgba(246, 173, 85, 0.15);
 	}
 
-	#box-apps .card.c-red,
-	#box-recommendation .card.c-red,
-	#box-result .card.c-red {
+	#box-apps .card.c-red {
 		--card-accent: #fc8181;
 		--card-icon-bg: rgba(252, 129, 129, 0.1);
 		--card-glow: rgba(252, 129, 129, 0.08);
 		--card-shadow: rgba(252, 129, 129, 0.15);
 	}
 
-	#box-apps .card.c-purple,
-	#box-recommendation .card.c-purple,
-	#box-result .card.c-purple {
+	#box-apps .card.c-purple {
 		--card-accent: #b794f4;
 		--card-icon-bg: rgba(183, 148, 244, 0.1);
 		--card-glow: rgba(183, 148, 244, 0.08);
 		--card-shadow: rgba(183, 148, 244, 0.15);
 	}
 
-	#box-apps .card.c-pink,
-	#box-recommendation .card.c-pink,
-	#box-result .card.c-pink {
+	#box-apps .card.c-pink {
 		--card-accent: #f687b3;
 		--card-icon-bg: rgba(246, 135, 179, 0.1);
 		--card-glow: rgba(246, 135, 179, 0.08);
 		--card-shadow: rgba(246, 135, 179, 0.15);
 	}
 
-	#box-apps .card.c-teal,
-	#box-recommendation .card.c-teal,
-	#box-result .card.c-teal {
+	#box-apps .card.c-teal {
 		--card-accent: #4fd1c5;
 		--card-icon-bg: rgba(79, 209, 197, 0.1);
 		--card-glow: rgba(79, 209, 197, 0.08);
 		--card-shadow: rgba(79, 209, 197, 0.15);
 	}
 
-	#box-apps .card.c-orange,
-	#box-recommendation .card.c-orange,
-	#box-result .card.c-orange {
+	#box-apps .card.c-orange {
 		--card-accent: #f6ad55;
 		--card-icon-bg: rgba(246, 173, 85, 0.1);
 		--card-glow: rgba(246, 173, 85, 0.08);
 		--card-shadow: rgba(246, 173, 85, 0.15);
 	}
 
-	#box-apps .my-apps .col,
-	#box-recommendation .my-apps .col,
-	#box-result .my-apps .col {
+	#box-apps .my-apps .col {
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 		transition: box-shadow 0.25s ease, transform 0.25s ease;
 	}
 
-	#box-apps .my-apps .col:hover,
-	#box-recommendation .my-apps .col:hover,
-	#box-result .my-apps .col:hover {
+	#box-apps .my-apps .col:hover {
 		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
 	}
 
@@ -378,52 +325,34 @@
 
 	/* z-index: foreground content above bg layer */
 	#box-apps .card .card-bar,
-	#box-recommendation .card .card-bar,
-	#box-result .card .card-bar,
 	#box-apps .card .dot,
-	#box-recommendation .card .dot,
-	#box-result .card .dot,
 	#box-apps .card .card-icon,
-	#box-recommendation .card .card-icon,
-	#box-result .card .card-icon,
-	#box-apps .card .card-content,
-	#box-recommendation .card .card-content,
-	#box-result .card .card-content {
+	#box-apps .card .card-content {
 		position: relative;
 		z-index: 3;
 	}
 
 	/* More visible bg image */
-	#box-apps .card .card-bg-icon img,
-	#box-recommendation .card .card-bg-icon img,
-	#box-result .card .card-bg-icon img {
-		opacity: 0.95 !important;
+	#box-apps .card .card-bg-icon img {
+		opacity: 0.15 !important;
 		filter: blur(0.5px) saturate(0.7);
 	}
 
-	#box-apps .card:hover .card-bg-icon img,
-	#box-recommendation .card:hover .card-bg-icon img,
-	#box-result .card:hover .card-bg-icon img {
+	#box-apps .card:hover .card-bg-icon img {
 		opacity: 0.6 !important;
 	}
 
 	/* Dim bg FA icon */
-	#box-apps .card .card-bg-icon i,
-	#box-recommendation .card .card-bg-icon i,
-	#box-result .card .card-bg-icon i {
+	#box-apps .card .card-bg-icon i {
 		opacity: 0.08 !important;
 	}
 
-	#box-apps .card:hover .card-bg-icon i,
-	#box-recommendation .card:hover .card-bg-icon i,
-	#box-result .card:hover .card-bg-icon i {
+	#box-apps .card:hover .card-bg-icon i {
 		opacity: 0.12 !important;
 	}
 
 	/* Stronger scrim to keep text readable despite more visible image */
-	#box-apps .card .card-bg-icon::after,
-	#box-recommendation .card .card-bg-icon::after,
-	#box-result .card .card-bg-icon::after {
+	#box-apps .card .card-bg-icon::after {
 		content: '';
 		position: absolute;
 		inset: 0;
@@ -433,31 +362,29 @@
 	}
 
 	/* Text contrast */
-	#box-apps .card .card-title,
-	#box-recommendation .card .card-title,
-	#box-result .card .card-title {
+	#box-apps .card .card-title {
 		color: var(--bs-body-color);
-		text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5), 0 0 2px rgba(0, 0, 0, 0.3);
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5), 0 0 1px rgba(0, 0, 0, 0.1);
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
-	#box-apps .card .card-desc,
-	#box-recommendation .card .card-desc,
-	#box-result .card .card-desc {
+	/* #box-apps .card .card-desc {
 		text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-	}
+	} */
 
 	/* ===== Linktr.ee-style app cards on mobile ===== */
 	@media (max-width: 575.98px) {
 
-		#box-apps .my-apps,
-		#box-recommendation .my-apps,
-		#box-result .my-apps {
+		#box-apps .my-apps {
 			row-gap: 0.85rem !important;
 		}
 
-		#box-apps .card,
-		#box-recommendation .card,
-		#box-result .card {
+		#box-apps .card {
 			flex-direction: row !important;
 			align-items: center !important;
 			gap: 0.85rem !important;
@@ -468,30 +395,28 @@
 			border-color: transparent !important;
 		}
 
-		#box-apps .card:hover,
-		#box-recommendation .card:hover,
-		#box-result .card:hover {
+		#box-apps .card:hover {
 			transform: none !important;
 			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 0 0 1px var(--card-accent, var(--bs-purple)) !important;
 		}
 
-		/* drop the decorative big bg icon, accent bar and status dot */
-		#box-apps .card .card-bg-icon,
-		#box-recommendation .card .card-bg-icon,
-		#box-result .card .card-bg-icon,
+		/* drop the accent bar and status dot, but keep the transparent bg icon */
 		#box-apps .card .card-bar,
-		#box-recommendation .card .card-bar,
-		#box-result .card .card-bar,
-		#box-apps .card .dot,
-		#box-recommendation .card .dot,
-		#box-result .card .dot {
+		#box-apps .card .dot {
 			display: none !important;
 		}
 
+		/* scale the decorative bg icon/image down so it fits the compact row card */
+		#box-apps .card .card-bg-icon {
+			display: flex !important;
+		}
+
+		#box-apps .card .card-bg-icon i {
+			font-size: 70px !important;
+		}
+
 		/* small round icon on the left, like a linktr.ee avatar */
-		#box-apps .card .card-icon,
-		#box-recommendation .card .card-icon,
-		#box-result .card .card-icon {
+		#box-apps .card .card-icon {
 			width: 50px !important;
 			height: 50px !important;
 			border-radius: 50% !important;
@@ -500,35 +425,32 @@
 			overflow: hidden !important;
 		}
 
-		#box-apps .card .card-icon i,
-		#box-recommendation .card .card-icon i,
-		#box-result .card .card-icon i {
+		#box-apps .card .card-icon i {
 			font-size: 17px !important;
 		}
 
-		/* centered single-line title, description hidden for a clean link-button look */
-		#box-apps .card .card-content,
-		#box-recommendation .card .card-content,
-		#box-result .card .card-content {
+		/* centered single-line title + truncated description, clean link-button look */
+		#box-apps .card .card-content {
 			flex: 1 1 auto !important;
-			text-align: center !important;
-			gap: 0 !important;
+			/* text-align: center !important; */
+			gap: 0.15rem !important;
 			min-width: 0;
 		}
 
-		#box-apps .card .card-title,
-		#box-recommendation .card .card-title,
-		#box-result .card .card-title {
+		#box-apps .card .card-title {
 			font-size: 0.95rem !important;
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
 		}
 
-		#box-apps .card .card-desc,
-		#box-recommendation .card .card-desc,
-		#box-result .card .card-desc {
-			display: none !important;
+		#box-apps .card .card-desc {
+			font-size: 0.75rem !important;
+			line-height: 1.2 !important;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			opacity: 0.7;
 		}
 	}
 </style>
@@ -543,7 +465,7 @@ $appLogo = is_local_ip() ? asset_url('assets/images/joss.png') : asset_url('asse
 
 <section>
 	<div class="card-body py-0">
-		<div class="d-flex justify-content-center mx-auto p-4">
+		<div class="d-flex justify-content-center col-lg-7 col-md-8 mx-auto p-4">
 			<div id="box-logo-login" class="row row-cols-1 <?php if ($this->ion_auth->logged_in() && is_local_ip()): ?>row-cols-sm-1 <?php else: ?> row-cols-sm-2<?php endif; ?> justify-content-center g-3 mt-2 w-100">
 				<div id="box-logo" class="col<?php if ($this->ion_auth->logged_in() && is_local_ip()): ?> col-sm-8<?php endif; ?> d-flex flex-column align-items-center justify-content-center mt-4 text-center">
 					<div>
@@ -564,18 +486,18 @@ $appLogo = is_local_ip() ? asset_url('assets/images/joss.png') : asset_url('asse
 							<?php if ($category == 'Socmed') : ?>
 								<?php foreach ($socmed as $s) : ?>
 									<?php if ($s[2]) : ?>
-										<a href="<?php echo $s[1] ?>" rel="noopener noreferrer"><img src="<?php echo $s[2] ?>" loading="lazy" class="transform-scale" alt="<?php echo $s[0] ?>" width="<?php echo $s[3] ?: 30 ?>" height="<?php echo $s[4] ?: 30 ?>"></a>
+										<a href="<?php echo $s[1] ?>" target="_blank" rel="noopener noreferrer"><img src="<?php echo $s[2] ?>" loading="lazy" class="transform-scale" alt="<?php echo $s[0] ?>" width="<?php echo $s[3] ?: 30 ?>" height="<?php echo $s[4] ?: 30 ?>"></a>
 									<?php else : ?>
-										<a href="<?php echo $s[1] ?>" rel="noopener noreferrer"><?php echo $s[0] ?></a>
+										<a href="<?php echo $s[1] ?>" target="_blank" rel="noopener noreferrer"><?php echo $s[0] ?></a>
 									<?php endif ?>
 								<?php endforeach ?>
 							<?php endif ?>
 						<?php endforeach ?>
 					</div>
 				</div>
-				<!-- <php if (!$this->ion_auth->logged_in() && is_local_ip()): ?>
-					<php $this->load->view('site/_login_form') ?>
-				<php endif ?> -->
+				<?php if (!$this->ion_auth->logged_in() && is_local_ip()): ?>
+					<?php $this->load->view('site/_login_form') ?>
+				<?php endif ?>
 			</div>
 		</div>
 
@@ -600,10 +522,6 @@ $appLogo = is_local_ip() ? asset_url('assets/images/joss.png') : asset_url('asse
 	</div>
 
 	<div class="card-body album pt-0">
-		<div id="box-result" class="collapse"></div>
-
-		<div id="box-recommendation" class="collapse"></div>
-
 		<div id="box-apps" class="collapse"></div>
 	</div>
 </section>
@@ -626,7 +544,6 @@ $appLogo = is_local_ip() ? asset_url('assets/images/joss.png') : asset_url('asse
 	}
 
 	var numOfRecommendation = 4;
-	var allApps = [];
 
 	function sortFunction(a, b) {
 		if (a[4] === b[4]) {
@@ -702,66 +619,20 @@ $appLogo = is_local_ip() ? asset_url('assets/images/joss.png') : asset_url('asse
 		}
 	}
 
-	function showApps(target, data, category, count = null, isReset = false) {
-		if (isReset) {
-			$(target).html('');
-		}
-
-		var elId = category.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
-
-		$(target).append('<div id="' + elId + '" class="leaves border my-1 p-3"></div>');
-		$(target).find('#' + elId).append('<span class="category h4">' + category + '</span>');
-		$(target).find('#' + elId).append('<div class="my-apps row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 mt-2"></div>');
-
-		if (data.length > 0) {
-			$.each(count ? data.slice(0, count) : data, function(index, value) {
-				// Only add to allApps from regular category rendering (not from Rekomendasi/Hasil Pencarian)
-				if (!['Rekomendasi', 'Hasil Pencarian'].includes(category)) {
-					allApps.push(value);
-				}
-
-				var iconData = getIconHTML(value[2], value[0]);
-
-				$(target).find('#' + elId).find('.my-apps').append(
-					'<div class="col mt-0">' +
-					' <a href="' + value[1] + '" target="_blank" style="text-decoration:none;color:inherit;">' +
-					'   <div class="card position-relative overflow-hidden border rounded-4 p-3 h-100 d-flex flex-column gap-3 ' + getColorClass(value[0]) + '">' +
-					'     <div class="card-bar rounded-top-4"></div>' +
-					(value[4] ? '     <div class="dot rounded-circle"></div>' : '') +
-					'     <div class="card-bg-icon d-flex align-items-center justify-content-center overflow-hidden">' + iconData.bgHtml + '</div>' +
-					'     <div class="card-icon d-flex align-items-center justify-content-center flex-shrink-0 rounded-3 position-relative">' + iconData.bgHtml + '</div>' +
-					'     <div class="card-content flex-fill d-flex flex-column gap-2">' +
-					'       <div class="card-title fs-5 fw-semibold lh-sm text-start">' + value[0] + '</div>' +
-					(value[5] ? '       <div class="card-desc lh-base">' + value[5] + '</div>' : '') +
-					'     </div>' +
-					'   </div>' +
-					' </a>' +
-					'</div>'
-				);
-			});
-		} else {
-			$(target).find('#' + elId).find('.my-apps').append('<span class="text-muted m-0"><i class="fa-solid fa-magnifying-glass text-danger" aria-hidden="true"></i> Web tidak ditemukan</span>');
-		}
-
-		$(target).show();
-	}
-
 	function showFlatApps(target, items) {
 		$(target).html('');
 		$(target).append('<div id="all-apps" class="leaves border my-1 p-3"></div>');
-		$(target).find('#all-apps').append('<div class="my-apps row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 mt-2"></div>');
+		$(target).find('#all-apps').append('<div class="my-apps row row-cols-1 row-cols-sm-2 row-cols-md-4 gx-3 gy-0 gy-md-3 mt-2"></div>');
 
 		if (items.length > 0) {
 			$.each(items, function(index, entry) {
 				var value = entry.value;
 				var category = entry.category;
 
-				allApps.push(value);
-
 				var iconData = getIconHTML(value[2], value[0]);
 
 				$(target).find('#all-apps').find('.my-apps').append(
-					'<div class="col mt-0">' +
+					'<div class="col">' +
 					' <a href="' + value[1] + '" target="_blank" style="text-decoration:none;color:inherit;">' +
 					'   <div class="card position-relative overflow-hidden border rounded-4 p-3 h-100 d-flex flex-column gap-3 ' + getColorClass(value[0]) + '">' +
 					'     <div class="card-bar rounded-top-4"></div>' +
@@ -770,7 +641,7 @@ $appLogo = is_local_ip() ? asset_url('assets/images/joss.png') : asset_url('asse
 					'     <div class="card-icon d-flex align-items-center justify-content-center flex-shrink-0 rounded-3 position-relative">' + iconData.bgHtml + '</div>' +
 					'     <div class="card-content flex-fill d-flex flex-column gap-2">' +
 					'       <div class="card-title fs-5 fw-semibold lh-sm text-start">' + value[0] + '</div>' +
-					'       <span class="card-category-badge">' + category + '</span>' +
+					(category ? '       <span class="card-category-badge">' + category + '</span>' : '') +
 					(value[5] ? '       <div class="card-desc lh-base">' + value[5] + '</div>' : '') +
 					'     </div>' +
 					'   </div>' +
@@ -785,64 +656,114 @@ $appLogo = is_local_ip() ? asset_url('assets/images/joss.png') : asset_url('asse
 		$(target).show();
 	}
 
-	function getUniqueApps(arr) {
+	function getUniqueEntries(entries) {
 		var uniques = [];
 		var itemsFound = {};
-		for (var i = 0, l = arr.length; i < l; i++) {
-			var temp = [arr[i][0], arr[i][1], arr[i][2]];
-			var stringified = JSON.stringify(temp);
+		for (var i = 0, l = entries.length; i < l; i++) {
+			var value = entries[i].value;
+			var stringified = JSON.stringify([value[0], value[1], value[2]]);
 			if (itemsFound[stringified]) {
 				continue;
 			}
-			uniques.push(arr[i]);
+			uniques.push(entries[i]);
 			itemsFound[stringified] = true;
 		}
 		return uniques;
 	}
 
 	var mycookie;
-	if (!(mycookie = localStorage.getItem('joss-favs1'))) {
+	if (!(mycookie = localStorage.getItem('joss-favs3'))) {
 		var my_recommendation = [];
-		localStorage.setItem('joss-favs1', JSON.stringify(my_recommendation));
+		localStorage.setItem('joss-favs3', JSON.stringify(my_recommendation));
 	} else {
 		var my_recommendation = JSON.parse(mycookie);
 	}
 
-	// Populate recommendations
-	var classes = <?php echo json_encode($classes) ?>;
-	if (my_recommendation.length > 0)
-		showApps('#box-recommendation', my_recommendation, 'Rekomendasi', numOfRecommendation);
+	var appsFlatData = <?php echo json_encode($appsFlat) ?>;
+	var allAppsData = <?php echo json_encode($apps) ?>;
 
-	// Populate all apps — merged into a single flat grid, in the exact global order
-	// (order nulls-last, then name) returned by the backend — category no longer affects sort order.
-	// Each card still carries its own category as a badge. 'Menu' category is skipped so it doesn't show in box-apps
-	var mergedAppsList = [];
-	$.each(<?php echo json_encode($appsFlat) ?>, function(index, value) {
-		var category = value[3];
-
-		if (category == 'Lokal') {
-			if (!is_local_ip) {
-				return;
-			}
-		} else if (category == 'Socmed' || category == 'Menu') {
-			return;
-		}
-
-		mergedAppsList.push({
-			value: value,
-			category: category
+	// Real category per app URL, so recommended/matched cards keep their
+	// actual category badge instead of a generic "Rekomendasi"/"Hasil Pencarian" one.
+	var categoryByUrl = {};
+	$.each(allAppsData, function(category, items) {
+		$.each(items, function(index, value) {
+			if (!(value[1] in categoryByUrl)) categoryByUrl[value[1]] = category;
 		});
 	});
-	showFlatApps('#box-apps', mergedAppsList);
 
-	// Add 'Menu' apps directly to allApps (once) so they appear in search results
-	// but are NOT rendered in box-apps
-	var allAppsData = <?php echo json_encode($apps) ?>;
+	// Apps that live only under the 'Menu' category: not shown in the main
+	// grid by default, but still searchable.
+	var menuEntries = [];
 	if (allAppsData['Menu']) {
 		$.each(allAppsData['Menu'], function(index, value) {
-			allApps.push(value);
+			menuEntries.push({
+				value: value,
+				category: 'Menu'
+			});
 		});
 	}
+
+	// Builds the entries to render in #box-apps.
+	// - No keyword: recommended apps first (capped at numOfRecommendation),
+	//   followed by the rest of the catalog, each with its real category badge.
+	// - With keyword: matching recommended apps first, then other matches
+	//   (including 'Menu'-only apps), same box, same badges.
+	function buildAppEntries(keyword) {
+		var recommendedUrls = {};
+		var recommendedEntries = [];
+		my_recommendation.forEach(function(item) {
+			recommendedUrls[item[1]] = true;
+			recommendedEntries.push({
+				value: item,
+				category: categoryByUrl[item[1]] || ''
+			});
+		});
+
+		var remainingEntries = [];
+		$.each(appsFlatData, function(index, value) {
+			var category = value[3];
+
+			if (category == 'Lokal') {
+				if (!is_local_ip) {
+					return;
+				}
+			} else if (category == 'Socmed' || category == 'Menu') {
+				return;
+			}
+			if (recommendedUrls[value[1]]) return;
+
+			remainingEntries.push({
+				value: value,
+				category: category
+			});
+		});
+
+		if (!keyword) {
+			return recommendedEntries.slice(0, numOfRecommendation).concat(remainingEntries);
+		}
+
+		var kw = keyword.toLowerCase();
+
+		function matches(entry) {
+			var name = (entry.value[0] || '').toLowerCase();
+			var url = (entry.value[1] || '').toLowerCase();
+			var category = (entry.category || '').toLowerCase();
+			var desc = (entry.value[5] || '').toLowerCase();
+			return name.includes(kw) || url.includes(kw) || category.includes(kw) || desc.includes(kw);
+		}
+
+		var searchableMenu = menuEntries.filter(function(entry) {
+			return !recommendedUrls[entry.value[1]];
+		});
+
+		return getUniqueEntries(
+			recommendedEntries.filter(matches)
+			.concat(remainingEntries.filter(matches))
+			.concat(searchableMenu.filter(matches))
+		);
+	}
+
+	showFlatApps('#box-apps', buildAppEntries(''));
 
 	// Logic on card click
 	$('body').on('click', '.card', function(e) {
@@ -875,35 +796,23 @@ $appLogo = is_local_ip() ? asset_url('assets/images/joss.png') : asset_url('asse
 			my_recommendation.unshift(my_recommendation.splice(clickedIndex, 1)[0]);
 		}
 
-		localStorage.setItem('joss-favs1', JSON.stringify(my_recommendation));
+		localStorage.setItem('joss-favs3', JSON.stringify(my_recommendation));
 
-		showApps('#box-recommendation', my_recommendation, 'Rekomendasi', numOfRecommendation, true);
+		showFlatApps('#box-apps', buildAppEntries($('#textfield-search').val()));
 	});
 
 	$('#textfield-search').focus();
 
-	// Search logic
+	// Search logic — filters/re-sorts the same #box-apps grid in place.
 	$('#textfield-search').on('input', function(e) {
-		if ($(this).val()) {
-			var filterApps = [];
-			var keyword = $(this).val();
-			$.each(getUniqueApps(allApps), function(index, item) {
-				var appName = item[0] || '';
-				var appUrl = item[1] || '';
-				var appTags = item[3] || '';
-				if (appName.toLowerCase().includes(keyword.toLowerCase()) || appTags.toLowerCase().includes(keyword.toLowerCase()) || appUrl.toLowerCase().includes(keyword.toLowerCase())) {
-					filterApps.push(item);
-				}
-			});
+		var keyword = $(this).val();
+		showFlatApps('#box-apps', buildAppEntries(keyword));
 
-			showApps('#box-result', filterApps, 'Hasil Pencarian', null, true);
-
+		if (keyword) {
 			$('.btn-clear').show();
-			$('#box-result').slideDown();
 			$('#box-ratio').slideUp();
 		} else {
 			$('.btn-clear').hide();
-			$('#box-result').slideUp();
 			$('#box-ratio').slideDown();
 		}
 	});

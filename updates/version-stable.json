@@ -1,11 +1,11 @@
 {
-    "version": "3.36",
-    "released_at": "2026-08-28 23:43:38",
+    "version": "3.37",
+    "released_at": "2026-08-30 13:23:01",
     "min_supported_version": "2.0",
-    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.36.zip",
-    "checksum_sha256": "9e826bea3800acf0b4366476d11b76a706e9e4e451f76b0eed79ac9770b6f479",
+    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.37.zip",
+    "checksum_sha256": "0c2550963d89e8ff904d5319c0f16b84c0af5cd9be8d6cf6030ac1155c06ba0f",
     "mandatory": true,
-    "changelog": "fix presensi reminder notification for friday",
+    "changelog": "update dashboard layout",
     "excluded_from_overwrite": [
         "updates/",
         "uploads/",

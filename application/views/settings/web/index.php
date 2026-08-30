@@ -236,7 +236,9 @@
 					orderable: false,
 					searchable: false,
 					render: function(data, type, row) {
-						return '<a class="btn btn-sm btn-outline-success btn-modal" href="' + '<?php echo base_url("settings/web/view/") ?>' + row.id + '" title="Detail Web"><i class="fas fa-eye"></i></a> ' +
+						var urlBtn = row.url ? '<a class="btn btn-sm btn-outline-info" href="' + row.url + '" target="_blank" rel="noopener noreferrer" title="Buka URL"><i class="fas fa-external-link-alt"></i></a> ' : '';
+						return urlBtn +
+							'<a class="btn btn-sm btn-outline-success btn-modal" href="' + '<?php echo base_url("settings/web/view/") ?>' + row.id + '" title="Detail Web"><i class="fas fa-eye"></i></a> ' +
 							'<a class="btn btn-sm btn-outline-primary btn-modal" href="' + '<?php echo base_url("settings/web/save/") ?>' + row.id + '" title="Edit Web"><i class="fas fa-pen"></i></a> ' +
 							'<a class="btn btn-sm btn-outline-danger btn-confirm" href="' + '<?php echo base_url("settings/web/delete/") ?>' + row.id + '" data-confirm-message="Anda yakin akan menghapus web ' + row.name + '?" title="Hapus Web"><i class="fas fa-trash"></i></a>';
 					}
