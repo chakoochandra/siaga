@@ -1,12 +1,12 @@
 [
     {
-        "version": "3.38",
-        "released_at": "2026-08-31 06:59:27",
+        "version": "3.39",
+        "released_at": "2026-09-01 18:25:28",
         "min_supported_version": "2.0",
-        "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.38.zip",
-        "checksum_sha256": "f086f111069f203743cf204bd331289b4c95dc2c8c497fd81202b05824362044",
+        "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.39.zip",
+        "checksum_sha256": "b57878b60e7b49ec2519db18a53aea8272561c6c4fa507fb7e1b8e249988761c",
         "mandatory": true,
-        "changelog": "update sikep url",
+        "changelog": "update notif rencana putus",
         "excluded_from_overwrite": [
             "updates/",
             "uploads/",

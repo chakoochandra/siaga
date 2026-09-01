@@ -465,7 +465,7 @@ $appLogo = is_local_ip() ? asset_url('assets/images/joss.png') : asset_url('asse
 
 <section>
 	<div class="card-body py-0">
-		<div class="d-flex justify-content-center col-lg-7 col-md-8 mx-auto p-4">
+		<div class="d-flex justify-content-center mx-auto p-4">
 			<div id="box-logo-login" class="row row-cols-1 <?php if ($this->ion_auth->logged_in() && is_local_ip()): ?>row-cols-sm-1 <?php else: ?> row-cols-sm-2<?php endif; ?> justify-content-center g-3 mt-2 w-100">
 				<div id="box-logo" class="col<?php if ($this->ion_auth->logged_in() && is_local_ip()): ?> col-sm-8<?php endif; ?> d-flex flex-column align-items-center justify-content-center mt-4 text-center">
 					<div>
@@ -478,7 +478,7 @@ $appLogo = is_local_ip() ? asset_url('assets/images/joss.png') : asset_url('asse
 							<?php endif; ?>
 						</a>
 						<?php if ($appName): ?>
-							<p class="text-center fw-bold h5 m-0 mt-2"><?php echo $appName ?></p>
+							<p class="text-center fw-bold h5 m-0 d-flex justify-content-center mt-2"><?php echo $appName ?></p>
 						<?php endif; ?>
 					</div>
 					<div class="text-center p-2">
@@ -495,9 +495,9 @@ $appLogo = is_local_ip() ? asset_url('assets/images/joss.png') : asset_url('asse
 						<?php endforeach ?>
 					</div>
 				</div>
-				<?php if (!$this->ion_auth->logged_in() && is_local_ip()): ?>
-					<?php $this->load->view('site/_login_form') ?>
-				<?php endif ?>
+				<!-- <php if (!$this->ion_auth->logged_in() && is_local_ip()): ?>
+					<php $this->load->view('site/_login_form') ?>
+				<php endif ?> -->
 			</div>
 		</div>
 
