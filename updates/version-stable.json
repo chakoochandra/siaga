@@ -1,11 +1,11 @@
 {
-    "version": "3.39",
-    "released_at": "2026-09-01 18:25:28",
+    "version": "3.40",
+    "released_at": "2026-09-02 11:15:38",
     "min_supported_version": "2.0",
-    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.39.zip",
-    "checksum_sha256": "b57878b60e7b49ec2519db18a53aea8272561c6c4fa507fb7e1b8e249988761c",
+    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.40.zip",
+    "checksum_sha256": "d1f263474f160e1c8108dad8ed201b5a1459e40f79c483ff1c5158456367e4c0",
     "mandatory": true,
-    "changelog": "update notif rencana putus",
+    "changelog": "bug fixing",
     "excluded_from_overwrite": [
         "updates/",
         "uploads/",

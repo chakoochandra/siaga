@@ -1,6 +1,6 @@
 ### Update logs:
 
-#### Version 3.39 (01/09/2026)
+#### Version 3.40 (02/09/2026)
 - UPDATE notifikasi mediasi
 - UPDATE notifikasi rencana putus
 
