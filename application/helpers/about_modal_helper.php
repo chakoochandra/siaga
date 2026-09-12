@@ -870,7 +870,7 @@ function get_default_about_content($moduleType)
 				'Pegawai melakukan presensi masuk dan pulang',
 				'Pimpin dapat memantau kehadiran pegawai',
 				'Lihat laporan presensi per periode',
-				'Kirim reminder presensi via WhatsApp'
+				'Kirim reminder presensi'
 			],
 			'notes' => [
 				'Presensi dilakukan dengan Scan Fingerprint atau manual',
@@ -1526,7 +1526,7 @@ function get_default_about_content($moduleType)
 			],
 			'notes' => [
 				'Data diambil dari database SIPP',
-				'Notifikasi dikirim via WhatsApp'
+				'Notifikasi dikirim'
 			]
 		],
 		'monitoring_pihak' => [

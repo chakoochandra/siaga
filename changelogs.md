@@ -1,5 +1,8 @@
 ### Update logs:
 
+#### Version 3.41 (12/09/2026)
+- ADDED Toggle kirim excel on/off untuk tiap notifikasi
+
 #### Version 3.40 (02/09/2026)
 - UPDATE notifikasi mediasi
 - UPDATE notifikasi rencana putus

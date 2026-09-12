@@ -747,6 +747,24 @@ foreach ($fabGroupsPresent as $key => $present) {
 							<div class="accordion-body">Tidak. Notifikasi tidak akan dikirim jika tanggal tersebut telah diatur sebagai <strong>hari libur</strong> di menu <strong>Settings &gt; Hari Libur</strong>.</div>
 						</div>
 					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="faq10"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse10" aria-expanded="false" aria-controls="faqCollapse10">Bagaimana cara menonaktifkan lampiran Excel pada notifikasi WhatsApp?</button></h2>
+						<div id="faqCollapse10" class="accordion-collapse collapse" aria-labelledby="faq10" data-bs-parent="#faqAccordion">
+							<div class="accordion-body">Buka menu <strong>Settings &gt; Config</strong>, kemudian cari konstanta <code>ENABLE_EXCEL_*_GROUP</code> yang sesuai dengan laporan yang ingin dinonaktifkan (misalnya <code>ENABLE_EXCEL_BAS_BELUM_UNGGAH_GROUP</code>). Ubah nilainya menjadi <strong>false</strong>. Setelah disimpan, notifikasi grup akan tetap dikirim berupa caption teks tanpa lampiran Excel.</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="faq11"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse11" aria-expanded="false" aria-controls="faqCollapse11">Apa yang terjadi jika lampiran Excel dinonaktifkan?</button></h2>
+						<div id="faqCollapse11" class="accordion-collapse collapse" aria-labelledby="faq11" data-bs-parent="#faqAccordion">
+							<div class="accordion-body">Notifikasi WhatsApp tetap dikirim, hanya saja berupa <strong>teks/summary tanpa file Excel</strong>. Data yang ditampilkan tetap sama, yaitu ringkasan jumlah dan daftar perkara, hanya tidak dilengkapi file Excel sebagai lampiran.</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="faq12"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse12" aria-expanded="false" aria-controls="faqCollapse12">Bagaimana cara mengaktifkan kembali lampiran Excel yang sudah dinonaktifkan?</button></h2>
+						<div id="faqCollapse12" class="accordion-collapse collapse" aria-labelledby="faq12" data-bs-parent="#faqAccordion">
+							<div class="accordion-body">Kembali ke <strong>Settings &gt; Config</strong>, ubah nilai konstanta <code>ENABLE_EXCEL_*_GROUP</code> menjadi <strong>true</strong>, lalu simpan. Pada eksekusi selanjutnya, sistem akan kembali membuat dan mengirim lampiran Excel seperti semula.</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

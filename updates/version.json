@@ -1,11 +1,11 @@
 {
-    "version": "3.40",
-    "released_at": "2026-09-02 11:15:38",
+    "version": "3.41",
+    "released_at": "2026-09-12 09:04:32",
     "min_supported_version": "2.0",
-    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.40.zip",
-    "checksum_sha256": "d1f263474f160e1c8108dad8ed201b5a1459e40f79c483ff1c5158456367e4c0",
+    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.41.zip",
+    "checksum_sha256": "e5b467df935c1d3686d5dd1729994af359a2c7c1aac18fcafce579864937ffd8",
     "mandatory": true,
-    "changelog": "bug fixing",
+    "changelog": "added toggle excel attachment",
     "excluded_from_overwrite": [
         "updates/",
         "uploads/",
