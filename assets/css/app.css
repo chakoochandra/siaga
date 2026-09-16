@@ -127,6 +127,133 @@
 	vertical-align: middle;
 }
 
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	text-decoration: none;
+	cursor: pointer;
+	flex-shrink: 0;
+}
+
+.brand-text {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+}
+
+.brand-text h1 {
+	font-family: 'Oswald', 'Cinzel', sans-serif;
+	font-size: 5rem;
+	font-weight: 700;
+	letter-spacing: -0.2px;
+	transform: scaleX(0.88);
+	transform-origin: left center;
+	line-height: 1.05;
+	margin: 0;
+	white-space: nowrap;
+	background: linear-gradient(110deg,
+			#b8860b 0%,
+			#d4af37 20%,
+			#fff9e6 45%,
+			#ffffff 50%,
+			#fff9e6 55%,
+			#d4af37 80%,
+			#b8860b 100%);
+	background-size: 200% auto;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: goldShimmer 3.5s linear infinite;
+	filter: drop-shadow(0 1px 4px rgba(212, 175, 55, 0.2));
+}
+
+.brand-text p {
+	font-family: 'Oswald', 'Plus Jakarta Sans', sans-serif;
+	font-size: 0.62rem;
+	font-weight: 500;
+	letter-spacing: -0.1px;
+	transform: scaleX(0.9);
+	transform-origin: left center;
+	color: var(--text-muted);
+	line-height: 1;
+	margin-top: 1px;
+	white-space: nowrap;
+}
+
+#box-logo .brand-link {
+	max-width: 100%;
+	flex-wrap: nowrap;
+}
+
+#box-logo .brand-link .logo-img {
+	max-width: 100%;
+}
+
+#box-logo p {
+	font-size: clamp(0.9rem, 2.5vw, 1.18rem);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.brand-text .brand-subtitle {
+	font-family: 'Oswald', 'Plus Jakarta Sans', sans-serif;
+	font-size: 0.62rem;
+	font-weight: 500;
+	letter-spacing: -0.1px;
+	transform: scaleX(0.9);
+	transform-origin: left center;
+	color: var(--text-muted);
+	line-height: 1;
+	margin-top: 1px;
+	white-space: nowrap;
+	overflow: visible;
+	text-overflow: clip;
+}
+
+.sidebar-brand .brand-text {
+	margin-left: 0;
+}
+
+/* 2. EFFECT GOLD SHIMMER (SAPUAN CAHAYA KILAU EMAS) */
+@keyframes goldShimmer {
+	0% {
+		background-position: -200% center;
+	}
+
+	100% {
+		background-position: 200% center;
+	}
+}
+
+.brand-text h1,
+.brand-text .brand-title {
+	font-family: 'Oswald', 'Cinzel', sans-serif;
+	font-size: 6rem;
+	font-weight: 700;
+	letter-spacing: -0.2px;
+	transform: scaleX(0.88);
+	transform-origin: left center;
+	line-height: 1.05;
+	margin: 0;
+	white-space: nowrap;
+
+	background: linear-gradient(110deg,
+			#b8860b 0%,
+			#d4af37 20%,
+			#fff9e6 45%,
+			#ffffff 50%,
+			#fff9e6 55%,
+			#d4af37 80%,
+			#b8860b 100%);
+	background-size: 200% auto;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: goldShimmer 3.5s linear infinite;
+	filter: drop-shadow(0 1px 4px rgba(212, 175, 55, 0.2));
+}
+
 .datepicker table tr td.day.focused,
 .datepicker table tr td.day:hover,
 .datepicker table tr td span.focused,
@@ -455,12 +582,17 @@ big,
 .dt-column-title,
 .card-header h4,
 .card-header h5,
-.card-header i,
+.card-header h6,
 .card-header span,
 .accordion-button {
 	margin-bottom: 0;
 	text-transform: uppercase;
-	font-weight: 500;
+}
+
+.card-header i {
+	margin-bottom: 0;
+	font-weight: 900 !important;
+	text-transform: none !important;
 }
 
 /* .callout {
