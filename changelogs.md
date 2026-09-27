@@ -1,5 +1,8 @@
 ### Update logs:
 
+#### Version 3.43 (27/09/2026)
+- ADDED monitoring disposisi
+
 #### Version 3.42 (12/09/2026)
 - ADDED Toggle kirim excel on/off untuk tiap notifikasi
 

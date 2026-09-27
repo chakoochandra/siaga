@@ -7,7 +7,7 @@
 			<h6>Informasi</h6>
 			<ul>
 				<li>Klik kolom TANGGAL PENYERAHAN untuk menginput tanggal penyerahan putusan ke Panmud.</li>
-				<li>Klik kolom TANGGAL RENCANA BHT untuk menentukan tanggal.</li>
+				<li>Klik kolom TANGGAL RENCANA BHT untuk menentukan tanggal rencana BHT.</li>
 			</ul>
 		</div>
 
@@ -72,13 +72,13 @@
 				type: "datepicker",
 				url: '<?php echo site_url("ck/bht/update_value_disposisi/tanggal_panmudg_terima") ?>',
 				callback: '<?php echo site_url("ck/bht") ?>',
-				editable: true
+				editable: '<?php echo $canEdit ?>'
 			}, {
 				column: 5,
 				type: "datepicker",
 				url: '<?php echo site_url("ck/bht/update_value_disposisi/tanggal_rencana_bht") ?>',
 				callback: '<?php echo site_url("ck/bht") ?>',
-				editable: true
+				editable: '<?php echo $canEdit ?>'
 			}],
 			rowCallback: function(row, data, index) {},
 			columns: [{

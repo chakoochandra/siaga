@@ -103,7 +103,6 @@ class Download extends Core_Controller
 			'photo',
 			'python_temp',
 			'relaas_ghaib',
-			'scan_berkas',
 			'sk_documents',
 			'sop_documents',
 			'web',

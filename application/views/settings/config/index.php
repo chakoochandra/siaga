@@ -1,4 +1,4 @@
-﻿<div class="row">
+<div class="row">
 	<div class="col-12">
 		<div class="card leaves">
 			<div class="card-header leaves align-items-center">

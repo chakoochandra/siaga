@@ -1054,9 +1054,9 @@ tr.even td:first-child {
 	padding-left: 4em;
 }
 
-div.dt-container div.dt-layout-row {
+/* div.dt-container div.dt-layout-row {
 	margin-top: 0.5rem;
-}
+} */
 
 .table-cell-ellipsis img {
 	cursor: pointer;

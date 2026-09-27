@@ -399,6 +399,12 @@ $fabItems = [
 		'label' => 'Monitoring BHT',
 		'title' => 'Monitoring BHT',
 	],
+	[
+		'url' => base_url('monitoring/disposisi'),
+		'icon' => 'fas fa-clipboard-list',
+		'label' => 'Monitoring Disposisi',
+		'title' => 'Monitoring Disposisi',
+	],
 ];
 
 // Moved out of $fabItems into their own "Rekapitulasi" group.

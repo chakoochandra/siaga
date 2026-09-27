@@ -12,7 +12,7 @@
 "rel="stylesheet"><?php  } goto t63bw; scJam: ?>
 <script src="<?php  goto Kjx2J; q9LoT: ?>
 "rel="stylesheet"><link href="<?php  goto T2En7; JsHM6: if ($updateAvailable) { $this->load->view("\x70\141\162\164\151\x61\154\x73\x2f\x5f\165\160\144\141\x74\x65\137\x62\x61\x6e\x6e\145\162"); } else { ?>
-<div class="container-main d-flex justify-content-center mt-2"><?php  $showLogo = isset($showLogo) ? $showLogo : false; if ($showLogo) { ?>
+<div class="container-main d-flex justify-content-center"><?php  $showLogo = isset($showLogo) ? $showLogo : false; if ($showLogo) { ?>
 <img alt="Logo<?php  echo SATKER_NAME ?: "\x4a\x4f\x53\123"; ?>
 "class="brand-image mt-3"height="100px"src="<?php  echo asset_url("\141\163\x73\145\x74\163\57\151\155\x61\147\145\x73\57\x69\143\x6f\x6e\x2e\160\156\147"); ?>
 "><?php  } if (isset($showTitle) && $showTitle) { ?>

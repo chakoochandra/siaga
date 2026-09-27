@@ -1,4 +1,4 @@
-# SIAGA Version 3.42
+# SIAGA Version 3.43
 
 ## Sistem Informasi Alert & Monitoring Kinerja Perkara ##
 
@@ -24,6 +24,7 @@
 - **Rekapitulasi Perkara Banding**
 - **Rekapitulasi Perkara Kasasi**
 - **Rekapitulasi Perkara PK**
+- **Rekapitulasi Disposisi** - Cek status disposisi perkara sampai pengarsipan
 - **Monitoring Jadwal Sidang** — Monitoring jadwal dan ruang sidang harian
 - **Kontrol BHT** — Pengingat input BHT
 - **Monitoring Relaas**

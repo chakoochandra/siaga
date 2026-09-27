@@ -1,4 +1,4 @@
-﻿<style>
+<style>
 	.dropzone {
 		border: 3px dashed var(--bs-gray-200);
 		border-radius: var(--bs-border-radius);

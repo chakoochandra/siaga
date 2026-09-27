@@ -17,5 +17,7 @@ class Bht extends Core_Controller
 		$this->indexIcon = 'fa-solid fa-clipboard-check';
 		$this->indexView = 'ck/bht/index';
 		$this->module_id = 'monitoring_rencana_bht';
+
+		$this->vars['canEdit'] = $this->ion_auth->logged_in();
 	}
 }
