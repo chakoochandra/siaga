@@ -1,11 +1,11 @@
 {
-    "version": "3.44",
-    "released_at": "2026-09-27 15:49:15",
+    "version": "3.45",
+    "released_at": "2026-09-28 14:26:30",
     "min_supported_version": "2.0",
-    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.44.zip",
-    "checksum_sha256": "76b9b2d4cd631c5e086f0290e31749b748bfd2d563787f72bb349f27defee3f9",
+    "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.45.zip",
+    "checksum_sha256": "9fa657084727ab8f6c5d4a6c0d115affd3629179a041d0fcd8b4655992d54258",
     "mandatory": true,
-    "changelog": "Added menu monitoring disposisi",
+    "changelog": "fix minor bug",
     "excluded_from_overwrite": [
         "updates/",
         "uploads/",
