@@ -1,5 +1,8 @@
 ### Update logs:
 
+#### Version 3.45 (28/09/2026)
+- ADDED opsional kirim jadwal sidang ke pihak beserta QR / Barcode nomor perkara. Disable/Enable pada menu konfigurasi (ENABLE_SIDANG_QR, ENABLE_SIDANG_BARCODE)
+
 #### Version 3.44 (27/09/2026)
 - ADDED monitoring disposisi
 

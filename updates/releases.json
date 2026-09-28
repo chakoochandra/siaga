@@ -1,12 +1,12 @@
 [
     {
         "version": "3.45",
-        "released_at": "2026-09-28 14:26:30",
+        "released_at": "2026-09-28 23:01:00",
         "min_supported_version": "2.0",
         "package_url": "https://raw.githubusercontent.com/chakoochandra/siaga/refs/heads/main/updates/release-3.45.zip",
-        "checksum_sha256": "9fa657084727ab8f6c5d4a6c0d115affd3629179a041d0fcd8b4655992d54258",
+        "checksum_sha256": "338085b8a598a51efb45d85079ff8219d8af68dc22879206f2162657c3d444f5",
         "mandatory": true,
-        "changelog": "fix minor bug",
+        "changelog": "added jadwal sidang QR/Barcode (Optional)",
         "excluded_from_overwrite": [
             "updates/",
             "uploads/",

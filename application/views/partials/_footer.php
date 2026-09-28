@@ -771,6 +771,17 @@ foreach ($fabGroupsPresent as $key => $present) {
 							<div class="accordion-body">Kembali ke <strong>Settings &gt; Config</strong>, ubah nilai konstanta <code>ENABLE_EXCEL_*_GROUP</code> menjadi <strong>true</strong>, lalu simpan. Pada eksekusi selanjutnya, sistem akan kembali membuat dan mengirim lampiran Excel seperti semula.</div>
 						</div>
 					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="faq13"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse13" aria-expanded="false" aria-controls="faqCollapse13">Bagaimana cara mengaktifkan lampiran QR Code atau Barcode pada notifikasi sidang ke pihak?</button></h2>
+						<div id="faqCollapse13" class="accordion-collapse collapse" aria-labelledby="faq13" data-bs-parent="#faqAccordion">
+							<div class="accordion-body"><p class="mb-2">Buka menu <strong>Settings &gt; Config</strong>, kemudian atur konstanta berikut:</p>
+							<ul>
+								<li><code>ENABLE_SIDANG_QR = true</code> → melampirkan <strong>QR Code</strong> yang di-generate dari <em>nomor perkara</em>.</li>
+								<li><code>ENABLE_SIDANG_BARCODE = true</code> → melampirkan <strong>Barcode Code39</strong> dari <em>nomor perkara</em>.</li>
+							</ul>
+							<p class="mb-0">Jika <strong>keduanya aktif</strong>, sistem akan mengirim <strong>QR Code terlebih dahulu</strong>. Jika QR gagal dibuat, maka akan otomatis fallback ke Barcode.</p></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
